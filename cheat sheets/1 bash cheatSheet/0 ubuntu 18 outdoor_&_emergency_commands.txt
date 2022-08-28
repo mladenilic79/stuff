@@ -1,0 +1,44 @@
+
+######################################
+########## normal operation ##########
+######################################
+
+log out without killing anything
+	ctrl-alt-f1
+
+#interupt prompt in terminal by pressing
+	q
+
+#interupt infinite loop or similar in terminal
+	ctrl-c
+
+######################################
+########## gui bugged ################
+######################################
+
+shortcut for teminal:
+	ctrl-alt-t
+
+open terminal for killing frozen application and type:
+	$ xkill
+than click on any frozen window with a mouse
+
+######################################
+########## everything bugged #########
+######################################
+
+log out and kill everything
+	ctrl-alt-backspace
+
+set custom shortcuts put gnome-system-monitor instead of shutdown/restart/suspend/hibernate:
+	ctrl-alt-del
+
+######################################
+########## special operations ########
+######################################
+
+go to virtual shell
+	ctrl-alt-f3
+go back to gui
+	ctrl-alt-f2
+

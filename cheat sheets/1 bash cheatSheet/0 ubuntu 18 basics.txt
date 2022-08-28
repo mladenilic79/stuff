@@ -1,0 +1,356 @@
+
+optional element inside
+	[]
+expansions meaning
+	*	-pathname
+	?	-match any character
+	{}	-anything inside will be combined all options
+	&	-in the end of command, send command/task to background
+<<<match>>>
+	*	-match all pathnames
+	mar*	-match beginning of file including extension
+	*ca.txt	-match ending of file including extension
+	*.txt	-match ending of file including extension
+	*.???	-match any file with 3 letter extension
+<<<file/dir>>> / <<<files/dirs>>>	(if ommited current dir is default)
+<<<file.ext>>> / <<<files.ext>>>	(if ommited current dir is default)
+<<<directory>>> / <<<directories>>>	(if ommited current dir is default)
+	.			-current directory
+	/			-root directory
+	~			-home directory
+	Documents/		-directory
+	Documents/text.txt	-file
+	Home/Music/Folder/	-nested directory
+	..			-back, one up
+	../../..		-triple back
+	../Documents/		-back than to
+	../../Documents/Music/	-double back than double to
+	~/Documents/Music/	-home than double to
+	/Documents/Music/	-root directory than double to
+combined with {}
+	$ echo {app,engine,star}.{js,py}	-will return
+	app.js app.py engine.js engine.py star.js star.py
+	$ echo {1..10}				-will return
+	1 2 3 4 5 6 7 8 9 10
+	$ echo day{1..10}			-will return
+	day1 day2 day3 day4 day5 day6 day7 day8 day9 day10
+
+
+tab gives autocomplete options
+	TAB
+clear screen
+	$ clear
+	ctrl-l
+get last 500 commands
+	$ history
+get help
+	$ <<<command>>> --help	-help on command
+	$ man <<<command>>>	-help on command
+	$ man bash		-whole tutorial
+echo is used for printing
+" " are used for strings
+	$ echo "hello world"
+alias for simlefying commands, must be persisted in special bash file first
+	$ alias newCommandName = "command sequence here"
+
+
+superuser do, run as admin with elevated permissions
+	$ sudo
+check who is current user
+	$ echo $USER
+	$ whoami
+check group membership
+	$ groups		-for self
+	$ groups <<<user>>>	-for user
+check all users
+	$ who
+add user
+	$ adduser <<<user>>>
+delete user
+	$ deluser <<<user>>>
+add group
+	$ addgroup <<<group>>>
+add user to group
+	usermod -g <<<group>>> <<<user>>>	-assign primary group
+	usermod -a -G <<<group>>> <<<user>>>	-assign secondary group
+remove from a group
+	gpasswd -d <<<user>>> <<<group>>>
+log in as another user
+	$ su [flag] <<<user>>>		-log in
+		- or -l			-log in but more so
+change password
+	$ passwd
+	$ sudo passwd <<<user>>>	-change pass for another user
+exit login shell
+	$ logout
+exit shell
+	$ exit
+
+
+check for all directories added to path
+	$ $PATH
+check for all environment variables added to path
+	$ env
+get value from a variable
+	$ $<<environment variable>>
+	$ $HOME
+set variable
+	$ pera=zdera
+
+
+return present location
+	$ pwd
+list folder
+	$ ls [<<<match>>>] <<<directory>>>
+		-l	-with lots of data
+		-a	-with hidden files
+		-h	-human readable
+change directory
+	$ cd <<<directory>>>	-go to directory
+
+
+create file/directory
+	$ touch <<<file.ext>>>
+	$ mkdir <<<directory>>>
+		-p	-create parents dirs as needed
+copy file/folder <<<source>>> <<<destination>>>
+	$ cp <<<file.ext>>> <<<directory>>>
+	$ cp <<<file.ext>>> <<<file2.ext>>>
+	$ cp -r <<<directory>>> <<<directory>>>	-recursevly for not empty dirs
+move file/folder <<<source>>> <<<destination>>>
+	$ mv <<<file.ext>>> <<<directory>>>
+	$ mv <<<file.ext>>> <<<file2.ext>>>
+	$ mv <<<directory>>> <<<directory>>>
+delete file/folder
+	$ rm [<<<match>>>] <<<files.ext>>>
+		-r	-recursevly delete directory even if not empty
+		-f	-force delete not recommended
+		-i	-prompt for each file/folder
+		-v	-verbose, output what was deleted
+	$ rmdir [<<<match>>>] <<<directories>>>
+
+
+search for file/directory and return its location
+	$ which fileDirectoryName
+search for files/directories recursevly
+	$ find <<<files/dirs>>> [options]	-return all
+		-name "name"			-exact name
+		-name "E" -or -name "F"		-name start with E or F
+		-iname "name"			-exact name case insensitive
+		-name "*name*"			-part of name
+		-type d				-search for directories only
+		-type f				-search for files only
+		-type f -size +100k -size -1M	-file size between 100kb and 1mb
+	
+
+read file with
+	$ cat <<<file.ext>>>		-read file
+		-n			-to get a line numbers
+	$ cat <<<file.ext>>> <<<file2.ext>>>	-read both at the same time
+	$ more <<<file.ext>>>		-use spacebar or enter to move
+	$ less <<<file.ext>>>		-also use arrows to move
+	$ head <<<file.ext>>>		-get only first 10 lines of text
+		-n			-get n number of lines
+	$ tail <<<file.ext>>>		-get only last 10 lines of text
+		-n			-get n number of lines
+search inside a file, works with regex
+	$ grep <<<match>>> <<<files.ext>>>
+		-i	-ignore case
+		-n	-also line numbers
+		-C 2	-context, number of linex before and after match
+		-r	-recursively from starting point
+		-E	-pattern is an extended regex, put in quotes
+sort output from file
+	$ sort <<<files.ext>>>
+		-f	-ignore case
+		-r	-reverse order
+		-n	-sort numericaly
+		-u	-return only unique values
+		-h	-human readable, can sort kb, mb & gb also
+remove adjacent duplicates in output from file
+	$ unique <<<files.ext>>>
+		-d	-return only duplicates
+		-c	-retuns how many times are repeated
+compare two files
+	$ diff <<<file.ext>>> <<<file2.ext>>>
+		-y	-show files side by side
+		-u	-git like, with more info
+
+
+change file ownership, every file has an owner/user and group owner also
+	sudo chown [flag] <<<setOwnerUser>>> <<<files/dirs>>>		-for user
+	sudo chown [flag] <<<setOwnerUser:setGroup>>> <<<files/dirs>>>	-for group also
+		-R	-recursively for nested files and dirs
+permissions 10 characters
+	1st character - type
+		-	-file
+		d	-directory
+		l	-sym link
+	2nd-4th characters - owner
+	5th-7th characters - group
+	8th-10th characters - world
+		r	-read permission (for directory to list)
+		w	-write permission (for directory to be modified but only if x is also set)
+		x	-execute permission (for directory to cd)
+		-	-no permission at this spot
+changing permissions
+	chmod [flag] [who] [what] <<<file/dir>>>
+		-R	-recursively for directories
+	chmod ug+rwx,o-rw file.txt
+		who:
+			u	-user, owner of the file/dir
+			g	-group, members of the group file/dir belogs to
+			o	-others, the world
+			a	-all of the above
+		what:
+			r	-read
+			w	-write
+			x	-execute
+			-	-removes permission
+			+	-add permission
+			=	-adds permission and remove others
+
+
+get number of lines, words and letters in file
+	$ wc <<<files.ext>>>
+return size of directory/directories
+	$ du <<<files/dirs>>>
+		-m	-return in magabytes
+		-g	-return in gigabytes
+		-h	-human readable formated
+
+
+open files & directories using default application
+	$ xdg-open <<<file/dir>>>
+new text file
+	$ cat > <<<file.ext>>>	-than enter text and finish with
+	ctrl-d			
+open specified file using specified text editor
+	$ nano <<<file.ext>>>
+	$ vi <<<file.ext>>>
+	$ code <<<file.ext>>>
+
+
+compressing single files
+	gzip <<<file.ext>>>		-replace original
+	gzip -c <<<file.ext>>> > <<<file2.ext>>>.gz	-preserve original
+	gzip -k <<<file.ext>>>		-preserve original in same location
+	gzip -d <<<file.ext>>>.gz	-decompress
+	gunzip <<<file.ext>>>.gz	-decompress
+archive multiple files, not compressed by default
+	tar -cf archive.tar <<<file.ext>>> <<<file.ext>>>	-archive
+	tar -czf archive.tar <<<file.ext>>> <<<file.ext>>>	-archive and compress
+	tar -xf archive.tar				-unarchive in place
+	tar -xf archive.tar -C <<<directory>>>		-unarchive in another dir
+	tar -tf archive.tar				-see inside the archive
+
+
+links, linking one file to another, like shortcut
+hard links are like another pointer to the same content
+will not be deleted upon deleting the original
+	ln <<<originalFile.ext>>> <<<linkFile.ext>>>
+soft links or symbolic links are like pointer linking anoter pointer
+will not be deleted upon deleting the original, but will lose connection to content
+	ln -s <<<originalFile.ext>>> <<<linkFile.ext>>>
+
+
+get date
+	$ date
+get calendar
+	$ ncal
+sleep
+	$ sleep 10	-sleep for specified num of sec
+	$ sleep 10 &	-send taks to background
+
+
+jobs
+	ctrl-Z		-suspend task
+	$ jobs		-list all open tasks
+	$ fg		-go back and resume only opened task
+	$ fg 1		-resume specified task
+	$ fg 2		-resume specified task
+	$ bg 1		-resume specified task in background
+
+
+check software version
+	$ <<package name>> --version
+package manager apt or apt-get
+	$ sudo apt update
+	$ sudo apt upgrade
+clean ubuntu
+	$ sudo apt autoclean
+	$ sudo apt clean
+	$ sudo apt autoremove
+	$ sudo apt autoremove --purge	
+
+
+check for shell type, bash or otherwise
+	$ echo $SHELL
+get system information, linux, platform,..
+	$ uname -a
+hardrive info
+	$ sudo blkid
+hardrive space
+	$ df
+		-h	-human readable
+usb info
+	$ lsusb
+pci info
+	$ lspci
+resource monitor, returns most intensive processes
+	$ top		-sorted by cpu
+		-o mem	-sorted by memory
+returns running processes, process ids, pid
+	$ ps	   	-in user space
+		-A 	-all processes
+		-F 	-full formated
+		-auxww	-or something like that
+kill process
+	$ kill <<<pid>>>			-gracefull kill	
+	$ killall <<<application name>>>	-gracefull kill	
+		-9				-forcefull kill
+		-sigkill			-same as
+		-kill				-same as
+
+
+shuting down machine
+	$ sudo shutdown
+		-r	-restart
+		-h	-halt - shutdown
+		10	-in 10 minuts
+		now	-shutdown now
+
+
+networking
+	$ ping <<<host/domain>>>
+	$ ping google.com
+	$ ping 8.8.8.8
+	$ tracepath <<<host/domain>>>
+	$ ip
+	$ curl <<<host/domain>>>
+
+
+redirect data to another command with > and >>
+	$ echo "string" > <<<file.ext>>>	-replace
+	$ echo "string" >> <<<file.ext>>>	-append
+	$ date > <<<file.ext>>>
+piping use output of one command to feed another if stardard input can be passed
+	$ <<<command>>> | [xargs] <<<command>>>
+xargs option if standard input cannot be passed and must be converted to arguments
+	$ <<<command>>> | xargs <<<command>>>
+
+
+add on start of script
+	#!/bin/bash
+	#!/bin/sh
+save script with extension
+	filename.sh
+execute with
+	$ bash path/filename.sh
+	$ sh path/filename.sh
+or add execute permissions and execute with
+	$ path/filename.sh
+
+
+
+

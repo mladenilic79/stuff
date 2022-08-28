@@ -1,0 +1,41 @@
+https://dev.mysql.com/doc/mysql-apt-repo-quick-guide/en/
+
+	https://dev.mysql.com/downloads/repo/apt/. 
+	Select and download the release package for your Linux distribution
+	install downloaded package with
+	shell> sudo dpkg -i /PATH/version-specific-package-name.deb
+	For example, for version w.x.y-z of the package, the command is:
+	shell> sudo dpkg -i mysql-apt-config_w.x.y-z_all.deb
+
+	shell> sudo apt-get update
+
+	shell> sudo apt-get install mysql-server
+
+	shell> sudo mysql_secure_installation
+	(!!!!!set all to yes including setting for password or it will not work)
+
+	shell> sudo apt-get install mysql-workbench-community
+
+	optionally!!!
+	shell> sudo apt-get install package-name
+
+	removing!!!
+	shell> sudo apt-get remove mysql-server
+	Then, remove any other software that was installed automatically with the MySQL server:
+	shell> sudo apt-get autoremove
+	shell> sudo apt-get remove package-name
+	To see a list of packages you have installed from the MySQL APT repository
+	shell> dpkg -l | grep mysql | grep ii
+
+shell> sudo service mysql status
+shell> sudo service mysql stop
+shell> sudo service mysql start
+shell> sudo mysql
+exit
+
+some optional links in case of need of trubleshooting during installation
+https://stackoverflow.com/questions/47211545/fresh-mysql-server-installation-does-not-ask-for-password
+https://www.percona.com/blog/2016/03/16/change-user-password-in-mysql-5-7-with-plugin-auth_socket/
+https://websiteforstudents.com/mysql-server-installed-without-password-for-root-on-ubuntu-17-10-18-04/
+https://www.youtube.com/watch?v=ug0TFsort24
+

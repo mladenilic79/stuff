@@ -1,0 +1,62 @@
+
+#install postgresql--------------------------------------------install step 1
+$ sudo apt-get install postgresql postgresql-client postgresql-contrib libpq-dev postgresql-server-dev-10 pgadmin4
+
+#get postresql status from terminal
+$ service postgresql status
+
+#login as postgres user (with linux password ???)
+$ sudo su postgres
+#or
+$ sudo su - postgres
+
+#login back as linux user (with linux password ???)
+postgres$ su mmm
+
+#returns from postgres to linux
+postgres$ logout
+
+#access server from login with
+postgres$ psql
+
+#all the way directly (as postgres user)
+$ sudo -u postgres psql
+#or
+$ sudo -i -u postgres psql
+
+#start and stop server
+$ sudo service postgresql start
+$ sudo service postgresql stop
+
+#return client & server version
+$ psql -V
+$ postgres -V
+#if not found
+$ /usr/lib/postgresql/10/bin/postgres -V
+
+#create another user (safer this way)--------------------------install step 3
+$ sudo -u postgres createuser -s masteruser
+
+#creating another user in postgress (if needed, for troubleshooting role not found error)
+postgres$ createuser -s -r newuser
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+postgress internal commands
+
+#basic info
+\conninfo
+
+#list all users
+postgres-# \du
+
+#change password for current user------------------------------install step 2
+postgres-# \password
+#change password for another user------------------------------install step 4
+postgres-# \password masteruser
+
+#list all databases
+postgres-# \l
+
+#exit
+postgres-# \q
+

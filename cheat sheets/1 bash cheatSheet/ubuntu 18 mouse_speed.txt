@@ -1,0 +1,22 @@
+#find mouse device with:
+	$ xinput list
+
+#list properties of the device with:
+	$ xinput list-props "Razer Razer Diamondback 3G"
+
+#set desired speed with property with:
+#(edit first and fifth number with desired value)
+	$ xinput set-prop "Razer Razer Diamondback 3G" "Coordinate Transformation Matrix" 0.400000, 0.000000, 0.000000, 0.000000, 0.400000, 0.000000, 0.000000, 0.000000, 1.000000
+
+
+
+new
+
+xinput set-prop "Razer Razer Diamondback 3G" "Coordinate Transformation Matrix" 0.250000, 0.000000, 0.000000, 0.000000, 0.250000, 0.000000, 0.000000, 0.000000, 1.000000
+
+
+
+default
+
+xinput set-prop "Razer Razer Diamondback 3G" "Coordinate Transformation Matrix" 1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+

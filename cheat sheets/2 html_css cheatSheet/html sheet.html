@@ -1,0 +1,215 @@
+﻿
+<!--http://validator.w3.org/ html validator-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><!--this variant is for xhtml-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<!DOCTYPE html><!--this variant is for html5-->
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" /><!--this variant is for html5-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><!--this variant is for xhtml-->
+
+    <title>meta naslov</title>
+    <meta name="keywords" content="html, css, xml" /> <!--define keywords for search engines-->
+    <meta name="description" content="cheetsheet for html & css" /> <!--description for webpage-->
+    <meta name="author" content="mladen pravio sajt" /> <!--define author of a web page-->
+    <meta name="robots" content="index" /> <!--specifies settings for search engines crawler. optionally noindex or nofollow-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!--specifies responsive web design-->
+    <meta http-equiv="refresh" content="30"> <!--specifies refresh time of a page-->
+    <link href="styles.css" rel="stylesheet" />
+    <style type="text/css">
+        h1 {color:#9A2EFE}
+    </style>
+    <!--google fonts below (add fonts in css)-->
+    <link href="https://fonts.googleapis.com/css?family=Mali|Merriweather" rel="stylesheet">
+    <script src="scripts.js"></script>
+    <!--<base href="http://localhost/html/">--> <!--base folder za linkove-->
+    <link rel="icon" href="favicon.ico" type="image/gif" sizes="16x16" /> <!--little tab icon-->
+</head>
+<body onload="alert('hello')"> <!--popup message on loading of page-->
+    <header>...</header>
+    <nav>...</nav>
+    <main> <!--there can be many articles and sections in main-->
+    	<article> <!--articles and sections can be nested in one another or vice versa-->
+            <section>
+            	<p style="color:#9A2EFE"> <!--jedan pasus-->
+                    one line of text<br /> <!--line break-->
+                    second line of text<br />
+                    superkalifradzelisti<wbr>kexprilialidoushn<br /> <!--presece rec i prebaci u sledeci red-->
+                </p>
+                <h1 contenteditable="true">titles from h1 to h6</h1> <!--sadrzaj klijent moze menjati po potrebi-->
+                <p>neki tekst&nbsp;ovo je space&nbsp;jos jedan space</p>
+                <p>uglaste zagrade&lt;i kontra zagrada&gt;sa druge strane</p>
+                <p>obican&amp;ampersand</p>
+                <mark>isticanje dela text-a</mark> ali semanticki ne vizuelno<br />
+                <small>mali text</small><br />
+                <ins>podvucen text</ins><br />
+                <del>precrtan text</del><br />
+                <strong>jak text</strong><br />
+                <b>bold text</b><br />
+                <em>naglasen text</em><br />
+                <i>nakosen text</i><br />
+                <sub>subscript</sub><br />
+                <sup>superscript</sup><br />
+                <samp>text ispisan drugim fontom</samp><br />
+                <dfn>prva rec</dfn> definicija prve reci<br />
+                <dfn title="definicija koja iskace">rec koja se vidi</dfn><br />
+                <abbr title="textkojiiskace">glavni text</abbr><br />
+                <address>ovde idu kontakt podaci</address>
+                <bdo dir="rtl">perovic</bdo><br /> <!--precizira redosled text sa leva na desno ili obratno-->
+                <ruby>glavni text<rt>sitni opis iznad</rt></ruby><br /> <!--daje sitan text iznad glavnog-->
+                <blockquote cite="link ide ovde">perovic</blockquote><br /> <!--block citat-->
+                <q cite="link ide ovde">perovic</q><br /> <!--inline citat-->
+                <code>ovde ide softwareski kod</code>
+                <pre>preformated text</pre> <!--for displaing unusuall formating or code-->
+                time is <time datetime="1914-12-20 08:30:45.687"> do milisek; upisi konkretno vreme</time><br /> <!--omit any-->
+                time is <time datetime="14:30-1:00">sa vremenskom zonom ovde upisi i konkretno vreme</time> <!--omit any-->
+                <hr/> <!--horizontalna linija-->
+                <hr> <!--takodje horizontalna linija-->
+                <table>
+                    <caption>ovo je naslov tabele</caption>
+                    <thead>
+                        <tr>
+                            <td colspan="100">header tabela naslov</td><!--colspan how many fields will field take as one-->
+                        </tr>
+                    </thead>
+                    <colgroup><!--don't know hot to use-->
+                        <col class="prva kolona"/>
+                        <col class="druga kolona"/>
+                        <col class="treca kolona"/>
+                    </colgroup>
+                    <tfoot>
+                        <tr>
+                            <td colspan="100">footer tabela zacelje</td>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <th>prva kolona</th><!-- th for naslov field -->
+                            <td rowspan="5">druga kolona</td><!-- rowspan how many fields will field take as one -->
+                            <td>treca kolona</td>
+                        </tr>
+                        <tr>
+                            <th>red 1 kolona 1</th>
+                            <td rowspan="3" colspan="3">red 1 kolona 2</td>
+                            <td>red 1 kolona 3</td>
+                        </tr>
+                        <tr>
+                            <th>red 2 kolona 1</th>
+                            <td>red 2 kolona 2</td>
+                            <td>red 2 kolona 3</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <meter min="0" max="100" low="30" high="70" value="90">imamo dosta</meter> <!--skala; omit any except value-->
+                <object data="pdf.pdf" type="aplication/pdf" width="200" height="300">embeding objects in html</object><br /><!--type is media type, google it-->
+                <a name="pocetakstrane">pocetak strane</a><br />
+                <a href="htmlpage1.html#pocetakstrane">link ka pocetku strane</a><br /><!--relativna putanja-->
+                <a href="../../index.html">link</a><!--jos jedna relativna putanja primer-->
+                <a href="https://www.google.com">bilo koji link</a><!--apsolutna putanja-->
+                <a href="https://www.google.com" target="_blank">otvara u novom prozoru</a>
+                <!--emails-->
+                <a href="mailto:pera@gmail.com">Email1, opens default email app</a>
+				<a href="mailto:pera@yahoo.com?subject=Ovo je dodat subject">Email2</a>
+				<!--composite button links-->
+				<a href="cene.txt"><button>Cenovnik</button></a>
+				<button><a href="cenovnik.pdf" target="_blank">Ide ka pdf fajlu</a></button>
+				<!-- button regular version (value defines text on a button) -->
+                <input type="button" value="press me" onclick="validator()">
+            	<a href="galerija.html"><img src="galerija.jpg" alt="galerija" width="200"></a>
+                <iframe width="400" height="300" src="https://www.youtube.com/embed/CUxH_rWSI1k"
+                        allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                        <!--ove podatke uzmi sa youtuba site ili slicno-->
+                <details>
+                    <summary>Section #1</summary>
+                    <p>If you can see this content, the section is expanded</p>
+                </details>
+                <ul> <!--unordered list-->
+        	        <li>unordered list</li>
+                </ul>
+                <!-- type attributer for ordered lists can be I, i, A, a big & small letters or roman numbers -->
+                <ol type="I"><!-- ordered list -->
+        	        <li>ordered list</li>
+                </ol>
+                <dl> <!--definition list-->
+        	        <dt>definition</dt>
+        	        <dd>description of definition</dd>
+                </dl>
+                <figure>
+                    <img src="JPEG.jpg" alt="human scull"/> <!--alt je alternativni text koji stoji ukoliko slika nedostupna-->
+                    <figcaption>ovde ide text uz sliku</figcaption>
+                </figure>
+                <canvas id="okvir za crtanje" width="500" height="400">ovde ide okvir za crtanje u javascriptu</canvas><br />
+                <audio src="SampleAudio.mp3" controls preload="auto" muted>preload(verzije), autoplay i loop</audio><br />
+                <video src="SampleVideo.mp4" controls preload="metadata" muted width="500" height="400" poster="flower.jpg"><track kind="subtitles" label="titl" src="titl.vtt"/>
+                </video>
+            	<video controls width="700" height="400">
+                    <source src="beach.mp4" type="video/mp4"> source is used when multiple files is availlable
+                    <source src="beach.ogv" type="video/ogg">
+                </video>
+                <audio controls>
+                    <source src="rubberduckies.mp3" type="audio/mp3"> source is used when multiple files is availlable
+                    <source src="rubberduckies.ogg" type="audio/ogg">
+                </audio>
+                <!--method can be get or post, action is name of the page that is called to receive data, can omit action if self submitting-->
+                <form method="get" action="#">
+                    <p>popuniti formu</p>
+                    <fieldset>
+                    <legend>legenda 1</legend>
+                        <label for="naziv">naziv</label>
+                        	<!--value defines placeholder-->
+                            <input id="naziv" type="text" value="ukucaj" name="username" autofocus/>imeprezime
+                        <textarea name="Message" cols="30" rows="5"></textarea>
+                        <!--value defines placeholder-->
+                        <input type="password" name="pass" value="ukucaj" placeholder="lozinka" required/>
+                        <input type="number" min="3 max=7" step="0.1" value="5"/>
+                        <input title="unesi tacan pattern" pattern="[0-9]{2}"/>
+                        <!--value defines text on a button-->
+                        <input type="reset" value="reset"/>
+                        <!--value defines text on a button, also can be submitted to server?-->
+                        <input type="submit" name="submit" value="Submit Data"/>
+                    </fieldset>
+                    <fieldset>
+                        <legend>legenda 2</legend>
+                        <!--value is sent to server-->
+                        <input type="checkbox" value="anyValue" name="checkbox1"/><br/>
+                        <!--radio control group-->
+			            <fieldset id="radioGroup">
+			            	<!--value is sent to server-->
+			                <input checked type="radio" value="pera" name="radioGroup">
+			                <input type="radio" value="suzana" name="radioGroup">
+			                <input type="radio" value="svetlana" name="radioGroup">
+			            </fieldset>
+                        <label for="izaberi iz liste">padajuca lista</label>
+                            <select id="izaberi iz liste">
+                                <option value="opcija1">opcija1</option>
+                                <option value="opcija2">opcija2</option>
+                                <!--value is submited to server-->
+                            </select>
+                        <!--multiple select option-->
+		                <select multiple name="preferedCars">
+		                    <option>mercedes</option>
+		                    <option>audi</option>
+		                    <option>bmw</option>
+		                </select>
+                        <label for="lista_zivotinja">samo autocomplete</label>
+                            <input id="lista_zivotinja" list="selection"/>
+	                        <datalist id="selection">
+	                            <option label="zec" value="zec">
+	                            <option label="zmija" value="zmija">
+	                            <option label="kuce" value="kuce">
+	                            <!--value is submited to server-->
+	                        </datalist>
+                    </fieldset>
+                </form>
+            </section>
+        </article>
+    </main>
+    span <span>sluzi za vezivanje</span> inline text-a
+    <div class="maza">blok</div>
+    <aside id="pera">...</aside>
+    <footer>...</footer>
+</body>
+</html>

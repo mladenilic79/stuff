@@ -1,0 +1,33 @@
+
+dependancies/application properties
+	all dependancies
+		logging levels of packages
+		# comments
+		database all fields small letters or use some naming convention?
+	datasource (not a dependancy)
+		(database url) spring.datasource.url=jdbc:mysql://localhost:3306/kladionica1
+		(username) spring.datasource.username=root
+		(password) spring.datasource.password=root
+	jdbc
+	mysql
+	jpa
+	rest
+		(context path) spring.data.rest.base-path=/anything
+		(page size, number of elements in the database) spring.data.rest.default-page-size=50
+	web
+		(default server port, no need to specify) server.port=8080
+		context path
+		http session time out
+	devtools
+	actuator
+		include endpoints
+		exclude endpoints
+		base path for actuator endpoints
+	security
+		username
+		password
+
+run spring from cmd
+	go to project directory
+	start maven to package jar
+	start jar to run the program

@@ -1,0 +1,33 @@
+package oIteratorCustom;
+
+public class Waitress {
+
+	PancakeHouseMenu pancakeHouseMenu;
+	DinerMenu dinerMenu;
+
+	public Waitress(PancakeHouseMenu pancakeHouseMenu, DinerMenu dinerMenu) {
+		this.pancakeHouseMenu = pancakeHouseMenu;
+		this.dinerMenu = dinerMenu;
+	}
+
+	public void printMenu() {
+		BIterator pancakeIterator = pancakeHouseMenu.createIterator();
+		BIterator dinerIterator = dinerMenu.createIterator();
+		System.out.println("MENU\n----\nBREAKFAST");
+		printMenu(pancakeIterator);
+		System.out.println("\nLUNCH");
+		printMenu(dinerIterator);
+	}
+
+	private void printMenu(BIterator iterator) {
+		while (iterator.hasNext()) {
+			AMenuItem menuItem = (AMenuItem) iterator.next();
+			System.out.print(menuItem.getName() + ", ");
+			System.out.print(menuItem.getPrice() + " -- ");
+			System.out.println(menuItem.getDescription());
+		}
+	}
+
+	// other methods here
+
+}

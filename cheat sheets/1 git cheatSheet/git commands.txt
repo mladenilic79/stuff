@@ -1,0 +1,212 @@
+
+help
+	git help (basic help)
+	git help <concrete command> (show concrete command help)
+	git --version
+config
+	git config --list (list all settings)
+	git config --global user.name blondiee (set name)
+	git config --global user.email mladenilic79@gmail.com (set email)
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ start @@@@@@@@@@@@@@
+
+basics
+	clear (clear screen)
+	cd /c/users/"my documents" (set folder)
+	ls (list all files in folder)
+	ls -a (list all files including hidden ones)
+	touch <file.extension> (creates file in working folder)
+	touch .gitignore (add in file something like: *.log or *.html)
+init
+	git init (initialize/reinitialize working directory)
+remote
+	git remote (list online repositories names only)
+	git remote -v (list online repositories names & url)
+	git remote add <remote repo name> <online url> (connect local to remote)
+		(git remote add origin https://github.com/eBlondie/basic.git)
+	git remote set-url <remote repo name> <url> (change url for the remote)
+		(git remote set-url origin https://github.com/eBlondie/java_mobilniOperateri)
+		(git remote set-url origin git@github.com:USERNAME/REPOSITORY.git)
+	git remote rm <remote repo name> (delete connection to remote repo)
+	git remote rename <old remote repo name> <new remote repo name> (origin or other)
+clone
+	git clone <remote url> (make full copy of remote repository)
+	git clone <remote url> <directory>
+		(make full copy of remote repository on local directory)
+gitignore
+	*.pdf (exclude extension, this will match any part of the path)
+	directory/ (exclude whole directory)
+	"my directory/"
+	or
+	my\ directory/
+		(exclude whole directory with spaces in name)
+	directory/* (exclude directory with posibility for unignore)
+	README.txt (exclude file)
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ info @@@@@@@@@@@@@@@
+
+status
+	git status (state of your files, if tracked, modified and branch your on)
+diff
+	git diff (shows what you changed, but haven't staged)
+	git diff --cached (shows what has been staged, but not committed)
+		(or dit diff --staged)
+	git diff HEAD
+		(changes in working tree from last commit, git diff + git diff -cached)
+	git diff <branch name>..<branch name> (compare two branches)
+	git diff --no-index <file_a> <file_b>
+		(compare two files with id/paths, doesn't need to be tracked by git)???
+log
+	git log (displays the commit SHA, author, date and message and branch)
+	git log --oneline (first 7 chars of the commit SHA and the commit message)
+	git log --pretty=oneline
+	git log --stat (modified lines & files, number of lines & files changed)
+	git log --stat --summary (overview of the change)
+	git log -p (modified lines & files changed)
+graphic
+	gitk (graphic representation of a log)
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ local @@@@@@@@@@@@@@
+
+add
+	git add <file.extension> (add file to index)
+	git add . (add all files to index)
+remove
+	git rm <file.extension> (remove files from working tree and index)
+	git rm --cached <file.extension> (delete file from index only)
+	git rm --force <file.extension>
+		(remove file from working tree and index with staged changes)
+move/rename
+	git mv <old file name/path> <new file name/path> (move/rename)
+commit
+	git commit (record changes with text editor, put comment in there)
+	git commit -m '<enter comment here>'
+		(record changes without editor, comment mandatory)
+	git commit -a (add & commit modified (but not new files) at the same time)
+	git commit --amend
+		(undo last commit, only performe on commit that have not been pushed)
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ shortcuts @@@@@@@@@@
+
+<commit hash>
+	hash of commit or commit id or head pointer HEAD / HEAD^ / HEAD^^ / HEAD~3
+	or tag, if omitted current HEAD will be used instead
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ branching @@@@@@@@@@
+
+branch list
+	git branch (or git branch --list) (list all branches, current branch with *)
+branch create/delete/rename/move
+	git branch <branch name> (create branch)
+	git branch -d <branch name>
+		(safe delete, prevents deleting branch if it has unmerged changes)
+	git branch -D <branch name>
+		(unsafe delete, delete branch even if it has unmerged branch)
+	git branch -m <branch name> (move/rename branch)
+branch pointer
+	git branch -f <branch name> <commit hash>
+		(move branch to specified commit, create if doesn't exists)?
+	git branch -u <origin/remote branch name> <branch name>
+		(associate branch to remote branch or upstream branch)?
+checkout
+	git checkout <master / branch name / commit hash / tag>
+		(switch to branch pointer or specified commit)
+		(update files in working tree, updates HEAD)
+	git checkout <master / branch name / commit hash / tag> <^2>
+		(for second parent branch or up)
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ special @@@@@@@@@@@@
+
+undo
+	git reset <commit hash>
+		(move branch pointer to any previous commit, use localy)
+	git revert <commit hash>
+		(reset branch remote changes to specified commit, use on remote)
+merge/rebase/cherry-pick
+	git merge <branch name>
+		(merge branch with current branch with opening editor)
+	git merge --no-edit <branch name>
+		(merge branch with current branch without opening editor)
+	git rebase <branch name> (merge/connect current branch to named branch)
+	git cherry-pick <commit hash> (copy specified commit to current branch)
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ remote @@@@@@@@@@@@@
+
+fetch
+	git fetch <remote repo name> (get everything)
+	git fetch <remote repo name> <branch name> (get one branch only)
+	git fetch --all (fetches all registered remotes and their branches)
+pull
+	git pull <remote repo name> (fetch & merge)
+	git pull --rebase <remote repo name> (fetch & rebase)
+	git pull <remote repo name> <branch name> (pull specific branch; fetch & merge)
+pull with disregard local changes & commits
+	git reset --hard origin/master
+	git pull origin master
+push
+	git push (update remote repos if everything already set, if not uses default config)
+	git push <remote repo name or url> <branch name>
+		(synch. branch to online repo / ignores HEAD location)
+	git push <remote repo name or url> <branch name> --allow-unrelated-histories
+		(for syncing project started from two end independantly)
+	git push <remote repo name> --all
+		(push all of your local branches to the specified remote)
+	git push -u origin master (connect branch with remote)
+	git push <remote repo name> --tags
+		(tags are not automat. pushed, --tags sends all tags to remote repo)
+	git push <remote repo name> <tag> (upload one tag to repository)
+	git push --force (force all changes to remote)
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ tags @@@@@@@@@@@@@@@
+
+	git tag (list all tags)
+	git show <version number> (show tag details)
+	git tag <version number> (tag current branch head)
+	git tag <version number> <commit hash> (tag current branch specify commit)
+	git tag -a <version number>  (tag previous commit)
+	git tag -a <version number> -m '<comment>' (tag previous commit direct)
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ workflow @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ update local branche with local master
+
+$ git checkout <feature-branch>
+$ git merge master -m 'comment'
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ pushing branch online
+
+pushing own branch online:
+1. git push origin <<my own branch>>
+2. create pull request online <<own branch>> --> <<master>>
+
+contine working on my own branch:
+1. git push origin <<my own branch>>
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ deleting excluded files @ directories & from origin
+
+git rm -r --cached <directory>
+or
+git rm -r --cached .
+and
+git add .
+git commit -m 'Remove the now ignored directory'
+git push origin master
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@
+@@@@@ conflicts @@@@@@@@@@
+
+for:	MERGE_HEAD exists
+use:	git merge --abort
+

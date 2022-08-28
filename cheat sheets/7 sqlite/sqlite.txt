@@ -1,0 +1,382 @@
+________________________________________________________________________________
+________________>>>>>::::: SQLite :::::<<<<<____________________________________
+
+install by putting exe files in system 32 in windows folder on c
+or in different place with adding the new path
+
+first set work directory
+
+start the sqlite in cmd or with exe file
+temporary db will be created which will be deleted on exit
+	sqlite3
+
+open or make permanent db
+	.open D:/folder/dbname.db
+
+Closes the database
+	.exit
+
+You don't delete a database with any command. You have to delete the file itself
+________________________________________________________________________________
+
+Used to show the current settings
+	.show
+
+Set NULL to 'NULL'
+	.nullvalue 'NULL'
+
+Change the prompt for SQLite
+	.prompt 'sqlite3> '
+________________________________________________________________________________
+
+Shows the statements used to create the database
+	.schema
+
+Provide table name to show how that table was made
+	.schema employees
+
+Displays list of tables
+	.tables
+
+switch output to the screen (default)
+	.output stdout
+
+switch output to a file
+	.output D:/Documents/sqlite3Files/employees.sql
+
+put out entire database to screen or to file
+	.dump
+
+read data (repopulate deleted database for example)
+	.read D:/Documents/sqlite3Files/employees.sql
+
+Returns the total number of changes made to database since it was last opened
+	SELECT total_changes();
+________________________________________________________________________________
+
+output modes:
+	.mode column # each record is shown on separate line with the data
+	.mode line # show every value on it's own line
+	.mode csv # used for csv output
+	.mode html
+	.mode insert # will show all commands used to create the table
+	.mode list # show list without comas
+	.mode tabs # show tabs separated list
+	.mode tcl
+	.mode separator , # output all data to csv
+			  # or define the separator for the columns
+
+headers on shows the column names, if off they wouldn't show
+	.headers on
+
+Changes the width of the columns
+	.width 15 20
+________________________________________________________________________________
+
+- Single line comments start with 2 lines --
+- Multiline comments start with /* and end with */
+- There are 3 types of values
+	a. String literals, surrounded almost always with single quotes
+	b. Numeric literals, which are numbers of any type without quotes
+	c. Binary literals are numbers represented as hexidecimals
+- There are 5 types in SQLite
+	a. integer (inteeger)
+	b. real (float)
+	c. text (string)
+	d. blob (binary data)
+	e. null (no value)
+- Each command ends with a semi-colon
+- To use single quotes in a string add 2 in a row rather then one ''
+- SQL is case insensitive
+________________________________________________________________________________
+________________>>>>>::::: SQL :::::<<<<<_______________________________________
+
+some keywords
+	primary key autoincrement // will auto increment by 1 and remain unique
+	primary key // useful for special applications
+	NOT NULL // field must have value
+	COLLATE NOCASE // converts upper case to lowercase for comparing
+	COLLATE BINARY // compare without converting
+	COLLATE RTRIM // compare as binary but with removing trailing space
+	DEFAULT '0hklh' // defalult field value
+	UNIQUE // every value in this field must be unique
+	CHECK(a>0) // every value must obey this condition
+	INDEX // index field to enable quick search
+________________________________________________________________________________
+
+creating tables
+	CREATE TABLE gen_table (id INTEGER PRIMARY KEY AUTOINCREMENT,
+			name TEXT NOT NULL,
+		      	type_machine INTEGER,
+			FOREIGN KEY(type_machine) REFERENCES employees(id));
+
+foreign key
+	FOREIGN KEY(this_table_field) REFERENCES other_table(primary_id));
+	foreign field in one table references a primary key in another table
+
+A Composite Primary Key
+	FOREIGN KEY (test_id) REFERENCES test (test_id),
+	FOREIGN KEY (student_id) REFERENCES student (id_number),
+	PRIMARY KEY (test_id, student_id));
+
+You can rename a table
+	ALTER TABLE origin_issue
+	RENAME TO first_issue;
+
+You can delete a table
+	drop table employees;
+________________________________________________________________________________
+
+copying tables data to another table (from person to new person)
+
+sqlite> INSERT INTO new_person
+   ...> SELECT id, first_name, last_name, age FROM person ;
+________________________________________________________________________________
+
+To add a column it Can't be UNIQUE, PRIMARY KEY,
+it can't have a default value CURRENT_TIME, CURRENT_DATE, CURRENT_TIMESTAMP
+or an expression in parentheses
+if NOT NULL it can't have a NULL value
+
+	ALTER TABLE origin_issue
+	ADD COLUMN writer TEXT;
+
+You can't delete columns in any way
+________________________________________________________________________________
+
+inserting values into tables
+can omit (id, name) if inputing in all fields
+can omit id becuse it's autoincrementing??????????
+	INSERT INTO employees(id, name) VALUES(1, 'Max Eisenhardt');
+
+deleting rows from tables
+	DELETE FROM identity WHERE id=7;
+
+update value (target table, set target field, define clause)
+	UPDATE identity 
+	SET secret_identity='Steve Rogers'
+	WHERE id=2;
+________________________________________________________________________________
+
+SELECT is used to query field in your database
+	SELECT identity_id, character
+* means select all fields
+	SELECT *
+You can change the title of columns with AS like this
+	SELECT power_type AS 'Common Power'
+Use DISTINCT to output the first result and then ignore duplicates
+	SELECT DISTINCT character
+
+FROM specifies target table
+	FROM employees
+
+WHERE filters resultset
+	WHERE power_id_2 = 14 AND power_id_3 = 14
+	WHERE power_id_2 = 14 OR power_id_3 = 14
+LIKE can be used with % to match series of zero or more characters
+example return superhuman followed by any word beginning with s but not any
+strenght in it's name
+	WHERE power_type LIKE 'Superhuman%s%'
+	AND power_type NOT LIKE '%strength%'
+_ can be used to represent any 1 character or space
+example return word starting with power followed by additional 9 letters
+	WHERE power_type LIKE 'Power_________'
+BETWEEN can be used to make comparisons as well
+	WHERE power_type_id BETWEEN 1 AND 40;
+
+ORDER BY allows you to define sorting either DESC or ASC
+LIMIT allows you to limit your results
+OFFSET will skip the first number or results
+	ORDER BY power_type ASC, power_type LIMIT 10 OFFSET 2;
+	ORDER BY power_type ASC, power_type LIMIT 2, 10; 
+						--OFFSET included before coma
+________________________________________________________________________________
+
+agregate query
+	SELECT name AS NAME,
+	COUNT(absence.date) AS ABSENCES
+	FROM student, absence
+	WHERE absence.student_id = student.id_number
+	GROUP BY id_number;
+________________________________________________________________________________
+________________>>>>>::::: JOINS :::::<<<<<_____________________________________
+
+Above we defined INNER JOIN by separating tables with a comma.
+You can also define them with the word INNER JOIN (or just JOIN?????)
+An INNER JOIN returns only those records from tables that match.
+
+SELECT
+	stvari.ID,
+	vrsta_stvari.vrsta_stvari,
+	stvari.spisak,
+FROM 
+	stvari
+	INNER JOIN prioritet on stvari.prioritet=prioritet.ID
+	INNER JOIN pakovanje on stvari.pakovanje=pakovanje.ID
+________________________________________________________________________________
+
+To show all students with the number of absences even if they have none we
+have to use a LEFT OUTER JOIN.
+LEFT JOIN says that we need row for each piece of data listed on left of join.
+Don't forget to change WHERE into ON
+
+this	SELECT ... FROM table1 LEFT [OUTER] JOIN table2
+				ON conditional_expression ...
+or	SELECT ... FROM table1 LEFT [OUTER] JOIN table2
+            			USING ( column1 ,... ) ...
+
+example	SELECT name,
+	COUNT(absence.date)
+	FROM student LEFT JOIN absence
+	ON absence.student_id = student.id_number
+	GROUP BY id_number;
+________________________________________________________________________________
+
+A NATURAL INNER JOIN is similar to a LEFT JOIN in that it returns all columns
+that match in both tables.
+
+	SELECT score, test_id
+	FROM student NATURAL JOIN test_score
+	WHERE student_id = id_number;
+________________________________________________________________________________
+
+A CROSS INNER JOIN (Cartesian Join) combines all the records from 2 tables.
+creates mess
+
+	SELECT score, test_id
+	FROM student CROSS JOIN test_score;
+________________________________________________________________________________
+________________>>>>>::::: EXAMPLES :::::<<<<<__________________________________
+
+	SELECT test.date AS DATE,
+	MIN(test_score.score) AS WORST,
+	MAX(test_score.score) AS BEST
+	FROM test_score, test
+	WHERE test_score.test_id = test.test_id
+	GROUP BY test.date;
+
+	SELECT test.date AS DATE,
+	AVG(test_score.score) 'AVG SCORE'
+	FROM test_score, test
+	WHERE test_score.test_id = test.test_id
+	GROUP BY test.date;
+
+	SELECT name, test_score.score
+	FROM test_score, student
+	WHERE test_score.score > 40 
+		AND test_score.student_id = student.id_number
+	GROUP BY name;
+
+	SELECT COUNT(name) AS 'SCORED OVER 40'
+	FROM student
+	WHERE student.name in
+	(SELECT name
+	FROM test_score, student
+	WHERE test_score.score > 40 
+		AND test_score.student_id = student.id_number
+	GROUP BY name);
+________________________________________________________________________________
+________________>>>>>::::: FUNCTIONS :::::<<<<<_________________________________
+
+SQLites SELECT can also be used to perform numerous Arithmetic, Boolean,
+Bitwise, Relational and other Operations
+sqlite returns any number as true, 0 if false
+	SELECT (1+2) / (6-3) * 10 % 3;
+	SELECT 1 AND 0, 1 OR 0, NOT 1; 
+	SELECT 1 < 2, 3 >= 2, 1 = 1, 2 == 2, 1 <> 2;
+
+Generate minimum and maximum values from a result
+	SELECT min(id), max(id) FROM Ttable
+
+return average
+	SELECT test.date, AVG(test_score.score)
+
+Random SQLite Functions
+	SELECT random(); // Generate random number
+	SELECT ABS(RANDOM() % 100); // Random number between 0 and 100
+________________________________________________________________________________
+
+String concatenation
+	SELECT 'Super' || 'hero';
+
+Returns the number of characters in a string
+	SELECT LENGTH('Iron Man');
+
+case (print case as required)
+	SELECT LOWER(secret_identity), UPPER(character)
+________________________________________________________________________________
+
+Number of rows in the table
+	SELECT COUNT(*) FROM identity;
+
+in (check if something is in another set of results)
+	SELECT 'Paul' IN ('Mike', 'Phil', 'Paul');
+	SELECT * FROM identity WHERE character IN ('Iron Man', 'Hulk');
+________________________________________________________________________________
+
+You can modify the date format
+	SELECT strftime('%m-%d-%Y');
+
+Return the current time
+	SELECT time();
+	SELECT datetime();
+	SELECT date();
+
+return time
+	SELECT date('now', '-30 days');
+	SELECT date('now', '-20 months');
+	SELECT time('now', '-1000 minutes');
+	SELECT time('now', '-1000 seconds');
+
+Get the date of the next Sunday
+	SELECT date('now', 'weekday 0');
+
+Find Thanksgiving day
+	SELECT date('now', 'start of year', '10 month', '21 days', 'weekday 4');
+________________________________________________________________________________
+________________>>>>>::::: EXTRA :::::<<<<<_____________________________________
+
+VIEW can be executed any time, shows in list of tables and 
+can be deleted with drop as table (shows in schema?????)
+	CREATE VIEW ScoreOver40 AS
+	SELECT name, test_score.score
+	FROM test_score, student
+	WHERE test_score.score > 40
+	AND test_score.student_id = student.id_number
+	GROUP BY name;
+________________________________________________________________________________
+
+GLOB is like LIKE, but it is case sensitive and it uses the UNIX file syntax
+Find results that contain super, but not Super
+	SELECT * FROM general_power
+	WHERE general_power_desc
+	GLOB '*super*';
+Find any match that has 9 characters
+	SELECT * FROM general_power
+	WHERE power_type
+	GLOB '?????????';
+________________________________________________________________________________
+
+Triggers are operations that are automatically performed when a specific
+event occurs
+
+	CREATE TABLE Log(id INTEGER PRIMARY KEY, test_id INTEGER NOT NULL,
+	        date DATE NOT NULL, student_id INTEGER NOT NULL,
+		FOREIGN KEY (test_id) REFERENCES test_score (test_id),
+		FOREIGN KEY (student_id) REFERENCES test_score (student_id));
+
+The Trigger that updates the Log when test_score is updated
+
+	CREATE TRIGGER test_score_update
+	AFTER UPDATE OF score ON test_score
+	BEGIN
+	INSERT INTO Log(test_id, date, student_id)
+	VALUES(new.test_id, date('now'), new.student_id);
+(Don't reference table instead use new or old)
+	END;
+
+	select * from absence;
+
+	UPDATE test_score
+	SET score=20
+	WHERE test_id=2 AND student_id=9;

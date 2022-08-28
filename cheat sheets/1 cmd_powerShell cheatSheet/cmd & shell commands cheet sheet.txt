@@ -1,0 +1,77 @@
+____________basics_____________________________________________________________
+/? <<<after command calls for help files
+use " " for connecting paths with multiple words
+TAB to complete
+cls <<<clear screen
+color <<<change color
+ipconfig
+path <<<show path
+____________dir________________________________________________________________
+dir C:\desktop\videos
+dir /a <<<with specified attributes hidden files/folder included
+dir *.png <<<include all files of specified type
+tree <<<show current directory in tree
+dir > text.txt <<<export dir command to text file
+____________navigation_________________________________________________________
+wmic logicaldisk get name <<<check for available drives
+e: <<<switch drive
+cd C:\desktop\videos\"program files"
+cd../..
+____________directories________________________________________________________
+mkdir
+rmdir 'dirname' <<<remove directory only
+rmdir /s 'dirname' <<<remove all
+____________files______________________________________________________________
+filename.png <<<on enter opens the file or if exe start running
+echo > filename.txt <<<making blank file 
+echo 'text' > filename.txt <<<writing text to file
+echo 'text' >> filename.txt <<<appending text to file
+del filename.txt
+type filename.txt <<<display text written in file
+____________attributes_________________________________________________________
+attrib <<<show files with attributes
+attrib -h +r filename.txt <<<add/remove attribute to specified file
+____________coping/move/rename_________________________________________________
+copy filename.txt destinationfolder
+xcopy <<<copy multiple files and only files at the same time
+xcopy /s <<<copy multiple files and folder at the same time
+move sourcdirname destinationdirname
+rename oldname newname
+____________<<<:::powershell:::>>>_____________________________________________
+all cmd commands works in powershell
+
+host <<< version
+update-help -force
+
+; <<< statement separator
+| <<< pipeline
+|where
+|sort
+|select
+|group
+|format-table
+-eq <<< equal / ==
+
+help
+get-help
+help commandname (((-detailed))) (((-full))) (((-examples)))
+get-help commandname
+
+get-command <<< show all commands
+get-alias <<< show all aliases
+get-command (((-name))) (((-noun))) *keyword1*, *keyword2* <<< show filtered
+get-member <<< objects proterties methods
+get-verb
+get-module
+get-eventlog
+
+get-process <<< show all processes
+get-service <<< show all services
+stop-service
+set-service -name nname -status "running"
+get-childitem <<< show directory
+
+-whatif <<< keywork for checking what if
+-confirm <<< same as -whatif with confirmation dialog
+
+start-transcript (((stop-transcript)))

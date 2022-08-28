@@ -1,0 +1,388 @@
+﻿
+/* select all */
+* {}
+
+/* regular selectors here as group selectors also */
+body, p, h2 {}
+
+/* class & id selectors */
+.class {}
+#id {}
+
+/* combine selectors */
+p, .class, #id {}
+article .classcssstyle strong {}
+
+/* Gađa sve <a> elemente koji se nalaze unutar <h1>,
+čak iako ima elemenata između njih. */
+h1 a {}
+
+/* Gađa sve <a> elemente koji se nalaze unutar <h1>,
+ali samo one koji su direktno njemu (nema elemenata između). */
+h1>a {}
+
+/* Gađa sve <p> elemente koji slede posle <h1> elementa */
+h1~p {}
+
+/* Gađa samo jedan <p> element koji je direktno posle <h1> */
+h1+p {}
+
+/* for forms */
+input[type=text], textarea[type=text]
+
+/* complex selectors */
+p.trik {}
+p#misko {}
+
+/* budzeno prvo slovo ili prvi red */
+p::first-letter {}
+p::first-line {}
+
+/* select every nth element */
+p:nth-of-type(3) {}
+main:nth-of-type(odd) {}
+
+/* for links */
+a:link {}
+a:visited {}
+a:hover {}
+a:active {}
+
+/* fokusira na mouse hover */
+input:focus {}
+
+tag::selection {}
+/* text prevucen misem */
+
+/* inversion (everything except specified) */
+tag:not(tag) {}
+
+/* attribute selectors */
+/* child selectors */
+/* sibling selector */
+
+/* Put your reset styles template here */
+/* Put styles for desktop and basic styles for all devices here */
+body {/* properties for body here */}
+
+p {display: inline;
+  display: block;
+  display: inline-block;
+  display: none;
+
+/* for float left, right, none za wrapovanje text-a na slike i sl. */
+p {float: left;
+  /* left, right, both, none se odnosi na sprecavanje sudaranja floata */
+  clear: left;
+  /* absolute, relative, fixed, static; pozicioniranje tagova na ekranu */
+  position: absolute;
+  /* for stacking of elements on top of each other
+  (only works on positioned elements) */
+  z-index: 3;}
+
+/* deljenje box-a na verticalne kolone kao u novinama */
+.multicol {
+  column-count: 3;
+  column-gap: 1em;
+  column-rule: 1px dotted black;}
+
+/* default:visible; scroll, auto, hidden za prikaz sadrzaja veceg od box-a */
+p {overflow: visible;
+  /* visibility of elements */
+  visibility: hidden;
+  visibility: visible}
+
+p {box-sizing: border-box}
+/* content box is default; content box = width;
+prebaci na border box za responsive;
+padding box = width + padding; border box = width + padding + border */
+
+/* general hight and weight */
+p {width: 300px;
+  width: 30%;
+  height: 20em;
+  min-width: 760px;
+  max-width: 1200px;
+  min-height: 400px;
+  max-height: 400px;}
+
+/* margin/padding/border top/right/bottom/left */
+p {margin: 0 10px auto 20px;
+  margin: 0;
+  padding: 10px 5px 5px 10px;
+  padding: 10px}
+  
+p {border: 4px solid #FF0000;
+  border: none;
+  border-bottom: 2px dashed red;
+  border-color: green yellow red blue;
+  border-width: 10px;
+  border-style: double;
+  border-top-width: 15px;
+  border-left-style: dotted;}
+
+p {border-radius: 0 30px 10px 5px;
+  border-radius: 10px 10px 20px 10px / 10px 30px 40px 10px;
+  border-top-left-radius: 20%;
+  border-radius: 40px/20px;
+  border-radius: 1em;
+
+  color: #3E8988;
+  color: rgb(100%,100%,100%);
+  color: rgb(255,255,255);
+  color: rgba(255, 255, 255, .5);
+  color: hsl(0, 100%, 50%);
+  color: hsla(0, 100%, 50%, .5);}
+
+p { font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+
+  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Arial Black", Gadget, sans-serif;
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  font-family: Impact, Charcoal, sans-serif;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  font-family: Tahoma, Geneva, sans-serif;
+  font-family: "Trebuchet MS", Helvetica, sans-serif;
+  font-family: Verdana, Geneva, sans-serif;
+
+  font-family: "Courier New", Courier, monospace;
+  font-family: "Lucida Console", Monaco, monospace;
+
+  /* sizing px direktno odredjuje velicinu
+  xx-small, x-small, small, medium, large, x-large, and xx-large
+  je ekvivlentno sa %[inherited font size] i em[inherited font size]
+  (medium = 100% = 1em); rem[root font size] */
+
+  font-size: 16px;
+  font-size: 1em;
+  font-size: medium;
+  font-size: 100%;
+  font-style: italic;
+  font-style: normal;
+  font-weight: bold;
+  font-weight: normal;
+  text-transform: uppercase;
+  text-transform: lowercase;
+  text-transform: capitalize;
+  font-variant: small-caps;
+  /* for letter and word spacing any unit like for font size */
+  word-spacing: 1em;
+  letter-spacing: -1.2em;
+  text-shadow: -4px 4px 3px #999999;
+  text-shadow: -4px 4px 3px #666, 1px -1px 2px #000;
+  /* any unit for line hight */
+  line-height: 150%;
+  line-height: 1.5;
+  /* left, right, justify, center */
+  text-align: center;
+  /* px or em unit */
+  text-indent: 25px;
+  /* shorthand omit first three and line height*/
+  font: italic bold small-caps 18px/1.5 Arial, Helvetica, sans-serif
+
+/* removing underline from link, or, underline, overline or line-through*/
+a {text-decoration: none}
+
+/* bulleted list: disk, circle, square, decimal, none,... */
+li {list-style-type: square;
+  /* outside ili inside u odnosu na text */
+  list-style-position: outside;
+  list-style-position: inside;
+  /* stavlja malu grafiku umesto crtica */
+  list-style-image: url(images/bullet.gif)}
+
+/* table cell align property: top, middle, baseline, bottom */
+th ili td {vertical-align: top}
+/* space beetween cells */
+table {border-spacing: 2px}
+/* eliminise border izmedju cells */
+table {border-collapse: collapse}
+/* zaokrugljenost table cells */
+td {border-radius: 5px}
+/* sakrivanje praznih cells */
+table {empty-cells: hide}
+
+p {box-shadow: 4px 4px rgba(0,0,0,.75);
+  /* inset znaci unutrasnja senka */
+  /* 8px here is a spread value.. optional */
+  box-shadow: inset 4px 4px 8px rgba(0,0,0,.75);
+  box-shadow: 4px 4px 8px rgba(0,0,0,.75)}
+
+p {transform: rotate(-45deg);
+  transform: scale(2);
+  transform: scaleY(2);
+  transform: scaleX(3.5);
+  transform: scale(.5,2);
+  /* flipping upside down */
+  transform: scale(-1);
+  /* flipping mirror */
+  transform: scale(-1,1);
+  transform: translate(1px,2px);
+  transform: translateY(-.5em);
+  transform: skew(25deg,10deg);
+  transform: skew(45deg,0deg) scale(.5) translate(400px,500px) rotate(90deg);
+  transform-origin: left top;
+  /* transform origin odredjuje centar transformac. umesto sredine po default */
+  transform-origin: 0 0;
+  transform-origin: 0% 0%;}
+
+flex container tag {display: flex}
+/*za prikazivanje horizontalnog rasporeda sadrzaja bez upotr. float i inline*/
+
+.flexElement div:nth-of-type(1n+2) {margin-left: 20px}
+/*za dodavanje razmaka izmedju kolona u flex*/
+
+flex container tag {flex-flow: row-reverse nowrap}
+/*sastavlja u sebe komande flex-direction i flex-wrap
+row, row reverse, column, column reverse, gde je row default
+no wrap, wrap, wrap reverse, gde je nowrap default*/
+
+flex container tag {justify-content: space-around}
+/*flex-start, flex-end, center, space-beetween, space-around*/
+
+flex container tag {align-items: flex-end}
+/*flex-start, flex-end, center, baseline, strech, gde je strech default*/
+
+flex container tag {align-content: space-between}
+/*flex-start, flex-end, center, space-beetween, space-around,
+strech, gde je strech default*/
+
+flex item tag {order: -1}
+/*bilo koji broj -xyz - +xyx, za reorganizovanje tagova u css-u*/
+flex item tag {margin-right: auto}
+/*samokorigujuce margine*/
+flex item tag {flex: 1} 
+/* flex-grow flex-shrink flex-basis|auto|initial|inherit;
+prvi broj je flex-grow i predstavlja koliko kontejner moze da se prosiri
+drugi broj je flex-shrink i predstavlja koliko se moze suziti polje
+treci broj je flex-basis i predstavlja minimalnu sirinu u pixelima*/
+
+/*basic grid definition*/
+containertag {display: grid;
+  /*definitions for gap*/
+  grid-gap: 20px;
+  grid-gap: 20px 30px;
+  grid-row-gap: 20px;
+  grid-column-gap: 20px;
+  /*definitions for number of columns*/
+  grid-template-columns: 30px 40px auto 10px;
+  /*definitions for row hight*/
+  grid-template-rows: 20px 50px 50px;
+
+  justify-content: space-around;
+  justify-content: space-between;
+  justify-content: space-evenly;
+  justify-content: center;
+  justify-content: start;
+  justify-content: end;
+  align-content: space-around;
+  align-content: space-between;
+  align-content: space-evenly;
+  align-content: center;
+  align-content: start;
+  align-content: end;}
+
+itemtag {grid-column-start: 1;
+    grid-column-end: 1;
+    grid-row-start: 1;
+    grid-row-end: 1;
+    grid-column: 1/3;
+    /*shorhand for grid column start end*/
+    grid-column: 1/span 3;
+    grid-row: 1/2;
+    /*shorhand for grid row start end*/
+    grid-row: 2/span 2;
+    /*shorthand for grid-row-start, grid-column-start,
+    grid-row-end and the grid-column-end*/
+    grid-area: 1/1/2/2;
+    grid-area: 1/2/span 2/span 2;
+/*naming areas*/
+itemtag     {grid-area: myArea;}
+containertag  {grid-template-areas: 'myArea myArea myArea myArea myArea';}
+
+/*za responsive design umesto linkovanje sa html-a moze da ide:*/
+/*dimenzije proveriti ove su otprilike, import directives idu na pocetak css*/
+/*@import url(css/base.css) (min-width: 769px);
+@import url(css/medium.css) (min-width: 481px) and (max-width: 768px);
+@import url(css/small.css) (max-width: 480px);*/
+
+  /* medium display only: / properties that only apply to tablets */
+  /*@media (min-width: 481px) and (max-width: 768px) {
+  body {}}*/
+
+  /* small display only / properties that only apply to phones */
+  /*@media (max-width: 480px) {
+  body {}}*/
+
+p {background-color: rgb(109,218,63);
+  opacity: 0;
+  /* make element invisible */
+  opacity: 1;
+  /* root relative */
+  background-image: url(images/bg.gif);
+  /* document relative */
+  background-image: url(../images/bg.gif);
+  /* repeat, no-repeat, repeat-x, and repeat-y */
+  background-repeat: no-repeat;
+  /* left, center, right; top, center, bottom */
+  background-position: center center;
+  background-position: 5px 8px;
+  background-position: 50% 50%;
+  /* fix position of background so no scrolling */
+	background-attachment: fixed;
+  /* content-box, padding-box; isto objasnjenje kao i za box sizing */
+  background-origin: border-box;
+  /* content-box, padding-box; limits area for background */
+  background-clip: border-box;
+  background-size: 100px 200px;
+  background-size: 100px auto;
+  background-size: contain;
+  background-size: cover;
+  /* background shorthand */
+  background: url(bullseye.gif) center center no-repeat fixed transparent;
+  background-color: inherit;
+  background: blue;
+
+  background-image: url(scrollTop.jpg),
+                    url(scrollBottom.jpg),
+                    url(scrollMiddle.jpg);
+  background-repeat:  no-repeat,
+                      no-repeat,
+                      repeat-y;
+  background: url(scrollTop.jpg) center top no-repeat,
+              url(scrollBottom.jpg) center bottom no-repeat,
+              url(scrollMiddle.jpg) center top repeat-y}
+  /* postavljanje tri slike redom kao background */
+
+.sidebar {background: url(scrollMiddle.jpg) centertop repeat-y}
+.sidebar:before {content: url(scrollTop.jpg)}
+.sidebar:after {content: url(scrollBottom.jpg)}
+/* koriscenje pseudoklasa za dodavanje visestrukih slika na background */
+
+p {background: linear-gradient(to top left,black,white);
+  background: linear-gradient(45deg, rgb(0,0,0), rgb(204,204,204));
+  background: linear-gradient(to left, black, white, black);
+  background: linear-gradient(to left, black, rgb(255,255,255), #FFFFFF, HSL(0,0,0%));
+  background: linear-gradient(to left, #900, #FC0 10%, #FC0 90%, #900);
+  background: linear-gradient(to left, #900 20%, #FC0 30%, #FC0 70%, #900 80%);
+  background: repeating-linear-gradient(45deg, #900 0, #900 10px, #FC0 10px, #FC0 20px);
+  background: radial-gradient(red, blue);
+  background: radial-gradient(circle, red, blue);
+  background: radial-gradient(circle at 20% 40%, red, blue);
+  background: radial-gradient(closest-side circle at 20% 40%, red, blue);
+  background: radial-gradient(closest-corner circle at 20% 40%, red, blue);
+  background: radial-gradient(farthest-side circle at 20% 40%, red, blue);
+  background: radial-gradient(farthest-corner circle at 20% 40%, red, blue);
+  background: radial-gradient(circle at 20% 40%, red 20%, orange 80%, yellow);
+  background: radial-gradient(circle at 20% 40%, rgb(255,0,0) 20%, rgb(255,165,0) 80%, #FFFF00);
+  background: repeating-radial-gradient(circle, red 20px, orange 30px, yellow 40px, red 50px)}
+
+p {transition-property: background-color;
+/* background color or other */
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
+/* linear, ease, ease-in, ease-out, and ease-in-out. */
+  transition-delay: .5s;
+  transition: all 1s ease-in .5s;}
+/* shorthand variantan; animation */

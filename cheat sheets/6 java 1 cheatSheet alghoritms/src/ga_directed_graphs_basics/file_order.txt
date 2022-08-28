@@ -1,0 +1,8 @@
+digraph generator
+
+digraph
+adj matrix digraph
+edge weighted digraph
+	directed edge
+adj matrix edge weighted digraph
+symbol digraph

@@ -1,0 +1,1343 @@
+
+<!--@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+<!---------- BASICS: CALLS & HIDDING ---------->
+
+<head>
+    <!-- Link to External JavaScript -->
+    <script src="nameofthefile.js" language="javascript" type="text/javascript"></script>
+</head>
+
+<body>
+
+<!--for calls from inside html tags it's not needed to use script tags at all-->
+<!--from head or body tags use script tags regularly-->
+
+<script>
+    <!-- // Hide JavaScript Code for browsers that do not support it there is
+    // closing tag for this also
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+	// ---------- BASICS: COMMENTS & CONSOLE ----------
+
+    // single line comment
+    /*
+        this is multiline comment
+    */
+
+    console.log("pera"); // log to browser console as pera (mozilla/chrome f12)
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- VARIABLES: BASICS ----------
+
+    // JavaScript is case sensitive - Variables & Functions must use the same
+    // capitalization
+    // Variables must start with a Letter, _, or $ then numbers
+    // Variables don't have a defined type, which can cause problems
+    // 4 Datatypes- Numbers, Strings, Booleans, Objects
+    // You create variables that store values with var
+
+    // Boolean Variables are false (0 or NaN) or true (Every Other Value)
+    bool_var = Boolean(23);
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- VARIABLES: CONVERSIONS & DATATYPES ----------
+
+    // Variable Conversion is Automatic
+    var str_var = "5";
+    var num_var = 10;
+    var total = num_var + str_var; // Converts a number into a string
+    var mult_total = num_var * str_var; // Converts a string into a number
+
+    // Convert strings to numbers
+    document.write("Converted String : ", Number("3.14"), "<br />");
+    document.write("Converted Int : ", parseInt("5"), "<br />");
+    document.write("Converted Float : ", parseFloat("5.555"), "<br />");
+
+    // convert numbers to strings
+    var num_var2 = String(num_var);
+
+    // Find Datatype of Variable or object
+    document.write("Datatype is " + typeof(float_var) +"<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- MATH BASICS ----------
+
+    var maxNum = Number.MAX_VALUE;
+    document.write("Max Num = ", maxNum, "<br/>");
+    document.write("Min Num = ", Number.MIN_VALUE, "<br/>");
+
+    // Numbers have 16 digits of precision
+    precisionTest = 0.1000000000000001;
+
+    // document.write outputs data to the browser
+    document.write("5 + 4 = ", 5 + 4, "<br/>");
+
+    // Using + instead of , will treat everything as a string unless you use ()
+    document.write("5 + 4 = " + (5 + 4) + "<br/>");
+
+    // standard math operators - + * / %(modulus remainder of a division)
+
+    // Shortcut for adding or subtracting 1 (++ or --)
+    var randNum = 5;
+    document.write("randNum++ = ", randNum++, "<br/>"); // print than add
+    document.write("++randNum = ", ++randNum, "<br/>"); // add than print
+
+    // Perform a calculation on a value and assign the result
+    document.write("randNum += 5 = ", randNum += 5, "<br/>");
+    document.write("randNum -= 5 = ", randNum -= 5, "<br/>");
+    document.write("randNum *= 5 = ", randNum *= 5, "<br/>");
+    document.write("randNum /= 5 = ", randNum /= 5, "<br/>");
+    document.write("randNum /= 5 = ", randNum %= 5, "<br/>");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- MATH METHODS ----------
+
+    // Round Number to Fixed Length
+    var float_var = 3.141592653589793238;
+    var float_str = float_var.toFixed(5);
+
+    // Math properties and methods
+    document.write("Math.E = ", Math.E, "<br/>");
+    document.write("Math.PI = ", Math.PI, "<br/>");
+
+    document.write("Math.abs(-8) = ", Math.abs(-8), "<br/>"); // absolute value
+    document.write("Math.cbrt(1000) = ", Math.cbrt(1000), "<br/>"); // cube root
+    document.write("Math.pow(4,2) = ", Math.pow(4,2), "<br/>"); // power
+    document.write("Math.sqrt(1000) = ", Math.sqrt(1000), "<br/>");
+    // square root
+
+    document.write("Math.ceil(6.45) = ", Math.ceil(6.45), "<br/>"); // round up
+    document.write("Math.floor(6.45) = ", Math.floor(6.45), "<br/>");
+    // round down
+    document.write("Math.round(6.45) = ", Math.round(6.45), "<br/>"); // round
+
+    document.write("Math.log(10) = ", Math.log(10), "<br/>"); // Natural log
+    document.write("Math.log10(10) = ", Math.log10(10), "<br/>"); // Base 10 log
+
+    document.write("Math.max(10,5) = ", Math.max(10,5), "<br/>");
+    // find max value from list
+    document.write("Math.min(10,5) = ", Math.min(10,5), "<br/>");
+    // find min value from list
+
+    document.write("Random # (1-10) = ",
+        Math.floor((Math.random() * 10) + 1), "<br/>");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- STRINGS BASICS ----------
+
+    // Strings - Series of characters surrounded by quotes
+
+    var samp_str = "Here are escaped characters \' \" \\ \t \n \b \f \r";
+    // \b - one space to left, backspace
+    // \f - one row down, form feed
+    // \n - new line
+    // \r - return, carriage return
+    // \t - tab
+
+    // concatenation
+    var randStr = "A long " + "string that " + "goes on and on";
+    var first_str = "First String ";
+    var second_str = "and Second String";
+    var combined = first_str + second_str;
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- STRINGS METHODS ----------
+
+    // String length
+    document.write("String Length : ", randStr.length + "<br/>");
+
+    // Split a string into an array
+    var randStrArray = randStr.split(" ");
+
+    // Get character at an index
+    document.write("At Index 2 : ", randStr.charAt(2) + "<br/>");
+    document.write("Last character " +
+        combined.charAt(combined.length-1)+"<br />");
+
+    // Trim white space
+    randStr = randStr.trim();
+
+    // Convert to uppercase
+    document.write(randStr.toUpperCase() + "<br/>");
+
+    // Convert to lowercase
+    document.write(randStr.toLowerCase() + "<br/>");
+
+    // Replace a string
+    document.write(randStr.replace("and on", "forever") + "<br/>");
+
+    // substring
+    document.write("Substring " + combined.substring(6,12) +"<br />");
+
+    // finding part of string
+    document.write("Index for \"goes\" : ", randStr.indexOf("goes"), "<br/>");
+
+    // Return the value using a start and end index
+    document.write(randStr.slice(19, 23) + "<br/>");
+
+    // Return everything after the start index
+    document.write(randStr.slice(19) + "<br/>");
+
+    // Return the value using the start index and length
+    document.write(randStr.substr(19, 4) + "<br/>");
+
+    // string styling
+    document.write("Big : ", randStr.big(), "<br />");
+    document.write("Bold : ", randStr.bold(), "<br />");
+    document.write("Font Color : ", randStr.fontcolor("blue"), "<br />");
+    document.write("Font Size : ", randStr.fontsize("8em"), "<br />");
+    document.write("Italics : ", randStr.italics(), "<br />");
+    document.write("Google : ", randStr.link("http://google.com"), "<br />");
+    document.write("Small : ", randStr.small(), "<br />");
+    document.write("Strike : ", randStr.strike(), "<br />");
+    document.write("Sub : ", randStr.sub(), "<br />");
+    document.write("Sup : ", randStr.sup(), "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- FLOW: BASICS ----------
+
+    // Relational Operators : == != > < >= <=
+    // === : Equal value and type
+    // Logical Operators : && and, \\ or i ! not
+
+    // The if Statement
+    if (5 > 10) {
+        document.write("5 is greater than 10" +"<br />");
+    } else if (5 < 10) {
+        document.write("5 is less than 10" +"<br />");
+    } else {
+        document.write("5 is equal to 10" +"<br />");
+    }
+
+    // Switch is used to match a limited number of options
+    var age = 5;
+    switch(age) {
+        case 5 :
+        case 6 :
+            document.write("Go to Kindergarten<br />");
+            break;
+        case 7 :
+            document.write("Go to 1st Grade<br />");
+            break;
+        default :
+            document.write("Subtract 5 from your age<br />");
+    }
+
+    // Ternary Operator assigns a value based on a condition
+    // (condition) ? iftrue : ifFalse
+    var age = 5;
+    var canIVote = (age >= 18) ? true : false;
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- FLOW: LOOPS ----------
+
+    // While Loop
+    count = 1;
+    while( count <= 10 ) {
+        if(count === 5) {
+            break;
+        }
+        if(count % 2) {
+            count++;
+            continue;
+        }
+        document.write(count +"<br />");
+        count++;
+    }
+
+    // Do While Loop
+    var count = 10;
+    do {
+        document.write(count +"<br />");
+        count--;
+    } while (count > 10);
+
+    // For loop
+    for(j = 0; j <= 20; j++){
+        if((j % 2) === 0){
+            continue;
+        }
+        if(j === 15){
+            break;
+        }
+        document.write(j, ", ");
+    }
+
+    // for in loop
+    var customer = {name : "Bob Thomas", address : "123 Main", balance : 50.50};
+    for(k in customer){
+        document.write(customer[k], "<br />");
+    }
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- ARRAYS: BASICS ----------
+
+    // Because JS is untyped, you can store any data type in an array
+
+    var sampArray10 = new Array(10); // Creates an array with 10 elements
+    var sampArray = new Array(); // Creates array without designation
+    var drugiNiz = []; // creates empty array
+    var tomSmith = ["Tom Smith", "123 Main", 120.50];
+    var sampArray2 = new Array("Sally", "221 Main St.", 34);
+    var treciNiz = {ime:"Pera", prezime:"Peric", godine:20};
+
+    // array length
+    document.write("Length of Array: " + sampArray.length + "<br />");
+
+    // array access index
+    document.write("1st State : ", tomSmith[0], "<br />");
+
+    // array access loop
+    for(i in sampArray) {
+        document.write(sampArray[i] + "<br />");
+    }
+
+    // Add an item
+    tomSmith[3] = "tsmith@aol.com";
+
+    // Delete an index
+    delete tomSmith[3];
+
+    // Remove the last item
+    tomSmith.pop();
+
+    // Add items to the end
+    tomSmith.push("555-1212", "US");
+
+    // Deletes the first item
+    tomSmith.shift();
+
+    // Adds item to the first index
+    tomSmith.unshift("Tom Smith");
+
+    // Works for sorting strings
+    tomSmith.sort();
+
+    // Sort numbers ascending (Descending sort ({return y - x}))
+    var numbers = [4,3,9,1,20,43];
+    numbers.sort(function(x,y){ return x - y });
+
+    // Overwrite index 2 and fit everything else after index 2 without
+    // overwriting (Put 0 for second parameter to not overwrite)
+    tomSmith.splice(2, 1, "Pittsburgh", "PA");
+
+    // Delete the 4th index item using splice
+    tomSmith.splice(4,1);
+
+    // Combine arrays
+    var combinedArray = numbers.concat(tomSmith);
+
+    // Returns the array reversed
+    document.write("Array Reversed: " + sampArray.reverse() + "<br />");
+
+    // returns if it's an array
+    Array.isArray(sampArray2);
+
+    // Convert an array into a string
+    document.write("Array : ", tomSmith.valueOf(), "<br />");
+    document.write("Array : ", tomSmith.toString(), "<br />");
+
+    // Convert an array into a string with separator
+    document.write("Array : ", tomSmith.join(", "), "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- ARRAYS: MULTIDIMENSIONAL ----------
+
+    // declaration
+    var multiArray = [[1,2,3,4,5], [6,7,8,9,10]];
+
+    // access specified indexes
+    document.write(multiArray[1][3] + "<br />");
+
+    // access through loop
+    for(i = 0; i < multiArray.length; i++) {
+        for(var j = 0; j < multiArray[i].length; j++) {
+            document.write(multiArray[i][j] + "<br />");
+        }
+    }
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- FUNCTIONS: BASICS ----------
+
+    // JS doesn't check if you passed the right number of arguments or datatype
+    // If you pass more arguments than are expected, they are ignored
+
+    // Function Scope test example
+    var scopeTest = 1;
+    // JS doesn't have block level scope
+    // Local variables defined in functions can't be accessed outside of
+    // the function
+    // Always define variable before using it in a function
+    function scopey() {
+        // All variables defined in a function are considered defined
+        // before they are given a value
+        document.write("In Scopey 1st: " + scopeTest + "<br />");
+        var scopeTest = 2;
+        document.write("In Scopey 2nd: " + scopeTest + "<br />");
+        return true;
+    }
+    scopey();
+    document.write("Out of Scopey: " + scopeTest + "<br />");
+
+    // Function Example
+    function addThese(a,b) {
+        return a+b;
+    }
+    // or
+    var sum = {
+        addThese(a,b){
+            return a+b;
+        }
+    };
+    document.write("5 + 25 = " + addThese(5,25) + "<br />");
+
+    // Pass a function as a parameter
+    function times3(num){
+        return num * 3;
+    }
+    function multiply(func, num){
+        return func(num);
+    }
+    document.write("3 * 15 = ", multiply(times3, 15), "<br />");
+
+    // Define a function expression
+    // We can assign functions to variables, store them in arrays,
+    // pass them into other functions and return them from functions
+    var triple = function(num){
+        return num * 3;
+    };
+    document.write("3 * 45 = ", multiply(triple, 45), "<br />");
+
+    // variable number of arguments version 1
+    function addMany(a,b,c,d,e,f) {
+        var i=0;
+        var sum=0;
+        document.write("Arguments Length: " + arguments.length + "<br />");
+        while(i < arguments.length) {
+            sum = sum + arguments[i];
+            i++;
+        }
+        document.write("Sum of arguments: " + sum + "<br />");
+    }
+
+    // Receive variable number of arguments version 2
+    function getSum(){
+        var sum = 0;
+        for(i = 0; i < arguments.length; i++){
+            sum += arguments[i];
+        }
+        return sum;
+    }
+    document.write("Sum : ", getSum(1,2,3,4,5), "<br />");
+
+    // Check for the number of function arguments outside of function version 3
+    document.write("Num of arguments : " + getSum.length + "<br />");
+
+    // Return a variable number of values
+    function times2(theArray){
+        var newArray = [];
+        for(i = 0; i < theArray.length; i++){
+            newArray.push(theArray[i] * 2);
+        }
+        return newArray;
+    }
+    document.write("Array Double : ", times2([1,2,3,4,5]).toString(), "<br />");
+
+    // Recursive Function
+    function factorial(num){
+        if(num <= 1){
+            return 1;
+        } else {
+            return num * factorial(num - 1);
+        }
+    }
+    document.write("Factorial of 4 : ", factorial(4), "<br />");
+    // 1st: num = 4 * factorial(3) = 4 * 6 = 24
+    // 2nd: num = 3 * factorial(2) = 3 * 2 = 6
+    // 3rd: num = 2 * factorial(1) = 2 * 1 = 2
+
+    // self calling function (selfinvoking)
+    (function samopoz() {
+        alert("samopoz. funk");
+    })();
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- FUNCTIONS: SPECIAL ----------
+
+    // receives function & time in milisek (after which function starts)
+    setTimeout(addThese(2,4),100);
+
+    // receives function & time in ms (ms is interval after which repedetly
+    // function is started
+    var idinterval = setInterval(addThese(2,4),100);
+    // clear time set with set interval
+    clearInterval(idinterval);
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- FUNCTIONS: DATE ----------
+
+    // Get a Date object (there is multiple constructors,
+    // pass many different arguments (check documentation))
+    var curDate = new Date();
+
+    document.write("Date : ", curDate.getDate(), "<br />");
+    document.write("Month : ", curDate.getMonth(), "<br />");
+    document.write("Day : ", curDate.getDay(), "<br />");
+    document.write("Year : ", curDate.getFullYear(), "<br />");
+    document.write("Time : ", curDate.getHours(), ":", curDate.getMinutes(),
+        ":", curDate.getSeconds(), ":", curDate.getMilliseconds(), "<br />");
+    // getTime(), getTimeZoneOffset(), parse(), setDate(), setHours(),
+    // setMinutes(), setMonth(), setSeconds(), setTime(), setFullYear(),
+    // toGMTString(), toLocalString(), UTC()
+
+    // Create a Date object for my birthday
+    var myBirthDay = new Date("December 21, 2015");
+    var msForBD = myBirthDay.getTime();
+    var timeNow = curDate.getTime();
+    var tilMyBD = msForBD - timeNow;
+    document.write("Days til Birthday : ",
+        tilMyBD / (1000 * 60 * 60 * 24), "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- EXCEPTION HANDLING ----------
+
+    // Through exception handling we can catch and manage errors rather then
+    // crashing by surrounding problem code in a try and catch block
+    var custArray = ["Tom", "Bob", "Sally", "Sue"];
+    var getCust = function(index){
+        if(index > custArray.length){
+            throw new RangeError("Index must be >= 0 and <= " +
+                custArray.length );
+        } else {
+            return custArray[index];
+        }
+    };
+    try {
+        document.write("Customer : ", getCust(5), "<br />");
+    }
+    catch(ex){
+        if (ex instanceof RangeError){
+            document.write(ex.message + "<br />");
+        }
+    }
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- REGEX ----------
+
+    // 2 ways to do the same regex definition
+    // var regPat = /[1-9]{1,5}\s[A-Z]{2}\b[a-z]{2,}/
+    // var regPat = new RegExp("\d{1,5}\s[A-Z]{2}\b[a-z]{2,}");
+
+    document.write(longStr.search(/[A-Za-z]{1,15}\s/) + "<br />");
+    document.write(longStr.replace(/\d{5}/, "55555") + "<br />");
+
+    matchArray = longStr.match(/\d{4,5}/g);
+    // g – Represents a global or whole string search
+    // i – Represents a case insensitive search
+    // m – multiline represents beginning and end of line of string rather than
+    // beginning and end of string
+
+    var regexPat = /\d{3,5}/;
+    document.write((regexPat instanceof RegExp) + "<br />");
+    // regexPat instance (object) of RexExp check
+
+    var regMatch = regexPat.exec(longStr);
+    // returning first next match in a string
+    document.write(regMatch.index + "<br />");
+    // returning index of first next match in a string
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- OO JAVASCRIPT: OBJECTS ----------
+
+    // Object - Stores variables and the functions needed to manipulate them
+    // Class - Defines what variables and functions each object will have
+    // Properties - The name given to variables in objects
+    // Methods -  The name given to functions in objects
+
+    // A basic JavaScript object with properties and a method
+    var customer = {
+        name: 'Tom Smith',
+        speak: function(){
+            return "My name is " + this.name;
+        },
+        // Objects can contain other objects
+        address: {
+            street: '123 Main St',
+            city: 'Pittsburgh'
+        }
+    };
+
+    // You access properties directly
+    document.write(customer.speak() + customer.name + "<br />");
+
+    // or using a function
+    function getInfo(cust){
+        cust.name = "Sue Smith";
+        return cust.name + " lives at " + cust.street;
+    }
+    document.write(getInfo(cust), "<br />");
+
+    // You can add or change properties
+    customer.address.country = "US";
+
+    // Delete a property
+    delete cust1.country;
+
+    // Check if a property is in an object
+    document.write("name in cust1 : ", "name" in cust1, "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- OO JAVASCRIPT: CLASSES ----------
+
+    // Creating multiple objects of the same type with Constructor Functions.
+    // Constructors provide the functions that classes provide in other lang.
+
+    function Person(name) {
+        this.name = name;
+        this.name = "No Name";
+        this.info = function(){
+            return "My name is " + this.name;
+        };
+    }
+
+    // You call constructor functions with new
+    var bob = new Person("Bob Smith", "234 Main St");
+
+    // instanceof tells you if an object is of a certain type
+    document.write("Bob is a person : " + (bob instanceof Person) +
+        "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- OO JAVASCRIPT: PROTOTYPE ----------
+
+    // Every function has a prototype property that contains an object
+    // You can add properties and methods to the prototype object
+    // and then when you call for them to execute they are used
+    // just as if they belonged to the object
+
+    // Use prototype to add a property
+    Person.prototype.sound = "Grrrrr";
+
+    // Use prototype to add a method
+    Person.prototype.makeSound = function() {
+        return this.name + " says " + this.sound;
+    };
+
+    // or like this
+    Person.prototype = {
+        drive (){
+            return this.name + " drives forward";
+        },
+        stop (){
+            return this.name + " stops";
+        }
+    };
+
+    // Check for specific property
+    document.write("name Property : " + bob.hasOwnProperty("name") + "<br />");
+
+    // List all properties of an object
+    for(var prop in bob){
+        if (bob.hasOwnProperty(prop))
+            document.write(prop + " : " + bob[prop] + "<br />");
+    }
+
+    // You can add methods to built in JS objects
+    Array.prototype.inArray = function inArray(value){
+        for(var i = 0; i < this.length; i++){
+            if(this[i] === value){
+                return true;
+            }
+        }
+        return false;
+    };
+    var sampArray = [1,2,3,4,5];
+    document.write("3 in array : " + sampArray.inArray(3) + "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- OO JAVASCRIPT: PRIVATE PROPERTIES ----------
+
+    // All properties in an object are public in that any function can modify or
+    // delete these properties. You can make properties private by declaring
+    // them as variables in a constructor
+
+    function SecretCode(){
+        // This value can't be accessed directly
+        var secretNum = 78;
+        // This function can be accessed secretNum
+        this.publicNum = 56;
+    }
+    var secret = new SecretCode();
+
+    document.write("Value of secretNum : " + secret.secretNum + "<br />");
+    document.write("Is 70 the number : " + secret.publicNum(70) + "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- OO JAVASCRIPT: GETTERS AND SETTERS ----------
+
+    // getters & setters using prototype
+
+    Person.prototype.setOwner = function(newOwner) {
+        if (typeof newOwner !== 'undefined') {
+            this.owner = newOwner;
+        } else {
+            document.write("Please enter a valid owner name");
+        }
+    };
+    Person.prototype.getOwner = function() {
+        return this.owner;
+    };
+    dog.setOwner("Paul");
+    document.write(dog.getOwner() + "<br />");
+
+    // regular getters & setters
+
+    var address = {
+        street: "No Street",
+        city: "No City",
+        state: "No State",
+        // Provides styled data all at once
+        get getAddress() {
+            return this.street + ", " + this.city + ", " + this.state;
+        },
+        // Allows the user to set 3 values with 1
+        set setAddress (theAddress) {
+            var parts = theAddress.toString().split(", ");
+            this.street = parts[0] || '';
+            this.city = parts[1] || '';
+            this.state = parts[2] || '';
+        }
+    };
+    address.setAddress = "123 Main St, Pittsburgh, PA";
+    document.write("Address : " + address.getAddress + "<br />");
+
+    // getters & setters with defineproperty
+
+    var lost = {
+        loc : "Island"
+    };
+    Object.defineProperty(lost, "location", {
+        get () {
+        return this.loc;
+        },
+        set (val) {
+            this.loc = val;
+        }
+    });
+    lost.loc = "Another island";
+
+    // ecmascript 5.1 getters & setters
+
+    var Circle = function (radius) {
+        this._radius = radius;
+    };
+    Circle.prototype = {
+        set radius(radius) {
+            this._radius = radius;
+            },
+        get radius() {
+            return this._radius;
+            }
+    };
+    var circ = new Circle(10);
+    circ.radius = 15;
+    document.write("A circle with radius " + circ.radius + "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- OO JAVASCRIPT: INHERITANCE ----------
+
+    // When we ask for a property if it isn't found in the main object
+    // then it is searched for in the prototype object. We are able
+    // to inherit methods and variables from any object in a chain of objects.
+
+    function Animal(){
+        this.name = "Animal";
+        this.toString = function() {
+            return "My name is : " + this.name;
+        };
+    }
+    function Canine(){
+        this.name = "Canine";
+    }
+    function Wolf(){
+        this.name = "Wolf";
+    }
+    // Overwrite the prototype chain for Canine and Wolf
+    Canine.prototype = new Animal();
+    Wolf.prototype = new Canine();
+    // After you overwrite prototype its constructor points to the
+    // main object object so you have to reset the constructor back
+    Canine.prototype.constructor = Canine;
+    Wolf.prototype.constructor = Wolf;
+
+    var arcticWolf = new Wolf();
+    // Wolf inherits toString from chain (wolf and animal)
+    document.write(arcticWolf.toString() + "<br />");
+
+    // Properties added to any object in the chain is inherited
+    Animal.prototype.sound = "Grrrrr";
+    Animal.prototype.getSound = function(){
+        return this.name + " says " + this.sound;
+    };
+
+    Canine.prototype.sound = "Woof";
+    Wolf.prototype.sound = "Grrrr Wooof";
+
+    // wolf inherits from chain
+    document.write(arcticWolf.getSound() + "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- OO JAVASCRIPT: INTERMEDIATE FUNCTION INHERITANCE ----------
+
+    function extend(Child, Parent){
+        var Temp = function(){};
+        Temp.prototype = Parent.prototype;
+        Child.prototype = new Temp();
+        Child.prototype.constructor = Child;
+    }
+
+    function Deer(){
+        this.name = "Deer";
+        this.sound = "Snort";
+    }
+
+    extend(Deer, Animal);
+
+    var elk = new Deer();
+    document.write(elk.getSound() + "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ----- OO JAVASCRIPT: EC6 WAY -----
+
+    class Animal {
+        constructor(name){
+            this.name = name;
+        }
+        toString(){
+            return "Animal is named " + this.name;
+        }
+        static getAnimal(){
+            return new Animal("No Name");
+        }
+    }
+
+    class Dog extends Animal{
+        constructor(name, owner){
+            // We can call the super class now
+            super(name);
+            this.owner = owner;
+        }
+        toString(){
+            // You can call super class methods as well
+            return super.toString() + "<br />Dog is named " + this.name;
+        }
+    }
+
+    var rover = new Dog("Rover", "Paul");
+    document.write(rover.name + " is owned by " + rover.owner + "<br />");
+    document.write(rover.toString() + "<br />");
+    // Call the static function
+    var bowser = Animal.getAnimal();
+    document.write("Bowser info : " + bowser.toString() + "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- JAVASCRIPT PATTERNS ----------
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- SINGLETON PATTERN ----------
+
+    // Singletons are used when you only ever want 1 object to be created
+    // Let's say you want to create a game character with fixed stats
+    function Hero(name){
+        // Check if the object exists
+        if(typeof Hero.instance === 'object'){
+            // If it does return it
+            return Hero.instance;
+        }
+        // if it doesn't then create the hero
+        this.name = name;
+        Hero.instance = this;
+        return this;
+    }
+    var derekHero = new Hero("Derek");
+    document.write("Are hero is " + derekHero.name + "<br />");
+    // This won't change the name to Paul
+    var paulHero = new Hero("Paul");
+    document.write("Are hero is " + paulHero.name + "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- FACTORY PATTERN ----------
+
+    // The factory pattern can be used to generate different
+    // objects on request
+    function Sword(desc){
+        this.weaponType = "Sword";
+        this.metal = desc.metal || "Steel";
+        this.style = desc.style || "Longsword";
+        this.hasMagic = desc.hasMagic || false;
+    }
+    function Bow(desc){
+        this.weaponType = "Bow";
+        this.material = desc.material || "Wood";
+        this.style = desc.style || "Longbow";
+        this.hasMagic = desc.hasMagic || false;
+    }
+    function WeaponFactory(){}
+    WeaponFactory.prototype.makeWeapon = function(desc){
+        var weaponClass = null;
+        if(desc.weaponType === "Sword"){
+            weaponClass = Sword;
+        } else if (desc.weaponType === "Bow"){
+            weaponClass = Bow;
+        } else {
+            return false;
+        }
+        return new weaponClass(desc);
+    };
+    var myWeaponFact = new WeaponFactory();
+    var bladeFist = myWeaponFact.makeWeapon({
+        weaponType: "Sword",
+        metal: "Dark Iron",
+        style: "Scythe",
+        hasMagic: true
+    });
+    document.write(bladeFist.weaponType + " of type " + bladeFist.style +
+        " crafted from " + bladeFist.metal + "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- DECORATOR PATTERN ----------
+
+    // The decorator pattern allows you alter an object at run time
+    function Pizza(price){
+        this.price = price || 10;
+    }
+    Pizza.prototype.getPrice = function(){
+        return this.price;
+    };
+    function ExtraCheese(pizza){
+        var prevPrice = pizza.price;
+        pizza.price = prevPrice + 1;
+    }
+    var myPizza = new Pizza(10);
+    ExtraCheese(myPizza);
+    document.write("Cost of Pizza : $" + myPizza.price + "<br />");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- OBSERVER PATTERN ----------
+
+    // A single object notifies many objects (observers) when a
+    // state change occurs
+    var Observable = function() {
+        this.subscribers = [];
+    };
+    Observable.prototype = {
+        subscribe: function(subscriber) {
+            // Add the subscriber object to the list
+            this.subscribers.push(subscriber);
+        },
+        unsubscribe: function(unsubscriber) {
+            // Cycle through the subscriber array and delete
+            // the unsubscriber
+            for (i = 0; i < this.subscribers.length; i++) {
+                if (this.subscribers[i] === unsubscriber) {
+                    this.subscribers.splice(i, 1);
+                    // We assume it only subscribed once so we
+                    // leave after it is found
+                    return unsubscriber.name;
+                }
+            }
+        },
+        publish: function(data) {
+            // Cycle through all subscribers and send them the update
+            for (i = 0; i < this.subscribers.length; i++) {
+                this.subscribers[i].receiveData(data);
+            }
+        }
+    };
+    var OrganFanny = {
+        name: "Organ Fanny",
+        receiveData: function(data){
+            document.write(this.name + " received your info : " + data +
+                "<br />");
+        }
+    };
+    var BoldmanYaks = {
+        name: "Boldman Yaks",
+        receiveData: function(data){
+            document.write(this.name + " received your info : " + data +
+                "<br />");
+        }
+    };
+    // Add subscribers and alert them
+    observable = new Observable();
+    observable.subscribe(OrganFanny);
+    observable.subscribe(BoldmanYaks);
+    observable.publish('IBM at $145.30');
+    document.write(observable.unsubscribe(OrganFanny) + " Unsubscribed<br />");
+    observable.publish('IBM at $145.33');
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- DOCUMENT ----------
+
+    // all the events http://www.w3schools.com/jsref/dom_obj_event.asp
+    // all the styling http://www.w3schools.com/jsref/dom_obj_style.asp
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- DOCUMENT: BOXES ----------
+
+    // Prompt opens a popup that requests info
+    var yourName = prompt("What is your name?");
+
+    // confirm statement returns boolean
+    var confirmm = confirm("da li si ti pera?");
+
+    // Alert opens a popup that contains a message
+    alert("Please Enter Your Name Next Time");
+    // alternatively
+    window.alert("pera");
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- DOCUMENT: BASIC ELEMENTS ----------
+
+    // setting the name of the window
+    window.name = "pera";
+    // return name of the window
+    document.write(window.name);
+
+    // return dimensions of a window
+    var w=window.innerWidth;
+    var h=window.innerHeight;
+
+    // give title to the current document
+    document.title = "pera";
+
+    // puts & returns value of body tag
+    var content = document.body;
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- DOCUMENT: ELEMENT ACCESS ----------
+
+    // document refers to the html page
+    // head is the first child node of the document
+    // body is the second child of document
+    // All other items in the document are easily assigned attributes by id
+
+    // var node = document.getElementById(id);
+    // node = document.getElementById(id).lastChild; // .firstChild
+    // node.nodeValue=newText;
+    // node.childnodes[0]
+    // node.childnodes[0].nodevalue
+
+    // returns number of divs (any elements)
+    var b = document.getElementsByTagName("div").length;
+
+    // You can get all page elements and then target them like an array
+    var pElements = document.getElementsByTagName('p');
+    pElements[3].style.backgroundColor = "#EFDECD";
+    pElements.childNodes[0].style.backgroundColor = "#F0FFFF";
+    pElements.childNodes[0].childNodes[1].style.backgroundColor = "#BFAFB2";
+
+    // JavaScript can get confused by text nodes when targeting elements
+    // Text nodes are whitespace, which nodeType will identify with a 3
+    // while elements as a 1
+    // You can eliminate text nodes by deleting whitespace or by using a
+    // minimizer (lastChild and firstChild may not work)
+    document.write("Node Type : ",
+        pElements.childNodes[0].childNodes[0].nodeType, "<br />");
+    document.write("Node Name : ",
+        pElements.childNodes[0].childNodes[0].nodeName, "<br />");
+
+    // Changing element attributes
+    var nttLogo2 = document.getElementById('logo2');
+    // Check for attributes
+    document.write("Logo has alt : ", nttLogo2.hasAttribute("alt"), "<br />");
+    // Change attribute
+    nttLogo2.setAttribute("alt", "NTT Logo 2");
+    // Get attribute
+    document.write("Logo alt Value : ", nttLogo2.getAttribute("alt"), "<br />");
+
+    // Get all attributes and print them
+    var attribList = document.getElementById('logo2').attributes;
+    for(i = 0; i < attribList.length; i++){
+        document.write("Attribute ", i, " : ", attribList[i].nodeName, " : ",
+            attribList[i].nodeValue, "<br />");
+    }
+
+    // Add a p element after setting an attribute and text
+    var paragraph3 = document.createElement("p");
+    // html attribute.. id, name,...
+    paragraph3.setAttribute("id", "paragraph3");
+    // innerHTML is for setting & getting actual text inside HTML
+    paragraph3.innerHTML = "Proin eget turpis esuada ut ac nulla.";
+    // append to existing paragraph
+    pElements.appendChild(paragraph3);
+    // or put it into exact plase.. insert the element before the 1st child
+    pElements.insertBefore(paragraph3, sampDiv2.childNodes[0]);
+
+    // create specific attribute
+    var a = document.createAttribute("style");
+    a.value = "font-size: large; color: #3333ff";
+    footerTag.setAttributeNode(a);
+
+    // delete all existing children
+    while (node.firstChild)
+        // remove child function on node.firstChild
+        node.removeChild(node.firstChild);
+
+    // add new children
+    node.appendChild(document.createTextNode(newText));
+
+    -->
+</script>
+
+<!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ -->
+<!-- ---------- DOCUMENT: DOM & EVENTS ---------- -->
+
+<!-- Open alert on click -->
+<a href="JavaScript:void(0)" onClick="alert('Hello');">Say Hello</a><br />
+
+<!-- Call a function on click -->
+<a href="JavaScript:void(0)" onClick=
+        "openAlert('Hi how are you');">Say Something</a><br />
+
+<!-- Change on mouse click, rollover, roll out, resize and load-->
+<a href="JavaScript:void(0)" onmouseover="this.style.color='red';"
+   onmouseout="this.style.color='blue';"
+   ondblclick="this.text='You Double Clicked Me'"
+   onmousedown="this.text='Don\'t Press So hard'"
+   onmouseup="this.text='Thank You'"
+   onResize="changeImage();"
+   onLoad="alert('Website Loaded');">Make me Red</a><br />
+
+<!-- Get value in an input element and open alert on change -->
+<input type="text" id="randInput"
+       onChange="var dataEntered=document.getElementById('randInput').value;
+       alert('User Typed ' + dataEntered);"><br /><br />
+
+<script>
+
+    // Change text when the input gains focus
+    document.getElementById('charInput').onfocus = function(event) {
+        document.getElementById('keyData').innerHTML = "Input Gained Focus";
+    };
+
+    // Change text when the input loses focus
+    document.getElementById('charInput').onblur = function(event) {
+        document.getElementById('keyData').innerHTML = "Input Lost Focus";
+    };
+
+    // Change text when text is selected
+    document.getElementById('charInput').onselect = function(event) {
+        document.getElementById('keyData').innerHTML = "Text Selected";
+    };
+
+    // Add a listener that triggers a function on browser resize
+    window.addEventListener("resize", browserResized);
+    function browserResized() {
+        document.getElementById('keyData').innerHTML = "I've been resized";
+    }
+
+    // Make image invisible on click
+    document.getElementById('logo').onclick = function(event) {
+        // Change the class for the image
+        document.getElementById('logo').className = "hidden";
+        // Change the input element value
+        document.getElementById('mouseInput').value =
+            "Clicked on image with button " + event.button;
+    };
+
+    // Make image visible on click
+    document.getElementById('logoButton').onclick = function(event) {
+        document.getElementById('logo').className = "show";
+    };
+
+    // Change image src on mouseover
+    document.getElementById('logo').onmouseover = function(event) {
+        // .src for source info
+        document.getElementById('logo').src = "ntt-logo-horz.png";
+        document.getElementById('mouseInput').value = "Mouse Over image";
+    };
+
+    // Change image src back on mouseout
+    document.getElementById('logo').onmouseout = function(event) {
+        // .src for source info
+        document.getElementById('logo').src = "ntt-logo.png";
+        document.getElementById('mouseInput').value = "Mouse Left image";
+    };
+
+    // Change background color
+    document.getElementById('chgBkColor').onclick = function(event) {
+        document.getElementById('sampDiv').style.backgroundColor = "#EFDECD";
+    };
+
+    // Change background image
+    document.getElementById('chgBkImg').onclick = function(event) {
+        document.getElementById('sampDiv').style.backgroundImage =
+            "url('repeatBkgrnd.png')";
+    };
+
+    // Clear all input elements
+    document.getElementById('clearInputs').onclick = function(event) {
+        var inputElements = document.getElementsByTagName('input');
+        for (var i = 0; i < inputElements.length; i++) {
+            if (inputElements[i].type === "text") {
+                inputElements[i].value = "";
+            }
+        }
+    };
+
+    /* The other JavaScript Events
+    get mouse position
+    OnAbort - Called when a page load is interrupted
+    OnError - Called when an error occurs during page load
+    OnKeyDown - When key is pressed but not released
+    OnKeyUp - When key is released
+    OnMouseUp - When mouse button is released
+    OnReset - When reset button is clicked
+    OnSelect - When text is selected
+    OnSubmit - When submit button is clicked
+    OnUnload - When user leaves a page
+    */
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- DOCUMENT: URLS ----------
+
+    // returns the anchor part of the url
+    var sidro = location.hash;
+    console.log("Trenutni anchor: " + sidro);
+
+    // location.search returns search parameter after and including ?
+    var getParams=location.search;
+    location.search="?ime=Pera&Prezime=Perić";
+    getParams=location.search;
+    console.log("Get parametri: "+getParams);
+
+    // Get current web page info
+    document.write("Current URL : ", window.location.href, "<br />");
+    document.write("Current Host : ", window.location.hostname, "<br />");
+    document.write("Current Path : ", window.location.pathname, "<br />");
+
+    // Change site on button click
+    document.getElementById('goToGoogle').onclick = function(event) {
+        window.location.href = "http://google.com";
+        // OR
+        // window.location.assign("http://google.com");
+        // OR
+        // replace removes history & unables back button
+        // window.location.replace("http://www.it-akademija.com");
+    };
+
+    // history.length returns number of visited urls
+    var numURLs = history.length;
+
+    // Go forward a page on click
+    document.getElementById('forwardPage').onclick = function(event) {
+        history.forward();
+    };
+
+    // Go back a page on click
+    document.getElementById('forwardPage').onclick = function(event) {
+        history.back();
+    };
+
+    // Use history.go(-2) or history.go(2) to jump multiple pages
+
+    // Reload page on button click
+    document.getElementById('reload').onclick = function(event) {
+        window.location.reload(true);
+    };
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- DOCUMENT: COOKIES ----------
+
+    // Cookies are used to store information on the clients hard drive
+    // You can only access the information you stored on the clients machine
+    // You can't access other websites cookies
+    // Cookies contain a name, value, expiration, directory
+    // that can access it and the domain that can access it
+
+    document.write("Every Cookie: " + document.cookie); // print every cookie
+
+    function getACookie(name) // receives an id of a text box
+    {
+        var cookieName = document.getElementById("getme").value;
+        // Get the value from the text box called getme
+        var allCookies = document.cookie.split(';');
+        // Splits all of the cookies and puts them in an array
+        var cookieData = "";
+
+        for (var i=0; i < allCookies.length; i++) {
+            // Cycle through all of the cookies in the array
+            if ((allCookies[i].indexOf(cookieName)) !== -1) {
+                // Test to see if string contains the cookie name
+                var match = allCookies[i].replace(" ", "");
+                // Deletes whitespace that may proceed the cookie name
+                cookieData = match.substr((cookieName.length + 1));
+                // Assign the substring that follows the cookie name
+                alert(cookieName + " " + cookieData);
+            }
+        }
+    }
+
+    function createCookie(newCookie) {
+        var expDate = new Date();
+        expDate.setMonth(expDate.getMonth() + 1);
+        // Adds 1 month ahead as the expiration date
+        var cookieVal = document.getElementById(newCookie).value;
+        // Retrieves cookie value from the node that was past to the function
+        document.cookie = newCookie + "=" + cookieVal + ";path=/;expires=" +
+            expDate.toGMTString();
+        // Creates the cookie
+    }
+
+    function deleteCookie() {
+        var cookieToDel = document.getElementById("deleteme").value;
+        createCookie(cookieToDel,"",-1);
+        // Creates a cookie with a name value and expiration in days
+    }
+
+    // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+    // ---------- NAVIGATOR ----------
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(ucitajKoordinate);
+    } else {
+        console.log("Pregledac ne podrzava geolokaciju");
+    }
+
+    function ucitajKoordinate(position) {
+        console.log("Trenutna geografska sirina: " + position.coords.latitude);
+        console.log("Trenutna geografska duzina: " + position.coords.longitude);
+    }
+
+    // alternative if
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(ucitajKoordinate, showError);
+    } else {
+        console.log("Pregledac ne podrzava geolokaciju");
+    }
+
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                console.log("Korisnik nije dozvolio ucitavanje lokacije")
+                break;
+            case error.POSITION_UNAVAILABLE:
+                console.log("Nedostupna pozicija")
+                break;
+            case error.TIMEOUT:
+                console.log("Time out")
+                break;
+            case error.UNKNOWN_ERROR:
+                console.log("Nepoznata greska")
+                break;
+        }
+    }
+
+</script>
+
+<noscript>
+    <h3>JavaScript is Required</h3>
+</noscript>
+
+</body>

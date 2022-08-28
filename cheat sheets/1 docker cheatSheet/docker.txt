@@ -1,0 +1,82 @@
+
+first start docker if it's not running by default
+
+docker --version -returns docker version
+sudo docker info -returns info
+docker -returns all docker commands
+docker <<command>> --help -returns detailed explanation about command
+
+docker pull <<image>> -download image
+docker images -list all downloaded images
+docker image ls -list all downloaded images
+docker rmi <<image>> -delete image
+
+docker run <<container/image>> -download image and/or run/start image/container in attached mode
+docker run <<container/image>>:latest -download image and/or run/start image/container in attached mode with tag latest
+docker run -d <<container/image name>> -detached mode, running without direct terminal access
+docker run --name <<put name here>> <<container/image name>> -set name so you don't get random from docker
+docker run -p 8080:80 <<container/image name>> -mapping ports host 8080 to container 80
+docker run -p 8080:80 -p 3000:80 <<container/image name>> -mapping multiple ports
+docker run -v /some/content:/usr/share/nginx/html:ro <<container/image name>> -map local volume to container volume read only
+docker run -v $(pwd):/usr/share/nginx/html:ro <<container/image name>> -map current directory mac to container volume read only
+docker run -v $(dir):/usr/share/nginx/html <<container/image name>> -map current directory windows to container volume write access
+docker run --volumes-from <<another container/image name>> <<container/image name>> -get directory from another container
+docker run -i -t <<container/image name>> -will give prompt and listen to the terminal input
+docker exec -i -t <<container/image name>> bash -execute in interactive mode and specify bash or /bin/sh or something to enter linux terminal
+docker run --name <<put name here>> --volumes-from <<another container/image name>>:latest -d -p 8080:80 -p 3000:80 -i -t <<container/image name>> -complex command, untested
+docker run -e REDIS_NAMESPACE='staging' -e POSTGRES_ENV_POSTGRES_PASSWORD='foo' <<container/image>> -passing environment variables
+
+ctrl-c -close running container in attached mode in terminal
+docker stop <<container/image id/name>> -stop running container
+docker start <<container/image id/name>> -start previously stopped container
+
+docker container ls -list all running containers
+docker ps -list all running containers
+docker ps -a -list all containers
+docker ps -a -q -list all containers with quiet option get ids only
+
+docker rm <<container/image id/name>> -remove container, container must not run
+docker rm -f <<container/image id/name>> -remove container, even if running
+
+docker rm $(docker ps -a -q) -remove all containers, containers must not run
+docker rm -f $(docker ps -a -q) -remove all containers even if running
+
+creating images with Dockerfile
+
+Dockerfile file is in root of app/website directory
+	FROM <<base image>> -create image from base image
+	WORKDIR /app -set work directory inside of container, use /app dir or create if there is non
+	ADD . <<put container destination>> -add all files from root to specified container destination
+	ADD . . -add all files from root to root in container, ie working directory WORKDIR
+	RUN npm install -with RUN install dependencies, for example install node
+	CMD node index.js -after container stops what command should be executed
+docker build --tag <<container/image name>>:latest . -build image from Dockerfile inside a root directory
+docker build -t <<container/image name>>:latest . -build image from Dockerfile inside a root directory
+
+.dockerignore file is in root of app/website directory
+	node_modules
+	<<directory>>
+	<<file>>
+	Dockerfile
+	.git
+	*.gulp.js
+	folder/**
+
+docker inspect <<container name>> -detailed data about container
+docker logs <<container name>> -get logs of container
+
+
+
+
+
+docker attach <<container name>> -to attach later to container and get standard output to termanal
+
+import os
+list of all the environment variables
+os.environ
+get specific environment variable
+os.environ['HOME']
+return `None` if a key is not present rather than raise a `KeyError`
+os.environ.get('KEY_THAT_MIGHT_EXIST')
+os.getenv is equivalent, and can also give a default value instead of `None`
+os.getenv('KEY_THAT_MIGHT_EXIST', default_value)

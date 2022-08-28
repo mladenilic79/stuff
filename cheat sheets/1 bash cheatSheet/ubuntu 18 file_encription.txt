@@ -1,0 +1,9 @@
+
+use gpg utility for encription (file name should be one word)
+	$ gpg -c test.docx
+
+decrypt with
+	$ gpg -d test.docx.gpg
+
+decript and extract with
+	$ gpg test.docx.gpg

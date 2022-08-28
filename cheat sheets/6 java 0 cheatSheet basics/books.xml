@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE books [
+<!ELEMENT books (book)*>
+<!ELEMENT book (title|author)*>
+<!ATTLIST book
+	id ID #IMPLIED
+	isbn CDATA #IMPLIED
+	>
+<!ELEMENT title (#PCDATA)>
+<!ELEMENT author (#PCDATA)>
+]>
+<books>
+    <book id="01" isbn="12345">
+        <title>Childhood's End</title>
+        <author>Arthur Clarke</author>
+    </book>
+    <book id="02" isbn="67890">
+        <title>The Merchant of Venice</title>
+        <author>William Shakespeare</author>
+    </book>
+    <book id="03" isbn="33456">
+        <title>My Book Great</title>
+        <author>Pera Perovic</author>
+    </book>
+    <book id="04" isbn="23890">
+        <title>Ivica i Marica</title>
+        <author>Narodna Prica</author>
+    </book>
+    <book id="05" isbn="67897">
+        <title>Braca Jugovic</title>
+        <author>Narodna Pesma</author>
+    </book>
+    <book id="06" isbn="88990">
+        <title>Zenidba Kralja Vukasina</title>
+        <author>Narodna Pesma</author>
+    </book>
+    <book id="07" isbn="22890">
+        <title>Po Kamenjaru</title>
+        <author>Partizanska Prica</author>
+    </book>
+    <book id="08" isbn="87890">
+        <title>Po Sumama i Gorama</title>
+        <author>Zbirka Partizansih Pesama</author>
+    </book>
+</books>

@@ -1,0 +1,36 @@
+
+check java version with
+	$ java -version
+
+java 13 (scripted all setup done automatically, no variables needed to be added to path manually)
+	sudo add-apt-repository ppa:linuxuprising/java
+	sudo apt update
+	sudo apt install oracle-java13-installer
+
+return java location with (if needed to change path)
+	$ readlink -f $(which java)
+output will be something like (for oracle java)
+/usr/lib/jvm/java-13-oracle/bin/java
+
+#############################################
+using java
+
+to run java shell type:
+jshell
+
+compile java:
+from the cmd go to location of .java file & compile with command
+javac javaFileName.java
+this will get you a .class file in the same directory
+
+run java:
+from the cmd go to location of .class file & type
+java classFileName
+java classFileName arg1 arg2 arg3
+java classFileName "arg1 arg2 arg3"
+
+running runnable jar file (if packed as runnable):
+in cmd go to location of jar file & type
+java -jar filename.jar
+java -jar filename.jar arg1 arg2 arg3
+

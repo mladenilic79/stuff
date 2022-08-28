@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.3" class="java.beans.XMLDecoder">
+ <object class="c_perzistencija.ACovek">
+  <void property="ime">
+   <string>steva</string>
+  </void>
+  <void property="jmbg">
+   <string>1234</string>
+  </void>
+  <void property="prezime">
+   <string>stevic</string>
+  </void>
+ </object>
+</java>
