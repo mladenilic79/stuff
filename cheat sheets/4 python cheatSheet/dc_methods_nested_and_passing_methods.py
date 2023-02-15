@@ -25,7 +25,7 @@ def outer_method(a):
         return a * b
     return inner_method
 generated_func = outer_method(2)
-b = generated_func(3)
+nums = generated_func(3)
 
 # version ii
 def polynomial_creator(a, b, c):

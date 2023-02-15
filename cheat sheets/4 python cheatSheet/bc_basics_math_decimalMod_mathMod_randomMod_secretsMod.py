@@ -10,8 +10,9 @@ var1 = 2 + 3 - 5 * 3 / 2
 a = 5
 a += 1
 
-# power
+# power 2 & 3
 var2 = 5 ** 2
+var2 = 5 ** 3
 
 # floor division (positive round down, negative rounds up)
 round_down = 10 // 3 # result 3

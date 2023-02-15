@@ -1,12 +1,19 @@
 
 java\ small\ projects\ old\ NO\ GIT/
 python\ scripts\ suite\ NO\ GIT/
+testing\ NO\ GIT/
 
 cheat\ sheets/0\ books/
 cheat\ sheets/0\ books\ unreaded/
 cheat\ sheets/0\ plan/
 cheat\ sheets/0\ theory/
 cheat\ sheets/6\ java\ libraries/
+cheat\ sheets/7\ a\ sql\ query\ basics/
+
+!.gitignore
+!python\ scripts\ suite\ NO\ GIT/quarterly\ new.py
+!python\ scripts\ suite\ NO\ GIT/readrepo\ new.py
+!python\ scripts\ suite\ NO\ GIT/separate\ by\ customer.py
 
 *.pdf
 *.csv

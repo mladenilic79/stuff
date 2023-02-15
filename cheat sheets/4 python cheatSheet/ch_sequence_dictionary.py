@@ -14,6 +14,9 @@ dictionaryB = {'one': 1, 'two': 2, 'three': 3}
 dictionaryC = dict(zip(['one', 'two', 'three'], [1, 2, 3]))
 dictionaryD = dict([('two', 2), ('one', 1), ('three', 3)])
 dictionaryE = dict({'three': 3, 'one': 1, 'two': 2})
+# Create a new dictionary with keys from iterable and values set to value
+dictionaryF = dict.fromkeys(exampleList, "default value")
+
 if dictionaryA == dictionaryB == dictionaryC == dictionaryD == dictionaryE:
     print()
 
@@ -27,9 +30,6 @@ dictLength = len(dictionaryA)
 
 # returns shallow copy of a dictionary
 newDictionary1 = dictionaryA.copy()
-
-# returns copy with default value set to specified
-newDictionary2 = dict.fromkeys(exampleList, "default value")
 
 # Update dictionary with data from other overwriting existing keys
 dictionaryA.update(dictionaryD)

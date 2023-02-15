@@ -3,8 +3,12 @@
 ########## normal operation ##########
 ######################################
 
-log out without killing anything
+log out try
 	ctrl-alt-f1
+to lanch and chose virtual shell try
+    ctrl-alt-f(2 to 6 key)                     
+go back to gui try
+	ctrl-alt-f7
 
 #interupt prompt in terminal by pressing
 	q
@@ -30,15 +34,10 @@ than click on any frozen window with a mouse
 log out and kill everything
 	ctrl-alt-backspace
 
-set custom shortcuts put gnome-system-monitor instead of shutdown/restart/suspend/hibernate:
-	ctrl-alt-del
-
 ######################################
-########## special operations ########
+########## inside virtual shell ######
 ######################################
 
-go to virtual shell
-	ctrl-alt-f3
-go back to gui
-	ctrl-alt-f2
+reboot the system
+    ctrl alt del
 

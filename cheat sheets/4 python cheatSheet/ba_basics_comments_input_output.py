@@ -1,4 +1,13 @@
 
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# @@@@@@@@@@ COMMENTS @@@@@@@@@@
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+# Single line comments
+'''
+multiline comments
+'''
+
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@
 # @@@@@@@@@@ INPUT @@@@@@@@@@
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -7,22 +16,13 @@
 name = input('What is your name? ')
 num1, num2 = input('Enter 2 nums with split using whitespace: ').split()
 
-# evaluate input (useful for importing possible code)
-eval_input = eval(input('input number: '))
-print(eval_input)
+# evaluate string input (useful for importing possible code)
+# eval(expression[, globals[, locals]])
+eval("print('sima')")
 
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@ F STRING OUTPUT @@@@@@@@@@
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-first_parameter = 1
-second_parameter = 2
-
-string = f"this is an f-string {first_parameter} and the {second_parameter}"
-
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@ STANDARD OUTPUT @@@@@@@@@@
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# @@@@@@@@@@ FORMAT OUTPUT @@@@@@@@@@
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 import sys
 
@@ -148,3 +148,12 @@ dt = datetime(2001, 2, 3, 4, 5)
 print('{:{dfmt} {tfmt}}'.format(dt, dfmt='%Y-%m-%d', tfmt='%H:%M'))
 print('{:{}{}{}.{}}'.format(2.7182818284, '>', '+', 10, 3))
 print('{:{}{sign}{}.{}}'.format(2.7182818284, '>', 10, 3, sign='+'))
+
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# @@@@@@@@@@ F STRING OUTPUT @@@@@@@@@@
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+first_parameter = 1
+second_parameter = 2
+
+string = f"this is an f-string {first_parameter} and the {second_parameter}"

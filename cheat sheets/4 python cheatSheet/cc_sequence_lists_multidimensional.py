@@ -1,4 +1,22 @@
 
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@
+# @@@@@@@@@@ LISTS @@@@@@@@@@
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+# By default the 1st item in a list has the index 0
+# Python lists can grow in size and can contain data of any type
+
+# create from another iterable (like range) with constructor or fixed
+# list = list(iterable)
+oneToTen = list(range(10))
+fiveToTen = list(range(5, 10))
+emptyList1 = list()
+variousList = ["string", 1.234, 28, "pera"]
+emptyList2 = []
+
+# Sort a list
+oneToTen.sort()
+
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # @@@@@@@@@@ LISTS MULTIDIMENSIONAL @@@@@@@@@@
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -25,6 +43,7 @@ for i in range(10):
     print()
 
 
+
 # another example of multidimensional list
 multiList2 = [[1, 2, 3],
               [4, 5, 6],
@@ -36,13 +55,3 @@ print(multiList2[0])
 print([col[0] for col in multiList2])
 # print diagonal
 print([multiList2[i][i] for i in range(len(multiList2))])
-
-
-# put all elements in one list (works for every similar type)
-d = [list(range(10)), [1, 3, 5, 7, 9], ['a', 'b', 'c']]
-listt = []
-for x in d:
-    for y in x:
-        listt.append(y)
-
-print(listt)

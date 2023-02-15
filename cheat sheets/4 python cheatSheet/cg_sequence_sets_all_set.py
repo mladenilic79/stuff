@@ -18,13 +18,6 @@ set2 = set(list1)
 frozenset1 = frozenset(list1)
 frozenset2 = frozenset(list1)
 
-# returns length of set
-lengthh = len(set1)
-
-# You can see if a set contains or not an item
-isContain = "string" in set1
-isNotContain = "string" not in set1
-
 # Sets are disjoint if their intersection is the empty set
 isDisjoint = set1.isdisjoint(frozenset1)
 
@@ -75,13 +68,4 @@ updatedSetSymmetricDifference = set1.symmetric_difference_update(set2)
 set1.add("pera")
 
 # Remove element elem from the set
-set1.remove(3)
-
-# Remove element elem from the set
 set1.discard(2)
-
-# Remove and return an arbitrary element from the set
-element1 = set1.pop()
-
-# Remove all elements from the set
-set1.clear()

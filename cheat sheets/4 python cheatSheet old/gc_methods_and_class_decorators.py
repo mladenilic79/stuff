@@ -8,9 +8,9 @@
 # if multiple decorators are used they are executed in order listed
 # 1st decorator, they inside him 2nd decorator and so on..
 
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@ DECORATOR METHODS NO PARAMETER @@@@@@@@@@@
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+# @@@@@@@@@@ DECORATOR METHODS @@@@@@@@@@@
+# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 # this import is only to properly identify method
 import functools

@@ -17,12 +17,6 @@ samp_string2 = 'This it\'s a very " important string'
 samp_string3 = '''triple string can 
                 span multiple lines'''
 
-# ---------- CONCATENATION ----------
-
-# Join or concatenate strings
-newString1 = "Green " + "Eggs"
-newString2 = "Green " "Eggs"
-
 # ---------- UNICODE ----------
 
 # Computers assign characters with a number known as a Unicode
@@ -64,6 +58,12 @@ print("65 =", chr(65))
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 samp_string = "  string This is a an very important string  "
+
+# ---------- CONCATENATION ----------
+
+# Join or concatenate strings
+newString1 = "Green " + "Eggs"
+newString2 = "Green " "Eggs"
 
 # ---------- MODIFICATION ----------
 

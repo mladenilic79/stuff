@@ -27,9 +27,6 @@ d = add_numbers(1, num_3=5)
 # call docstring
 e = "docstring: " + add_numbers.__doc__
 
-# rename/reassign function
-add_two_numbers = add_numbers
-
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 # @@@@@@@@@@ GLOBAL VARIABLES @@@@@@@@@@
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -75,7 +72,7 @@ d = print_all(*[3, 4, 5])
 e = print_all(*(3, 4, 5))
 
 # receive an unknown number of positional arguments using
-# the double (**) operator, for dictionary
+# the double splat (**) operator, for dictionary
 def print_all(**kwargs):
     a = type(kwargs)
     for key in kwargs:
@@ -107,48 +104,22 @@ foo(1, 2, 3, last=100)
 # @@@@@@@@@@ SPLAT OPERATOR SPECIFICS @@@@@@@@@@
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
-# unpack with splat and double
-# length of container must match number of parameters
-def print_all(a, b, x):
-    a = a
-    a = b
-    a = x
-list = [1, 3, 5]
-a = print_all(*list)
-tuple = (1, 3, 5)
-a = print_all(*tuple)
-# for dictionary keys must match the names of the parameters
-dict = {'a':'append', 'b':'block','x': 7}
-a = print_all(*dict)
-a = print_all(**dict)
-
 # repacking and unpacking
 numbers = [1, 2, 3, 4, 5, 6]
 *beginning, last = numbers
 beginning, *last = numbers
 beginning, *middle, last = numbers
 beginning, *middle, secondlast, last = numbers
-###~> beginning = [1, 2, 3, 4, 5]
-###~> last = 6
 
 # merging
 my_typle = (1, 2, 3)
 my_list = [4, 5, 6]
 my_set = {7, 8, 9}
+new_tuple = (*my_list, *my_typle, *my_set)
 new_list = [*my_list, *my_typle, *my_set]
+new_set = {*my_list, *my_typle, *my_set}
+
 # merging dictionary
 dict_a = {'a': 1, 'b': 2}
 dict_b = {'c': 3, 'd': 4}
 dict_c = {**dict_a, **dict_b}
-
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-# @@@@@@@@@@ SPECIAL @@@@@@@@@@
-# @@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-
-# after * all must be keyword arguments
-def foo(a, b, *, c, d):
-    a = a
-    a = b
-    a = c
-    a = d
-foo(1, 2, c=3, d=4)

@@ -127,20 +127,23 @@ delete file/folder
 		-f	-force delete not recommended
 		-i	-prompt for each file/folder
 		-v	-verbose, output what was deleted
-	$ rmdir [<<<match>>>] <<<directories>>>
+	$ rmdir [<<<match>>>] <<<directories>>> -safe delete only empty directories
 
 
-search for file/directory and return its location
-	$ which fileDirectoryName
-search for files/directories recursevly
-	$ find <<<files/dirs>>> [options]	-return all
-		-name "name"			-exact name
-		-name "E" -or -name "F"		-name start with E or F
-		-iname "name"			-exact name case insensitive
-		-name "*name*"			-part of name
-		-type d				-search for directories only
-		-type f				-search for files only
-		-type f -size +100k -size -1M	-file size between 100kb and 1mb
+search for command and return its location
+	$ which <<<command>>>
+    $ which touch
+search for files/directories
+	$ find <<<from dirs>>> [expression what to find] [options]
+        [expressin what to find]
+		    -name "name"			-exact name
+		    -name "E" -or -name "F"		-name start with E or F
+		    -iname "name"			-exact name case insensitive
+		    -name "*name*"			-part of name
+        [options]
+		    -type d				-search for directories only
+		    -type f				-search for files only
+		    -type f -size +100k -size -1M	-file size between 100kb and 1mb
 	
 
 read file with

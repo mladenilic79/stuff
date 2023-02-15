@@ -38,12 +38,13 @@ maxx = max(oneToTen)
 
 # zip method (creates pairs of tuples)
 a = ("John", "Charles", "Mike")
-b = ("Jenny", "Christy", "Monica")
-a = ["John", "Charles", "Mike"]
 b = ["Jenny", "Christy", "Monica"]
 zip_iterator_object = zip(a, b)
+# convert to anything desired
 x = list(zip_iterator_object)
+zip_iterator_object = zip(a,b)
 y = tuple(zip_iterator_object)
+zip_iterator_object = zip(a,b)
 z = dict(zip_iterator_object)
 
 # @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -57,19 +58,15 @@ oneToTen = list(range(10))
 # You can change a list item
 variousList[0] = "New String"
 
-# slice of s from i to j is replaced by the contents of the iterable t
-# oneToTen[1:3] = t
-# s[i:j:k] = t
-
 # Append a value to the end of a sequence
 variousList.append("Another")
 
 # Insert value at index: insert (index, value)
 variousList.insert(5, 10)
 
-# delete elements
-del oneToTen[1:2]
-oneToTen[1:2] = []
+# delete elements using slicing
+del oneToTen[1:3]
+oneToTen[1:3] = []
 
 # Delete first occurrence of value
 oneToTen.remove(8)
