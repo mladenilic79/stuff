@@ -1,10 +1,10 @@
 
 java\ small\ projects\ old\ NO\ GIT/
 python\ scripts\ NO\ GIT/
-python\ scripts\ suite\ PARTIAL/*
-!python\ scripts\ suite\ PARTIAL/quarterly\ new.py
-!python\ scripts\ suite\ PARTIAL/readrepo\ new.py
-!python\ scripts\ suite\ PARTIAL/separate\ by\ customer.py
+python\ scripts\ suite\ PARTIAL\ GIT/*
+!python\ scripts\ suite\ PARTIAL\ GIT/quarterly\ new.py
+!python\ scripts\ suite\ PARTIAL\ GIT/readrepo\ new.py
+!python\ scripts\ suite\ PARTIAL\ GIT/separate\ by\ customer.py
 testing\ NO\ GIT/
 
 cheat\ sheets/0\ books/
