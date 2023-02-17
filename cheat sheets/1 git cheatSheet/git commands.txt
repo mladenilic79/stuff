@@ -37,12 +37,12 @@ clone
 gitignore
 	*.pdf (exclude extension, this will match any part of the path)
 	directory/ (exclude whole directory)
-	"my directory/"
-	or
-	my\ directory/
-		(exclude whole directory with spaces in name)
+	my\ directory/ (exclude whole directory with spaces in name, there are other variations of this)
 	directory/* (exclude directory with posibility for unignore)
 	README.txt (exclude file)
+	! (include after excluded, for exp, exclude directory but include one file from it)
+		python\ scripts\ suite\ PARTIAL\ GIT/*
+		!python\ scripts\ suite\ PARTIAL\ GIT/quarterly\ new.py 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@ info @@@@@@@@@@@@@@@
