@@ -1,0 +1,155 @@
+
+first open terminal as administrator
+
+____________terminal
+use " " for connecting paths with multiple words
+TAB <<<to complete
+UP/DOWN ARROW <<<to get previous/next commands
+    HOME/END <<<move cursor to beginning/end of command
+    CTRL-LEFT/RIGHT ARROW <<<move cursor left/right by one word at the time
+F7 <<<list all previous commands
+cls <<<clear screen
+color <<<change color
+prompt <<<setting and resetting prompt
+title <<<set terminal title, reset by reopening terminal
+exit <<<exit terminal
+
+____________basics
+ver <<<returns microsoft windows version
+/? <<<after command calls for help files
+path <<<show path
+[random command] | clip <<<copy some output to clipboard
+start <<<starts a separate window to run a specified program or command
+echo "random string" <<<print command to console
+| <<<pipe command
+[previous command] | more <<<returns page by page
+
+____________dirs info
+dir <<<list current directory
+    dir [directory] <<<list directory
+    dir /a <<<flag for hidden files/folder
+    dir *.png <<<include all files of specified type
+    dir /b /s | sort <<<list current directory sorted
+
+____________dirs navigation
+e: <<<switch drive
+tree <<<show current directory in tree
+cd C:\desktop\videos\"program files" <<<go to specified location
+    cd../.. <<<go back multople steps
+    cd / <<<go to root dir
+
+____________dirs manipulation
+mkdir [dir name] <<<create directory
+    md [dir name] <<<create directory
+rmdir [dir name] <<<remove directory only
+    rmdir /s [dir name] <<<remove all recursevly
+    rd [dir name] <<<remove directory only
+
+____________files
+filename.png <<<opens the file or if exe start running
+echo > filename.txt <<<making file with text 'echo is on'
+type nul > [file name] <<<create new blank file
+echo 'text' > filename.txt <<<writing text to file
+echo 'text' >> filename.txt <<<appending text to file
+copy con [file name] <<<output multiple lines to file
+    ctrl-z & enter <<<close the previous command
+dir > text.txt <<<output command to text file
+type filename.txt <<<display file content, text
+del filename.txt <<<delete file
+fc [file1][file2] <<<file compare
+find "string to find" [source file] <<<to find something in text file
+attrib <<<options, setting files attributes, read only, hidden,...
+cipher <<<options for encrypting and decrypting files
+assoc <<<options for displaying or modifying file extension associations
+
+____________coping/move/rename
+copy [source][destination] <<<options for copying
+    copy [y][source][destination] <<<for overwriting without confimation
+xcopy /s [source][destination] <<<somewhat more powerfull that copy, can do multiple dirs/files and have more flags
+robocopy [source][destination] <<<more powerfull than xcopy, creates replica
+move [source][destination] <<<options for moving
+rename [oldname][newname] <<<options for renaming
+    ren [oldname][newname] <<<options for renaming
+
+____________administration
+net session <<<check if you are an admin
+    net users <<<get all users
+    net user [user name] /add [password] <<<add user
+    net user /del [user name] <<<remove user
+    net user administrator /active:[yes/no] <<<enable/disable admin accout
+gpupdate <<<options for policies updating
+gpresult /r <<<options for policies, users & security groups
+    gpresult /z <<<same but super verbose
+    gpresult /s <<<returns info from remote machine
+
+____________networking
+ipconfig <<<basic networking info
+    ipconfig /all <<<basic networking info
+    ipconfig /displaydns <<<list all used dns
+    ipconfig /flushdns <<<flush dns cashe and restart dns activity
+nslookup <<<returns what my gateway is connected to
+    set type=MX <<<set what to return
+    [domain/website] <<<what domain/website data to return
+getmac <<<options mac address and info
+    getmac /v <<<returs more info
+arp <<<options for displaying and modifying the IP-to-physical address translation tables used by address resolution protocol (ARP).
+netsh <<<options for displaying or modifying the network configuration of a computer
+ping [web address/ip address] <<<test ability of source pc to reach destination
+    ping -t [web address/ip address] <<<continuous pinging
+        ctrl-c to interupt
+    ping -a [web address/ip address] <<<returns also computer name
+    ping -n [web address/ip address] <<<specify number of pings to send
+    ping -s [source address][destination address] <<<specify source also to check connectivity between two locations
+    ping -4 [web address/ip address] <<<specify IPv4
+    ping -6 [web address/ip address] <<<specify IPv6
+tracert [web address/ip address] <<<track in real time path taken by the package on an ip network, usually used after ping
+    tracert -d [web address/ip address] <<<without resolving hostname so faster
+        ctrl-c to interupt
+netstat <<<dispays current network connections and ports activity on computer
+    netstat -n <<<displays address and ports in numerical form
+    netstat -b <<<also dispays executable involved in connection creation
+    netstat -a <<<displays all connections and listening ports even not used ones
+    netstat -e <<<displays ethernet statistics
+    netstat -s <<<displays per protocol statistics
+    netstat -f <<<displays fully qualified domain names (FQDN) for foreign addresses
+        ctrl-c to interupt
+route <<<options for networking
+net <<<options for networking
+    net use <<<options for networking
+    net user <<<options for networking
+curl <<<options for networking
+openfiles <<<check for remotely opened files
+
+____________system
+time <<<get/set time
+date <<<get/set date
+systeminfo <<<system info
+net start <<<list all active services
+    net start [service] <<<start service
+    net stop [service] <<<stop service
+tasklist <<<options for tasks
+    takslist -v <<<more verbose
+taskkill /PID xxxx <<< and other options for killing tasks
+
+____________hardware
+chkdsk <<<options for fixing drives
+chkntfs C: <<<option for checking file system on specified partition
+sfc <<<options for fixing system files
+dism <<<options for fixing system files
+shutdown <<<options for shutdown and restart to bios ect
+driverquery <<<list drivers
+diskpart <<<options for hardware, partitioning, formating,... complex command
+    list disk <<<list disks
+    select disk 1 <<<select disk 1
+    exit <<<exit diskpart
+
+____________fun
+telnet <<<go to "turn windows features on or off" and enable telnet client
+    q <<<exit telnet
+    telnet telehack.com <<<fun options
+    ctrl-c <<<to interupt
+
+____________batch files & scheduling
+.bat <<<file for executing cmd commands
+    write each command to new line
+schtasks <<<check all scheduled tasks
