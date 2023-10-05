@@ -159,6 +159,12 @@ NO ACTION - Možemo da brišemo/menjamo roditeljski ID, bez da se bilo šta desi
 
 /* indexes */
 
+/*
+used to speed up search
+automatically created on primary indexes
+add index on any field that you want fast searching
+*/
+
 /* must specify name for index */
 CREATE INDEX index_name_create ON sakila.actor (first_name, last_name);
 /* or */

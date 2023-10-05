@@ -101,7 +101,7 @@ some keywords
 	DEFAULT '0hklh' // defalult field value
 	UNIQUE // every value in this field must be unique
 	CHECK(a>0) // every value must obey this condition
-	INDEX // index field to enable quick search
+	INDEX // index field to enable quick search on that field
 ________________________________________________________________________________
 
 creating tables

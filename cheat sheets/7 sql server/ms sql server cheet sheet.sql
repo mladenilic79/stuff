@@ -521,6 +521,10 @@ ADD full_name AS (first_name + ' ' + last_name) PERSISTED;
 --@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 --@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+-- used to speed up search
+-- automatically created on primary indexes
+-- add index on any field that you want fast searching
+
 --@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 --@@@@@@@@@@ clustered index @@@@@@@@@@
 
