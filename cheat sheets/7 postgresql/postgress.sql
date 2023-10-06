@@ -40,22 +40,14 @@ DROP DATABASE test;
 
 -- create table
 CREATE TABLE person(
-    id int,
-    first_name VARCHAR(50),
-    last_name VARCHAR(50),
-    gender VARCHAR(7),
-    date_of_birth DATE,
-)
-
--- create table
-CREATE TABLE person(
-    id BIGSERIAL NOT NULL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    gender VARCHAR(7) NOT NULL,
+    gender VARCHAR(15) NOT NULL,
     date_of_birth DATE NOT NULL,
     email VARCHAR(150),
-    country_of_birth VARCHAR(50)
+    country_of_birth VARCHAR(50),
+    price DECIMAL(19,2)
 );
 
 -- delete table
@@ -90,12 +82,43 @@ INSERT INTO person(
 );
 
 -- query
+
+-- select / from
 SELECT * FROM person;
 SELECT first_name, last_name FROM person;
+
+-- where / and / or / in / between / like / ilike
+SELECT * FROM person WHERE gender = 'Female';
+SELECT * FROM person WHERE date_of_birth > DATE '2023-06-01';
+SELECT * FROM person WHERE gender = 'Female' and country_of_birth = 'Russia';
+SELECT * FROM person WHERE gender = 'Female' and (country_of_birth = 'Russia' or country_of_birth = 'China');
+SELECT * FROM person WHERE country_of_birth IN ('Russia', 'China');
+SELECT * FROM person WHERE date_of_birth BETWEEN DATE '2022-01-01' AND '2023-01-01';
+SELECT * FROM person WHERE email LIKE '%log.com'; -- % means any number of characters
+SELECT * FROM person WHERE email LIKE '%oo%';
+SELECT * FROM person WHERE email LIKE '_________oo_____om'; -- _ represents single character
+SELECT * FROM person WHERE country_of_birth ILIKE 'p%'; -- ILIKE same as LIKE just ignores case
+
+-- aggragate / group by / having (having is filtering of groups)
+-- count / max / min / avg / sum
+-- round
+SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth;
+SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth HAVING COUNT(*) > 5;
+SELECT MAX(price) FROM person;
+SELECT MIN(price) FROM person;
+SELECT AVG(price) FROM person;
+SELECT ROUND(AVG(price)) FROM person;
+SELECT country_of_birth, MIN(price) FROM person GROUP BY country_of_birth;
+SELECT first_name, country_of_birth, MIN(price) FROM person GROUP BY first_name, country_of_birth; -- double grouping
+
+--order by
 SELECT * FROM person ORDER BY last_name; -- asscending is default
 SELECT * FROM person ORDER BY last_name ASC;
 SELECT * FROM person ORDER BY last_name DESC;
 SELECT * FROM person ORDER BY first_name, last_name; -- combine order
 
--- query functions
+-- keywords
 SELECT DISTINCT country_of_birth FROM person ORDER BY country_of_birth;
+SELECT * FROM person LIMIT 10;
+SELECT * FROM person FETCH FIRST 10 ROWS ONLY; -- fetch is same as limit just is part of sql standard
+SELECT * FROM person OFFSET 10; -- skip first 10 records

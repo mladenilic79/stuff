@@ -21,7 +21,7 @@ cmd commands
 	exit mysql
 		exit
 		quit
-/*
+*/
 
 /* default databases present are (with all meta data)
     information_schema
