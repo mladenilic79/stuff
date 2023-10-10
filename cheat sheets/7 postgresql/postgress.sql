@@ -24,8 +24,8 @@ en enter we will be prompted for password, input user password and enter
 \l
 
 -- connect to database
-\connect
-\c
+\connect mydb1
+\c mydb1
 
 -- describe
 \d -- database
@@ -87,6 +87,16 @@ INSERT INTO person(
 SELECT * FROM person;
 SELECT first_name, last_name FROM person;
 
+-- some keywords: distinct / limit/fetch / offset / as
+SELECT DISTINCT country_of_birth FROM person ORDER BY country_of_birth;
+SELECT * FROM person LIMIT 10;
+SELECT * FROM person FETCH FIRST 10 ROWS ONLY; -- fetch is same as limit just is part of sql standard
+SELECT * FROM person OFFSET 10; -- skip first 10 records
+SELECT country_of_birth AS country FROM person;
+
+-- +(add) / -(subtract) / *(multiply) / /(division) / ^(power) / %(moduo)
+SELECT price, price * 2 AS MULT, price / 2 AS DIV, price + price AS ADS, price - price AS SUB, price ^ 2 AS POWER, price % 3 AS MODUL FROM person;
+
 -- where / and / or / in / between / like / ilike
 SELECT * FROM person WHERE gender = 'Female';
 SELECT * FROM person WHERE date_of_birth > DATE '2023-06-01';
@@ -100,25 +110,24 @@ SELECT * FROM person WHERE email LIKE '_________oo_____om'; -- _ represents sing
 SELECT * FROM person WHERE country_of_birth ILIKE 'p%'; -- ILIKE same as LIKE just ignores case
 
 -- aggragate / group by / having (having is filtering of groups)
--- count / max / min / avg / sum
--- round
+
+-- count
+SELECT COUNT(*) FROM PERSON;
 SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth;
 SELECT country_of_birth, COUNT(*) FROM person GROUP BY country_of_birth HAVING COUNT(*) > 5;
+
+-- min / max / avg / sum / round
 SELECT MAX(price) FROM person;
 SELECT MIN(price) FROM person;
-SELECT AVG(price) FROM person;
 SELECT ROUND(AVG(price)) FROM person;
+SELECT SUM(price) FROM person;
 SELECT country_of_birth, MIN(price) FROM person GROUP BY country_of_birth;
+SELECT country_of_birth, MIN(price) FROM person GROUP BY country_of_birth HAVING MIN(price) >= 500;
+SELECT country_of_birth, SUM(price) FROM person GROUP BY country_of_birth HAVING SUM(price) <= 500;
 SELECT first_name, country_of_birth, MIN(price) FROM person GROUP BY first_name, country_of_birth; -- double grouping
 
---order by
+--order by / asc/desc
 SELECT * FROM person ORDER BY last_name; -- asscending is default
 SELECT * FROM person ORDER BY last_name ASC;
 SELECT * FROM person ORDER BY last_name DESC;
 SELECT * FROM person ORDER BY first_name, last_name; -- combine order
-
--- keywords
-SELECT DISTINCT country_of_birth FROM person ORDER BY country_of_birth;
-SELECT * FROM person LIMIT 10;
-SELECT * FROM person FETCH FIRST 10 ROWS ONLY; -- fetch is same as limit just is part of sql standard
-SELECT * FROM person OFFSET 10; -- skip first 10 records
