@@ -1,12 +1,4 @@
-create table person (
-	first_name VARCHAR(50),
-	last_name VARCHAR(50),
-	email VARCHAR(50),
-	gender VARCHAR(50),
-	date_of_birth DATE,
-	country_of_birth VARCHAR(50),
-	price DECIMAL(6,2)
-);
+
 insert into person (first_name, last_name, email, gender, date_of_birth, country_of_birth, price) values ('Valentina', 'Swateridge', null, 'Female', '2023-08-21', 'Russia', 663.2);
 insert into person (first_name, last_name, email, gender, date_of_birth, country_of_birth, price) values ('Yettie', 'Ebbrell', 'yebbrell1@house.gov', 'Female', '2023-02-10', 'Indonesia', 657.39);
 insert into person (first_name, last_name, email, gender, date_of_birth, country_of_birth, price) values ('Sherwynd', 'Spacey', null, 'Male', '2023-07-07', 'China', 581.93);
