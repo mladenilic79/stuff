@@ -35,6 +35,9 @@ en enter we will be prompted for password, input user password and enter
 -- run sql from file, set file permissions before this
 \i C:\Users\Administrator.DRHW10EDGE10\Desktop\postgres\person.sql
 
+-- toggle standard & expended output
+\x
+
 -- create database
 CREATE DATABASE testingDatabase;
 
@@ -43,14 +46,14 @@ DROP DATABASE testingDatabase;
 
 -- create table
 CREATE TABLE car(
-    id BIGSERIAL PRIMARY KEY,
+    car_id BIGSERIAL PRIMARY KEY,
     make VARCHAR(100) NOT NULL,
     model VARCHAR(100) NOT NULL,
     price NUMERIC(19,2) NOT NULL
 );
 CREATE TABLE person(
     id BIGSERIAL PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL,
+    first_name VARCHAR(50) NOT NULL DEFAULT 'Sara', -- put default if not provided
     last_name VARCHAR(50) NOT NULL,
     gender VARCHAR(15) NOT NULL CHECK(gender = 'Female' OR gender = 'Male' OR gender = 'Agender' OR gender = 'Non-binary' OR gender = 'Genderqueer'),
     email VARCHAR(150),
@@ -60,8 +63,8 @@ CREATE TABLE person(
     -- constraint can be written also like this
     -- price DECIMAL(19,2),
     -- UNIQUE(price)
-    car_id BIGINT REFERENCES car (id)
-    -- UNIQUE(car_id) -- unique because car can only be owned by one owner
+    car_id BIGINT REFERENCES car (car_id)
+    -- UNIQUE(car_id) --  add unique if car can only be owned by one owner
 );
 
 -- delete table
@@ -69,14 +72,32 @@ DROP TABLE person;
 
 -- modify constraints drop
 ALTER TABLE person DROP CONSTRAINT person_pkey; -- primary key in this case
+ALTER TABLE person DROP CONSTRAINT person_car_id_fkey; -- foreign key in this case
+ALTER TABLE person DROP CONSTRAINT person_gender_check;
 ALTER TABLE person DROP CONSTRAINT person_randomnumber_key;
--- modify constraints add (with setting custom name)
+-- modiry constraints add
 ALTER TABLE person ADD PRIMARY KEY (id); -- add primary key - will work if there are no duplicates
+ALTER TABLE person ADD FOREIGN KEY (person_car_id_fkey) REFERENCES car (car_id);
+-- modify constraints add (with setting custom name)
 ALTER TABLE person ADD CONSTRAINT unique_email UNIQUE(email); -- will work if there are no duplicates
 ALTER TABLE person ADD CONSTRAINT gender_check CHECK(gender = 'Female' OR gender = 'female' OR gender = 'Male' OR gender = 'male' OR gender = 'Agender' OR gender = 'Non-binary' OR gender = 'Genderqueer'); -- add checked constraint with choose name
 -- modify constraints add alternatively with letting database set the name for them
 ALTER TABLE person ADD UNIQUE(email); -- will work if there are no duplicates
 ALTER TABLE person ADD CHECK(gender = 'Female' OR gender = 'female' OR gender = 'Male' OR gender = 'male' OR gender = 'Agender' OR gender = 'Non-binary' OR gender = 'Genderqueer'); -- add checked constraint let db choose name for you
+
+-- alter table
+ALTER TABLE person ADD another_column TYPE VARCHAR(10);
+ALTER TABLE person ALTER COLUMN another_column SET NOT NULL;
+ALTER TABLE person RENAME COLUMN another_column TO another_column_2;
+ALTER TABLE person DROP COLUMN another_column_2;
+ALTER TABLE person RENAME TO person2;
+ALTER TABLE person2 RENAME TO person;
+
+-- restart sequence / auto numbering -- eh.. don't do this :)
+
+-- indexes
+CREATE INDEX person_index_1 ON person(first_name);
+CREATE INDEX person_index_2 ON person(first_name, last_name);
 
 -- insert into table
 
@@ -84,7 +105,7 @@ INSERT INTO person(first_name, last_name, gender, email, date_of_birth, country_
 VALUES('Anne', 'Smith', 'Female', 'jake@gmail.com', DATE '1993-01-03', 'US', 444);  -- convert string to date with DATE function
 
 INSERT INTO person(first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber) 
-VALUES('Bri', 'Smith', 'Female', 'bri@gmail.com', DATE '1989-01-03', 'US', 5.5);
+VALUES('Bri', 'Smith', 'Female', 'bri@gmail.com', DATE '1989-01-03', NULL, 5.5);
 
 INSERT INTO person(first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber)
 VALUES('Jack', 'Smith', 'Male', 'jake@gmail.com', DATE '1993-02-03', 'Paris', 888)
@@ -98,12 +119,15 @@ INSERT INTO person(
 
 -- update whole table -- !!!!!!!!! this will update whole table don't do this !!!!!!!!!!
 UPDATE person SET email = 'omar@gmail.com'; -- !!!!!!!!! this will update whole table don't do this !!!!!!!!!!
+
 -- update records
 UPDATE person SET email = 'omar@gmail.com' WHERE id = 1;
 UPDATE person SET gender = 'Male', country_of_birth = 'Paris' WHERE id = 2;
 
 -- delete all inside table -- !!!!!!!!! this will empty table don't do this !!!!!!!!!!
 DELETE FROM person; -- !!!!!!!!!! this will empty table don't do this !!!!!!!!!!
+TRUNCATE TABLE person; -- !!!!!!!!!! this will empty table don't do this !!!!!!!!!!
+
 -- delete records
 DELETE FROM person WHERE id = 1;
 DELETE FROM person WHERE gender = 'Male' AND country_of_birth = 'Paris';
@@ -118,9 +142,19 @@ SELECT * FROM person LIMIT 10; -- limit/fetch(return only number of records)
 SELECT * FROM person FETCH FIRST 10 ROWS ONLY; -- fetch is same as limit just is part of sql standard
 SELECT * FROM person OFFSET 10; -- offset(return records after that number of records), skip first 10, 
 SELECT country_of_birth AS country FROM person; -- as(alias) / coalesce(return default if value missing)
+
+-- some functions
 SELECT first_name, coalesce(email, 'default value if value missing') FROM person; -- coalesce - default value
 -- handle null value - nullif returns 1st argument if both values are not equel, returns null if they are equal
 SELECT first_name, 10/NULLIF(1+1-2, 0) AS new_price FROM person; -- this will replace 0 with null to prevent division with zero
+SELECT first_name, UPPER(first_name) AS upper_first_name, LOWER(first_name) AS lower_first_name FROM person;
+SELECT first_name, LENGTH(first_name) AS length_of_first_name FROM person;
+SELECT first_name, TRIM(first_name) AS trimmed_first_name FROM person;
+SELECT first_name || ' ' || last_name AS full_name FROM person;
+SELECT first_name, last_name, date_of_birth, 
+    CASE
+        WHEN date_of_birth < DATE 1-1-1980 THEN 'old'
+        ELSE 'young';
 
 -- +(add) / -(subtract) / *(multiply) / /(division) / ^(power) / %(moduo)
 SELECT randomnumber, randomnumber * 2 AS MULT, randomnumber / 2 AS DIV, randomnumber + randomnumber AS ADS, randomnumber - randomnumber AS SUB, randomnumber ^ 2 AS POWER, randomnumber % 3 AS MODUL FROM person;
@@ -138,19 +172,26 @@ SELECT EXTRACT(YEAR FROM NOW());
 SELECT EXTRACT(MONTH FROM NOW());
 SELECT EXTRACT(DAY FROM NOW());
 SELECT EXTRACT(DOW FROM NOW()); -- DOW - day of the week
+SELECT EXTRACT(MONTH FROM date_of_birth) AS month_of_birth FROM PERSON;
 SELECT first_name, AGE(NOW(), date_of_birth) AS age FROM person; -- AGE returns time between two dates
 
 -- where / and / or / in / between / like / ilike
-SELECT * FROM person WHERE gender = 'Female';
+SELECT * FROM person WHERE date_of_birth >= DATE '1960-06-01';
 SELECT * FROM person WHERE date_of_birth > DATE '1960-06-01';
-SELECT * FROM person WHERE gender = 'Female' and country_of_birth = 'Russia';
-SELECT * FROM person WHERE gender = 'Female' and (country_of_birth = 'Russia' or country_of_birth = 'China');
+SELECT * FROM person WHERE gender = 'Female' AND country_of_birth = 'Russia';
+SELECT * FROM person WHERE gender = 'Female' AND (country_of_birth != 'Russia' OR country_of_birth <> 'China');
 SELECT * FROM person WHERE country_of_birth IN ('Russia', 'China');
+SELECT * FROM person WHERE country_of_birth NOT IN ('Russia', 'China');
 SELECT * FROM person WHERE date_of_birth BETWEEN DATE '2000-01-01' AND '2023-01-01';
 SELECT * FROM person WHERE email LIKE '%o.com'; -- % means any number of characters
 SELECT * FROM person WHERE email LIKE '%oo%';
 SELECT * FROM person WHERE email LIKE '_________@_________.com'; -- _ represents single character
 SELECT * FROM person WHERE country_of_birth ILIKE 'p%'; -- ILIKE same as LIKE just ignores case
+SELECT * FROM person WHERE email SIMILAR TO '%oo%'; -- SIMILAR TO same as like just interprets regex differently
+SELECT * FROM person WHERE email ~ '%oo%'; -- ~ same as like just interprets regex differently
+SELECT * FROM person WHERE email IS NULL;
+SELECT * FROM person WHERE email IS NOT NULL;
+SELECT * FROM person WHERE email = NULL;
 
 -- aggragate / group by / having (having is filtering of groups)
 
@@ -174,3 +215,67 @@ SELECT * FROM person ORDER BY last_name; -- asscending is default
 SELECT * FROM person ORDER BY last_name ASC;
 SELECT * FROM person ORDER BY last_name DESC;
 SELECT * FROM person ORDER BY first_name, last_name; -- combine order
+
+-- joins
+
+-- inner
+
+SELECT * 
+FROM person
+    JOIN car ON person.car_id = car.car_id;
+
+-- inner join same as join
+SELECT * 
+FROM person
+    INNER JOIN car ON person.car_id = car.car_id;
+
+-- specific columns
+SELECT person.first_name, car.make
+FROM person
+    JOIN car ON person.car_id = car.car_id;
+
+-- if both ids are the same keyword USING can be used
+SELECT *
+FROM person
+    JOIN car USING(car_id);
+
+-- left (take all from left)
+SELECT *
+FROM person
+    LEFT JOIN car ON person.car_id = car.car_id;
+
+-- right (take all from right)
+SELECT *
+FROM person
+    RIGHT JOIN car ON person.car_id = car.car_id;
+
+-- full outer join
+SELECT *
+FROM person
+    FULL OUTER JOIN car ON person.car_id = car.car_id;
+
+-- cross join
+SELECT *
+FROM person
+    CROSS JOIN car ON person.car_id = car.car_id;
+
+
+-- unions for stacking data verticaly (default is to remove all duplicates)
+SELECT id, first_name, last_name, randomnumber FROM person
+UNION
+SELECT * FROM car
+UNION
+SELECT * FROM car;
+
+-- unions for stacking data verticaly (keep all duplicates)
+SELECT id, first_name, last_name, randomnumber FROM person
+UNION ALL
+SELECT id, first_name, last_name, randomnumber FROM person;
+
+-- subqueries
+
+-- subquery in from
+SELECT a.first_name, a.last_name FROM (SELECT * FROM person) a; -- a refers to the subquery
+
+-- subquery in where
+SELECT * FROM person WHERE country_of_birth IN (SELECT country_of_birth FROM person);

@@ -8,12 +8,12 @@ create table person (
 	randomnumber DECIMAL(8,5),
 	car_id INT
 );
-insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Kinny', 'Sivyour', 'Male', 'ksivyour0@ovh.net', '1984-01-27', 'Israel', 64.67389, null);
-insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Beverie', 'Jozwik', 'Female', 'bjozwik1@meetup.com', '1967-01-31', 'Brazil', 86.05047, 34);
-insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Bale', 'Revitt', 'Male', null, '1956-05-20', 'Cape Verde', 80.46538, 36);
-insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Rolf', 'Hawyes', 'Male', 'rhawyes3@businesswire.com', '1951-09-07', 'Ukraine', 62.68159, null);
-insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Consuelo', 'Woolfoot', 'Female', 'cwoolfoot4@umich.edu', '1990-12-18', 'Martinique', 95.91377, null);
-insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Gretal', 'Fawloe', 'Female', 'gfawloe5@wikimedia.org', '1962-03-07', 'China', 41.5736, 19);
+insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Kinny   ', 'Sivyour', 'Male', 'ksivyour0@ovh.net', '1984-01-27', 'Israel', 64.67389, null);
+insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('   Beverie', 'Jozwik', 'Female', 'bjozwik1@meetup.com', '1967-01-31', 'Brazil', 86.05047, 34);
+insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Bale   ', 'Revitt', 'Male', null, '1956-05-20', 'Cape Verde', 80.46538, 36);
+insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('   Rolf', 'Hawyes', 'Male', 'rhawyes3@businesswire.com', '1951-09-07', 'Ukraine', 62.68159, null);
+insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Consuelo   ', 'Woolfoot', 'Female', 'cwoolfoot4@umich.edu', '1990-12-18', 'Martinique', 95.91377, null);
+insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('   Gretal', 'Fawloe', 'Female', 'gfawloe5@wikimedia.org', '1962-03-07', 'China', 41.5736, 19);
 insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Nissy', 'McSkin', 'Female', null, '1960-12-01', 'Indonesia', 31.81537, 9);
 insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Mahmoud', 'Lemasney', 'Male', 'mlemasney7@yale.edu', '1995-08-24', 'China', 63.69718, 36);
 insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Hamil', 'Thaxter', 'Male', 'hthaxter8@gnu.org', '1972-08-27', 'Colombia', 6.56166, 29);
