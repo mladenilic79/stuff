@@ -134,6 +134,7 @@ DELETE FROM person WHERE gender = 'Male' AND country_of_birth = 'Paris';
 
 -- select / from
 SELECT * FROM person;
+SELECT *, first_name FROM person;
 SELECT first_name, last_name FROM person;
 
 -- some keywords
@@ -151,6 +152,7 @@ SELECT first_name, UPPER(first_name) AS upper_first_name, LOWER(first_name) AS l
 SELECT first_name, LENGTH(first_name) AS length_of_first_name FROM person;
 SELECT first_name, TRIM(first_name) AS trimmed_first_name FROM person;
 SELECT first_name || ' ' || last_name AS full_name FROM person;
+SELECT CONCAT(first_name, ' ', last_name) AS full_name, country_of_birth FROM person;
 SELECT first_name, last_name, date_of_birth, 
     CASE
         WHEN date_of_birth < DATE 1-1-1980 THEN 'old'
@@ -175,7 +177,7 @@ SELECT EXTRACT(DOW FROM NOW()); -- DOW - day of the week
 SELECT EXTRACT(MONTH FROM date_of_birth) AS month_of_birth FROM PERSON;
 SELECT first_name, AGE(NOW(), date_of_birth) AS age FROM person; -- AGE returns time between two dates
 
--- where / and / or / in / between / like / ilike
+-- where / and / or / in / between / like / ilike / < > <= >= <> !=
 SELECT * FROM person WHERE date_of_birth >= DATE '1960-06-01';
 SELECT * FROM person WHERE date_of_birth > DATE '1960-06-01';
 SELECT * FROM person WHERE gender = 'Female' AND country_of_birth = 'Russia';
@@ -223,6 +225,7 @@ SELECT * FROM person ORDER BY first_name, last_name; -- combine order
 SELECT * 
 FROM person
     JOIN car ON person.car_id = car.car_id;
+    -- JOIN table_y ON table_x.id = table_y.id; -- add like this in case of joining multiple tables
 
 -- inner join same as join
 SELECT * 
@@ -239,6 +242,12 @@ SELECT *
 FROM person
     JOIN car USING(car_id);
 
+-- natural join
+SELECT * 
+FROM person
+    NATURAL JOIN car ON person.car_id = car.car_id;
+
+
 -- left (take all from left)
 SELECT *
 FROM person
@@ -254,11 +263,10 @@ SELECT *
 FROM person
     FULL OUTER JOIN car ON person.car_id = car.car_id;
 
--- cross join
+-- cross join (include each row from both tables)
 SELECT *
 FROM person
     CROSS JOIN car ON person.car_id = car.car_id;
-
 
 -- unions for stacking data verticaly (default is to remove all duplicates)
 SELECT id, first_name, last_name, randomnumber FROM person
@@ -279,3 +287,175 @@ SELECT a.first_name, a.last_name FROM (SELECT * FROM person) a; -- a refers to t
 
 -- subquery in where
 SELECT * FROM person WHERE country_of_birth IN (SELECT country_of_birth FROM person);
+
+-- views (recalculations are not updated automagically so to update on call 
+-- don't use aggregations, calculation functions, distinct, union, group by, having)
+CREATE VIEW custom_view AS
+SELECT * FROM person;
+-- call view with
+SELECT * FROM custom_view;
+-- delete view with
+DROP VIEW custom_view;
+
+-- create function with
+CREATE OR REPLACE FUNCTION add_two_values(int, int) RETURNS int AS
+'
+SELECT $1 + $2;
+'
+LANGUAGE SQL
+-- call function with
+SELECT add_two_values(4,5);
+
+-- create function with
+CREATE OR REPLACE FUNCTION add_two_values(int, int) RETURNS int AS
+$body$
+    SELECT $1 + $2;
+$body$
+LANGUAGE SQL
+-- call function with
+SELECT add_two_values(4,5);
+
+-- create function with (void means returns nothing)
+CREATE OR REPLACE FUNCTION update_state() RETURNS void AS
+$body$
+    UPDATE person
+    SET first_name = "Cirilo"
+    WHERE country_of_birth = "China"
+$body$
+LANGUAGE SQL
+-- call function with
+SELECT update_state();
+
+-- create function with (named parameters)
+CREATE OR REPLACE FUNCTION text_ops(first_parameter VARCHAR, second_parameter VARCHAR) RETURNS void AS
+$body$
+    UPDATE person
+    SET person.first_name = first_parameter, person.last_name = second_parameter
+    WHERE country_of_birth = "China"
+$body$
+LANGUAGE SQL
+-- call function with
+SELECT text_ops("pera", "detlic");
+
+-- create function with (return row as result)
+CREATE OR REPLACE FUNCTION return_row() RETURNS result_row AS
+$body$
+    SELECT *
+    FROM person
+    ORDER BY date_of_birth
+    LIMIT 1;
+$body$
+LANGUAGE SQL
+-- call function with
+SELECT return_row(); -- one field format
+SELECT (return_row()).*; -- table format
+SELECT (return_row()).first_name -- get specific field
+
+-- create function with (return multiple rows as result)
+CREATE OR REPLACE FUNCTION return_rows() RETURNS SETOF result_rows AS
+$body$
+    SELECT *
+    FROM person
+    ORDER BY date_of_birth
+    LIMIT 5;
+$body$
+LANGUAGE SQL
+-- call function with
+SELECT result_rows(); -- one field format
+
+-- PL/pgSQL
+CREATE OR REPLACE FUNCTION select_function(name_to_get VARCHAR) RETURNS VARCHAR AS
+$body$
+BEGIN
+    RETURN last_name
+    FROM person
+    WHERE first_name = name_to_get
+END
+$body$
+LANGUAGE plpgsql
+-- run function
+SELECT select_function("Biljana");
+
+-- PL/pgSQL
+CREATE OR REPLACE FUNCTION get_sum(val1 int, val2 int) RETURNS int AS
+$body$
+DECLARE
+    result int
+BEGIN
+    result := val1 + val2;
+    RETUNS result
+END
+$body$
+LANGUAGE plpgsql
+-- run function
+SELECT get_sum(2,3);
+
+-- PL/pgSQL
+CREATE OR REPLACE FUNCTION get_random(max_val int, min_val int) RETURNS int AS
+$body$
+DECLARE
+    rand int
+BEGIN
+    SELECT random()*(max_val - min_val) + min_val INTO rand
+    RETUNS rand;
+END
+$body$
+LANGUAGE plpgsql
+-- run function
+SELECT get_random(10,3);
+
+-- PL/pgSQL
+CREATE OR REPLACE FUNCTION return_record() RETURNS VARCHAR AS
+$body$
+DECLARE
+    rand INT
+    row_data RECORD
+BEGIN
+    SELECT random()*(45-5) + 5 INTO rand;
+    SELECT * FROM person INTO row_data WHERE person.id = rand
+    RETURN rand
+END
+$body$
+LANGUAGE plpgsql
+-- run function
+SELECT get_random(10,3);
+
+-- PL/pgSQL
+CREATE OR REPLACE FUNCTION add_two_nums(IN val1 INT, IN val2 INT, OUT result INT) AS
+$body$
+BEGIN
+    result := val1 + val2
+END
+$body$
+LANGUAGE plpgsql
+-- run function
+SELECT add_two_nums(10,3);
+
+-- PL/pgSQL
+CREATE OR REPLACE FUNCTION get_some_data(IN any_id INT, OUT first_name VARCHAR, OUT last_name VARCHAR) AS
+$body$
+BEGIN
+    SELECT first_name, last_name INTO firstName, lastName
+    FROM person
+    WHERE person.id = any_id
+    LIMIT 1
+END
+$body$
+LANGUAGE plpgsql
+-- run function
+SELECT get_some_data(10);
+
+-- PL/pgSQL
+CREATE OR REPLACE FUNCTION return_query() RETURNS SETOF return_query_record AS
+$body$
+BEGIN
+    RETURN QUERY
+    SELECT *
+    FROM person
+END
+$body$
+LANGUAGE plpgsql
+-- run function
+SELECT return_query();
+SELECT return_query().*;
+SELECT return_query().first_name;
