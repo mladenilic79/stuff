@@ -38,11 +38,32 @@ en enter we will be prompted for password, input user password and enter
 -- toggle standard & expended output
 \x
 
+/*
+to control execution of postgresql use commands:
+BEGIN or BEGIN TRANSACTION
+COMMIT or COMMIT TRANSACTION
+ROLLBACK or ROLLBACK TRANSACTION
+*/
+
 -- create database
 CREATE DATABASE testingDatabase;
 
 -- delete database
 DROP DATABASE testingDatabase;
+
+/*
+types
+SERIAL / BIGSERIAL - for ids
+INTEGER / BIGINT - bigint is bigger, used for integers
+NUMERIC / DECIMAL - they are the same, they have high precision
+REAL / DOUBLE PRECISION - double is bigger, both not very precise
+CHAR - string of specified length, default length is 1, missing characters are filled with whitespace
+VARCHAR - string of specified length, default length is max, missing characters are not filled with whitespace
+TEXT - same as varchar without an argument
+DATE / TIME / TIMESTAMP - timestamp is date & time together
+INTERVAL - used with date/time/timestamp
+BOOLEAN - ...
+*/
 
 -- create table
 CREATE TABLE car(
@@ -52,8 +73,9 @@ CREATE TABLE car(
     price NUMERIC(19,2) NOT NULL
 );
 CREATE TABLE person(
+-- CREATE TEMPORARY TABLE person( - table remove by the end of database session or transaction
     id BIGSERIAL PRIMARY KEY,
-    first_name VARCHAR(50) NOT NULL DEFAULT 'Sara', -- put default if not provided
+    first_name VARCHAR(50) NOT NULL DEFAULT 'Sara', -- put default if value not provided
     last_name VARCHAR(50) NOT NULL,
     gender VARCHAR(15) NOT NULL CHECK(gender = 'Female' OR gender = 'Male' OR gender = 'Agender' OR gender = 'Non-binary' OR gender = 'Genderqueer'),
     email VARCHAR(150),
@@ -61,12 +83,17 @@ CREATE TABLE person(
     country_of_birth VARCHAR(50),
     randomnumber DECIMAL(19,2) UNIQUE,
     -- constraint can be written also like this
-    -- price DECIMAL(19,2),
+    -- randomnumber DECIMAL(19,2),
     -- UNIQUE(price)
-    car_id BIGINT REFERENCES car (car_id)
-    -- UNIQUE(car_id) --  add unique if car can only be owned by one owner
+    
+    car_id BIGINT REFERENCES car (car_id),
     -- car_id BIGINT REFERENCES car (car_id) ON DELETE CASCADE - add cascade or other options like this:
     -- ON DELETE SET NULL, ON DELETE RESTRICT, ON DELETE NO ACTION, ON DELETE SET DEFAULT
+    
+    -- this is self join
+    -- foreign key can also be written like this
+    manager_id INT,
+	FOREIGN KEY (manager_id) REFERENCES employee (employee_id) 
 );
 
 -- delete table
@@ -90,12 +117,15 @@ ALTER TABLE person ADD CONSTRAINT gender_check CHECK(gender = 'Female' OR gender
 -- alter table
 ALTER TABLE person ADD COLUMN another_column VARCHAR;
 ALTER TABLE person ALTER COLUMN another_column SET NOT NULL; -- this will work after populating the column
+ALTER TABLE person ALTER COLUMN another_column SET DEFAULT 'Pera'; -- this will work after populating the column
+ALTER TABLE person ADD UNIQUE (another_column); -- this will work if all values are unique
 ALTER TABLE person RENAME COLUMN another_column TO another_column_2;
 ALTER TABLE person DROP COLUMN another_column_2;
 ALTER TABLE person RENAME TO person2;
 ALTER TABLE person2 RENAME TO person;
 
--- restart sequence / auto numbering -- eh.. don't do this :)
+-- restart sequence / auto numbering
+ALTER SEQUENCE person_id_seq RESTART WITH 1000;
 
 -- indexes
 CREATE INDEX person_index_1 ON person(first_name);
@@ -123,7 +153,7 @@ INSERT INTO person(first_name, last_name, gender, email, date_of_birth, country_
 VALUES
     ('Anne', 'Smith', 'Female', 'Kjake@gmail.com', DATE '1993-01-03', 'US', 444),
     ('Bri', 'Smith', 'Female', 'Lbri@gmail.com', DATE '1989-01-03', NULL, 5.5),
-    ('Jack', 'Smith', 'Male', ';jake@gmail.com', DATE '1993-02-03', 'Paris', 888),
+    ('Jack', 'Smith', 'Male', 'djake@gmail.com', DATE '1993-02-03', 'Paris', 888),
     ('Marica', 'Smith', 'Male', 'JHjake@gmail.com', DATE '1993-02-03', 'London', 333);
 
 -- update whole table -- !!!!!!!!! this will update whole table don't do this !!!!!!!!!!
@@ -133,10 +163,10 @@ UPDATE person SET email = 'omar@gmail.com'; -- !!!!!!!!! this will update whole 
 UPDATE person SET email = 'omar@gmail.com' WHERE id = 1;
 UPDATE person SET gender = 'Male', country_of_birth = 'Paris' WHERE id = 2;
 
-
 -- delete all inside table -- !!!!!!!!! this will empty table don't do this !!!!!!!!!!
 DELETE FROM person; -- !!!!!!!!!! this will empty table don't do this !!!!!!!!!!
 TRUNCATE TABLE person; -- !!!!!!!!!! this will empty table don't do this !!!!!!!!!!
+TRUNCATE TABLE person RESTART IDENTITY; -- !!!!!!!!!! also restart ids to start from 1 !!!!!!!!!!
 
 -- delete records
 DELETE FROM person WHERE id = 1;
@@ -154,10 +184,10 @@ SELECT DISTINCT country_of_birth FROM person ORDER BY country_of_birth; -- disti
 SELECT * FROM person LIMIT 10; -- limit/fetch(return only number of records)
 SELECT * FROM person FETCH FIRST 10 ROWS ONLY; -- fetch is same as limit just is part of sql standard
 SELECT * FROM person OFFSET 10; -- offset(return records after that number of records), skip first 10, 
-SELECT country_of_birth AS country FROM person; -- as(alias) / coalesce(return default if value missing)
+SELECT country_of_birth AS country FROM person; -- as(alias)
 
 -- some functions
-SELECT first_name, coalesce(email, 'default value if value missing') FROM person; -- coalesce - default value
+SELECT first_name, coalesce(email, 'default value if value missing') FROM person; -- returns first NOT NULL argument
 -- handle null value - nullif returns 1st argument if both values are not equel, returns null if they are equal
 SELECT first_name, 10/NULLIF(randomnumber, 0) AS new_price FROM person; -- this will replace 0 with null to prevent division with zero
 SELECT first_name, UPPER(first_name) AS upper_first_name, LOWER(first_name) AS lower_first_name FROM person;
@@ -166,6 +196,7 @@ SELECT first_name, TRIM(first_name) AS trimmed_first_name FROM person;
 SELECT CONCAT(first_name, ' ', last_name) AS full_name, country_of_birth FROM person;
 SELECT first_name || ' ' || last_name AS full_name FROM person; -- also concat
 SELECT first_name, GREATEST(randomnumber, 50), LEAST(randomnumber, 20) FROM person;
+SELECT '100'::INTEGER;
 
 -- +(add) / -(subtract) / *(multiply) / /(division) / ^(power) / %(moduo)
 SELECT randomnumber, randomnumber * 2 AS MULT, randomnumber / 2 AS DIV, randomnumber + randomnumber AS ADS, randomnumber - randomnumber AS SUB, randomnumber ^ 2 AS POWER, randomnumber % 3 AS MODUL FROM person;
@@ -174,6 +205,7 @@ SELECT randomnumber, randomnumber * 2 AS MULT, randomnumber / 2 AS DIV, randomnu
 SELECT NOW(); -- return this moment
 SELECT NOW()::DATE; -- casting to only date
 SELECT NOW()::TIME; -- casting to only time
+SELECT NOW()::TIMESTAMP; -- casting to only time
 -- interval used for conversion
 SELECT NOW() - INTERVAL '1 YEAR';
 SELECT NOW()::DATE + INTERVAL '5 MONTHS'; -- casting here will round date but now change pattern
@@ -185,6 +217,17 @@ SELECT EXTRACT(DAY FROM NOW());
 SELECT EXTRACT(DOW FROM NOW()); -- DOW - day of the week
 SELECT first_name, EXTRACT(MONTH FROM date_of_birth) AS month_of_birth FROM PERSON;
 SELECT first_name, AGE(NOW(), date_of_birth) AS age FROM person; -- AGE returns time between two dates
+
+-- case
+SELECT
+    first_name,
+    randomnumber,
+    CASE
+        WHEN randomnumber > 50 THEN 'number high'
+        WHEN randomnumber > 30 THEN 'number low'
+        ELSE 'very bad' -- else is not mandatory, but will then return NULL
+    END
+FROM person;
 
 -- where / and / or / in / between / like / ilike / < > <= >= <> !=
 SELECT * FROM person WHERE date_of_birth >= DATE '1990-06-01';
@@ -270,6 +313,21 @@ SELECT *
 FROM person
     CROSS JOIN car;
 
+-- self join - for organizational or hierarchical structure
+SELECT
+    CONCAT(m.first_name, ' ', m.last_name) AS employee_full_name,
+    CONCAT(e.first_name, ' ', e.last_name) AS manager_full_name
+FROM
+    employee e
+    INNER JOIN employee m ON m.employee_id = e.manager_id
+-- or to include top name use LEFT insted of INNER JOIN
+SELECT
+    CONCAT(m.first_name, ' ', m.last_name) AS manager_full_name,
+    CONCAT(e.first_name, ' ', e.last_name) AS employee_full_name
+FROM
+    employee e
+    INNER JOIN employee m ON m.employee_id = e.manager_id
+
 -- union for stacking data verticaly (data must be stackable for this to work)
 
 -- union (remove all duplicates)
@@ -300,10 +358,13 @@ SELECT * FROM person WHERE country_of_birth IN (SELECT country_of_birth FROM per
 -- all - true for all values returned by subquery
 SELECT * FROM person WHERE randomnumber > ALL (SELECT randomnumber FROM person WHERE country_of_birth = 'China');
 
+-- exists - returns true is subquery returns anything
+SELECT * FROM person WHERE EXISTS (SELECT randomnumber FROM person WHERE country_of_birth = 'China');
+
 -- some / any - true for at least one element returned by subquery
 -- another subquery example here
 
--- views
+-- views - basicly tables also
 
 -- recalculations are not updated automagically so to update on call 
 -- don't use aggregations, calculation functions, distinct, union, group by, having)
@@ -314,7 +375,49 @@ SELECT * FROM custom_view;
 -- delete view with
 DROP VIEW custom_view;
 
--- functions - many ways to do this unfortunatelly :(
+-- making copies of tables with temporary keyword
+SELECT * 
+INTO TEMPORARY TABLE new_table 
+FROM person;
+-- making copies of tables with temporary keyword
+SELECT * 
+INTO TEMP TABLE new_table 
+FROM person;
+-- making copies of tables
+SELECT * 
+INTO TABLE new_table 
+FROM person;
+
+-- functions
+
+CREATE FUNCTION function_example_1(number_1 int, number_2 int)  
+RETURNS integer
+LANGUAGE plpgsql
+AS
+    $$  
+    declare  
+        total integer;  
+    BEGIN  
+        SELECT count(*) + number_1 + number_2 INTO total
+        FROM person;  
+        RETURN total;  
+    END;  
+    $$;
+SELECT function_example_1(10, 20);
+SELECT function_example_1(number_2 => 10, number_1 => 20);
+
+CREATE OR REPLACE FUNCTION function_example_2()  
+RETURNS void
+LANGUAGE plpgsql
+AS
+    $$   
+    BEGIN  
+        UPDATE person
+        SET first_name = 'Cirilo'
+        WHERE country_of_birth = 'China'; 
+    END;  
+    $$;
+SELECT function_example_2();
 
 
 
@@ -326,47 +429,7 @@ DROP VIEW custom_view;
 
 
 
--- body with ''
-CREATE OR REPLACE FUNCTION add_two_values(int, int) RETURNS int AS
-'
-SELECT $1 + $2;
-'
-LANGUAGE SQL;
-SELECT add_two_values(4,5);
 
--- alternative body with $
-CREATE OR REPLACE FUNCTION add_two_values(int, int) RETURNS int AS
-$body$
-    SELECT $1 + $2;
-$body$
-LANGUAGE SQL;
-SELECT add_two_values(4,5);
-
-
-
-
-
-
--- void means returns nothing
-CREATE OR REPLACE FUNCTION update_state() RETURNS void AS
-$body$
-    UPDATE person
-    SET first_name = "Cirilo"
-    WHERE country_of_birth = "China";
-$body$
-LANGUAGE SQL;
-SELECT update_state();
-
--- create function with (named parameters)
-CREATE OR REPLACE FUNCTION text_ops(first_parameter VARCHAR, second_parameter VARCHAR) RETURNS void AS
-$body$
-    UPDATE person
-    SET person.first_name = first_parameter, person.last_name = second_parameter
-    WHERE country_of_birth = "China"
-$body$
-LANGUAGE SQL
--- call function with
-SELECT text_ops("pera", "detlic");
 
 -- create function with (return row as result)
 CREATE OR REPLACE FUNCTION return_row() RETURNS result_row AS
@@ -394,29 +457,6 @@ LANGUAGE SQL
 -- call function with
 SELECT result_rows(); -- one field format
 
-
-
-
-
-
-
-
-
-
-
--- PL/pgSQL
-CREATE OR REPLACE FUNCTION select_function(name_to_get VARCHAR) RETURNS VARCHAR AS
-$body$
-BEGIN
-    RETURN last_name
-    FROM person
-    WHERE first_name = name_to_get
-END
-$body$
-LANGUAGE plpgsql
--- run function
-SELECT select_function("Biljana");
-
 -- PL/pgSQL
 CREATE OR REPLACE FUNCTION get_sum(val1 int, val2 int) RETURNS int AS
 $body$
@@ -430,20 +470,6 @@ $body$
 LANGUAGE plpgsql
 -- run function
 SELECT get_sum(2,3);
-
--- PL/pgSQL
-CREATE OR REPLACE FUNCTION get_random(max_val int, min_val int) RETURNS int AS
-$body$
-DECLARE
-    rand int
-BEGIN
-    SELECT random()*(max_val - min_val) + min_val INTO rand
-    RETUNS rand;
-END
-$body$
-LANGUAGE plpgsql
--- run function
-SELECT get_random(10,3);
 
 -- PL/pgSQL
 CREATE OR REPLACE FUNCTION return_record() RETURNS VARCHAR AS
