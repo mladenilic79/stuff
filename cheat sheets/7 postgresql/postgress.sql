@@ -402,6 +402,7 @@ FROM person;
 CREATE TABLE new_table AS
 SELECT * FROM person;
 
+-- plpgsql
 
 
 
@@ -412,26 +413,83 @@ SELECT * FROM person;
 
 
 
--- sql
 
 -- CREATE OR REPLACE FUNCTION function_example()
-CREATE OR REPLACE FUNCTION function_example(variable_1 int, variable_2 int)
--- RETURNS void
+CREATE OR REPLACE FUNCTION function_example(variable_1_in INT)
+-- RETURNS VOID
 -- RETURNS VARCHAR
 RETURNS INT
-LANGUAGE SQL
+LANGUAGE PLPGSQL
 AS
     $$
-
-    $$
-        SELECT *
+    DECLARE
+            temp_value INT;
+            value_4_out INT;
+    BEGIN
+        SELECT COUNT(*)
         FROM person
-        ORDER BY date_of_birth
-        LIMIT 1;
+        INTO temp_value;
+
+        value_4_out := variable_1_in + temp_value;
+        -- or like this:
+        -- SELECT variable_1_in + temp_value INTO value_4_out;
+
+        RETURN value_4_out;
+    END;
+    $$;
+SELECT function_example(3); -- one field format
+SELECT function_example(variable_1_in => 3);
+
+CREATE OR REPLACE FUNCTION function_example(IN variable_1 INT, IN variable_2 INT, OUT variable_3 INT, OUT variable_4 INT)
+LANGUAGE PLPGSQL
+AS
     $$
-SELECT function_example(); -- one field format
+    DECLARE
+        temp_value_1 INT;
+        temp_value_2 INT;
+    BEGIN
+        SELECT COUNT(*)
+        FROM person
+        INTO temp_value_1;
+
+        SELECT MAX(randomnumber)
+        FROM person
+        INTO temp_value_2;
+
+        SELECT variable_1 + temp_value_1 INTO variable_3;
+        SELECT variable_2 + temp_value_2 INTO variable_4;
+
+        SELECT variable_3, variable_4;
+    END;
+    $$;
+SELECT function_example(3, 4);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 SELECT (function_example()).*; -- table format
 SELECT (function_example()).first_name -- get specific field
+
+
+
+
+
+
+
+
 
 CREATE OR REPLACE FUNCTION function_example()
 RETURNS SETOF result_rows
@@ -444,37 +502,6 @@ AS
         LIMIT 5;
     $$
 SELECT result_rows(); -- one field format
-
--- plpgsql
-
-CREATE FUNCTION function_example(number_1 int, number_2 int)  
-RETURNS integer
-LANGUAGE plpgsql
-AS
-    $$  
-    declare  
-        total integer;  
-    BEGIN  
-        SELECT count(*) + number_1 + number_2 INTO total
-        FROM person;  
-        RETURN total;  
-    END;  
-    $$;
-SELECT function_example(10, 20);
-SELECT function_example(number_2 => 10, number_1 => 20);
-
-CREATE OR REPLACE FUNCTION function_example()  
-RETURNS void
-LANGUAGE plpgsql
-AS
-    $$   
-    BEGIN  
-        UPDATE person
-        SET first_name = 'Cirilo'
-        WHERE country_of_birth = 'China'; 
-    END;  
-    $$;
-SELECT function_example();
 
 CREATE OR REPLACE FUNCTION function_example()
 RETURNS VARCHAR
@@ -491,31 +518,6 @@ AS
     END
     $$
 SELECT function_example();
-
--- PL/pgSQL
-CREATE OR REPLACE FUNCTION add_two_nums(IN val1 INT, IN val2 INT, OUT result INT) AS
-$body$
-BEGIN
-    result := val1 + val2
-END
-$body$
-LANGUAGE plpgsql
--- run function
-SELECT add_two_nums(10,3);
-
--- PL/pgSQL
-CREATE OR REPLACE FUNCTION get_some_data(IN any_id INT, OUT first_name VARCHAR, OUT last_name VARCHAR) AS
-$body$
-BEGIN
-    SELECT first_name, last_name INTO firstName, lastName
-    FROM person
-    WHERE person.id = any_id
-    LIMIT 1
-END
-$body$
-LANGUAGE plpgsql
--- run function
-SELECT get_some_data(10);
 
 -- PL/pgSQL
 CREATE OR REPLACE FUNCTION return_query() RETURNS SETOF return_query_record AS
