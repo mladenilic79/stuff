@@ -40,9 +40,11 @@ en enter we will be prompted for password, input user password and enter
 
 /*
 to control execution of postgresql use commands:
-BEGIN or BEGIN TRANSACTION
-COMMIT or COMMIT TRANSACTION
-ROLLBACK or ROLLBACK TRANSACTION
+BEGIN or BEGIN TRANSACTION;
+COMMIT or COMMIT TRANSACTION;
+SAVEPOINT my_savepoint;
+ROLLBACK or ROLLBACK TRANSACTION;
+ROLLBACK TO my_savepoint;
 */
 
 -- create database
@@ -402,20 +404,53 @@ FROM person;
 CREATE TABLE new_table AS
 SELECT * FROM person;
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-- sql function
+
+CREATE OR REPLACE FUNCTION function_example_1(random_text text)
+CREATE OR REPLACE FUNCTION function_example_1(random_text text)
+RETURNS person
+AS
+$$
+ SELECT * FROM person WHERE last_name = random_text;
+$$
+LANGUAGE SQL;
+SELECT function_example_1('Jozwik');
+SELECT function_example_1(random_text => 'Jozwik');
+SELECT (function_example_1('Jozwik')).*;
+SELECT (function_example_1('Jozwik')).first_name;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -- plpgsql
 
-
-
-
-
-
-
-
-
-
-
 -- CREATE OR REPLACE FUNCTION function_example()
-CREATE OR REPLACE FUNCTION function_example(variable_1_in INT)
+CREATE OR REPLACE FUNCTION plpgsql_function_example_1(variable_1_in INT)
 -- RETURNS VOID
 -- RETURNS VARCHAR
 RETURNS INT
@@ -437,10 +472,10 @@ AS
         RETURN value_4_out;
     END;
     $$;
-SELECT function_example(3); -- one field format
-SELECT function_example(variable_1_in => 3);
+SELECT plpgsql_function_example_1(3); -- one field format
+SELECT plpgsql_function_example_1(variable_1_in => 3);
 
-CREATE OR REPLACE FUNCTION function_example(IN variable_1 INT, IN variable_2 INT, OUT variable_3 INT, OUT variable_4 INT)
+CREATE OR REPLACE FUNCTION plpgsql_function_example_2(IN variable_1 INT, IN variable_2 INT, OUT variable_3 INT, OUT variable_4 INT, INOUT variable_5 INT)
 LANGUAGE PLPGSQL
 AS
     $$
@@ -457,79 +492,11 @@ AS
         INTO temp_value_2;
 
         SELECT variable_1 + temp_value_1 INTO variable_3;
-        SELECT variable_2 + temp_value_2 INTO variable_4;
-
-        SELECT variable_3, variable_4;
+        variable_4 := variable_2 + temp_value_2;
     END;
     $$;
-SELECT function_example(3, 4);
+SELECT plpgsql_function_example_2(3, 4, 5); -- field format
+SELECT (plpgsql_function_example_2(3, 4, 5)).*; -- table format
+SELECT (plpgsql_function_example_2(3, 4, 5)).variable_3 -- get specific field
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-SELECT (function_example()).*; -- table format
-SELECT (function_example()).first_name -- get specific field
-
-
-
-
-
-
-
-
-
-CREATE OR REPLACE FUNCTION function_example()
-RETURNS SETOF result_rows
-LANGUAGE SQL
-AS
-    $$
-        SELECT *
-        FROM person
-        ORDER BY date_of_birth
-        LIMIT 5;
-    $$
-SELECT result_rows(); -- one field format
-
-CREATE OR REPLACE FUNCTION function_example()
-RETURNS VARCHAR
-LANGUAGE plpgsql
-AS
-    $$
-    DECLARE
-        rand INT
-        row_data RECORD
-    BEGIN
-        SELECT random()*(45-5) + 5 INTO rand;
-        SELECT * FROM person INTO row_data WHERE person.id = rand
-        RETURN rand
-    END
-    $$
-SELECT function_example();
-
--- PL/pgSQL
-CREATE OR REPLACE FUNCTION return_query() RETURNS SETOF return_query_record AS
-$body$
-BEGIN
-    RETURN QUERY
-    SELECT *
-    FROM person
-END
-$body$
-LANGUAGE plpgsql
--- run function
-SELECT return_query();
-SELECT return_query().*;
-SELECT return_query().first_name;
+-- and more completex plpgsql...
