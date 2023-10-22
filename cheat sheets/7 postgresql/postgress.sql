@@ -39,6 +39,14 @@ en enter we will be prompted for password, input user password and enter
 \x
 
 /*
+PRIVILEGES & POLICIES
+*/
+
+/*
+SCHEMAS
+*/
+
+/*
 to control execution of postgresql use commands:
 BEGIN or BEGIN TRANSACTION;
 COMMIT or COMMIT TRANSACTION;
@@ -67,7 +75,7 @@ INTERVAL - used with date/time/timestamp
 BOOLEAN - ...
 */
 
--- create table
+-- CREATE [TEMP] [IF NOT EXISTS] TABLE new_table_name AS query
 CREATE TABLE car(
     car_id SERIAL PRIMARY KEY,
     make VARCHAR NOT NULL,
@@ -84,9 +92,13 @@ CREATE TABLE person(
     last_name VARCHAR(50) NOT NULL,
     gender VARCHAR(15) NOT NULL CHECK(gender = 'Female' OR gender = 'Male' OR gender = 'Agender' OR gender = 'Non-binary' OR gender = 'Genderqueer'),
     email VARCHAR(150),
+    -- email VARCHAR(150) NULLS NOT DISTINCT, -- specifically designated as not distinct
+    -- email VARCHAR(150) NULLS DISTINCT, -- specifically designated as distinct
     date_of_birth DATE NOT NULL,
     country_of_birth VARCHAR(50),
     randomnumber DECIMAL(19,2) UNIQUE,
+    -- UNIQUE (first_name, last_name) -- UNIQUE can be on muptiple columns just like primary key
+
     -- constraint can be written also like this
     -- randomnumber DECIMAL(19,2),
     -- UNIQUE(price)
@@ -105,11 +117,32 @@ CREATE TABLE person(
 DROP TABLE person;
 DROP TABLE IF EXISTS person;
 
--- indexes
+/*
+INHERITANCE (tables)
+*/
+
+/*
+PARTITIONING (tables)
+*/
+
+/*
+indexes
+index types:
+B-Tree - this is the default one
+Hash
+GiST
+SP-GiST
+GIN
+BRIN
+*/
 CREATE INDEX person_index_1 ON person(first_name);
-CREATE INDEX person_index_2 ON person(first_name, last_name);
+CREATE UNIQUE INDEX person_index_2 ON person(first_name);
+CREATE INDEX person_index_3 ON person USING HASH (first_name);
+CREATE INDEX person_index_4 ON person(first_name, last_name);
 DROP INDEX IF EXISTS person_index_1;
 DROP INDEX person_index_2;
+DROP INDEX person_index_3;
+DROP INDEX person_index_4;
 
 -- modify constraints drop
 ALTER TABLE person DROP CONSTRAINT person_pkey; -- primary key in this case
@@ -130,6 +163,7 @@ ALTER TABLE person ADD CONSTRAINT gender_check CHECK(gender = 'Female' OR gender
 ALTER TABLE person ADD COLUMN another_column VARCHAR;
 ALTER TABLE person ALTER COLUMN another_column SET NOT NULL; -- this will work after populating the column
 ALTER TABLE person ALTER COLUMN another_column SET DEFAULT 'Pera'; -- this will work after populating the column
+ALTER TABLE person ALTER COLUMN another_column VARCHAR(20);
 ALTER TABLE person ADD UNIQUE (another_column); -- this will work if all values are unique
 ALTER TABLE person RENAME COLUMN another_column TO another_column_2;
 ALTER TABLE person DROP COLUMN another_column_2;
@@ -145,7 +179,7 @@ INSERT INTO person(first_name, last_name, gender, email, date_of_birth, country_
 VALUES('Anne', 'Smith', 'Female', 'jake@gmail.com', DATE '1993-01-03', 'US', 444);  -- convert string to date with DATE function
 
 INSERT INTO person(first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber) 
-VALUES('Bri', 'Smith', 'Female', 'bri@gmail.com', DATE '1989-01-03', NULL, 5.5);
+VALUES('Bri', 'Smith', 'Female', 'bri@gmail.com', DATE '1989-01-03', NULL, 5.5) RETURNING id, first_name;
 
 INSERT INTO person(first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber)
 VALUES('Jack', 'Smith', 'Male', 'jake@gmail.com', DATE '1993-02-03', 'Paris', 888)
@@ -168,7 +202,7 @@ VALUES
 UPDATE person SET email = 'omar@gmail.com'; -- !!!!!!!!! this will update whole table don't do this !!!!!!!!!!
 
 -- update records
-UPDATE person SET email = 'omar@gmail.com' WHERE id = 1;
+UPDATE person SET email = 'omar@gmail.com' WHERE id = 1 RETURNING id, first_name;
 UPDATE person SET gender = 'Male', country_of_birth = 'Paris' WHERE id = 2;
 
 -- delete all inside table -- !!!!!!!!! this will empty table don't do this !!!!!!!!!!
@@ -178,9 +212,9 @@ TRUNCATE TABLE person RESTART IDENTITY; -- !!!!!!!!!! also restart ids to start 
 
 -- delete records
 DELETE FROM person WHERE id = 1;
-DELETE FROM person WHERE gender = 'Male' AND country_of_birth = 'Paris';
+DELETE FROM person WHERE gender = 'Male' AND country_of_birth = 'Paris' RETURNING *;
 
--- input big files here
+-- input big files here (person.sql & car.sql)
 
 -- select / from
 SELECT * FROM person;
@@ -237,6 +271,26 @@ SELECT EXTRACT(DOW FROM NOW()); -- DOW - day of the week
 SELECT first_name, EXTRACT(MONTH FROM date_of_birth) AS month_of_birth FROM PERSON;
 SELECT first_name, AGE(NOW(), date_of_birth) AS age FROM person; -- AGE returns time between two dates
 
+/*
+SELECT in WITH (advanced select sugar syntax?)
+WITH regional_sales AS (
+    SELECT region, SUM(amount) AS total_sales
+    FROM orders
+    GROUP BY region
+), top_regions AS (
+    SELECT region
+    FROM regional_sales
+    WHERE total_sales > (SELECT SUM(total_sales)/10 FROM regional_sales)
+)
+SELECT region,
+       product,
+       SUM(quantity) AS product_units,
+       SUM(amount) AS product_sales
+FROM orders
+WHERE region IN (SELECT region FROM top_regions)
+GROUP BY region, product;
+*/
+
 -- where / and / or / in / between / like / ilike / < > <= >= <> !=
 SELECT * FROM person WHERE date_of_birth >= DATE '1990-06-01';
 SELECT * FROM person WHERE date_of_birth > DATE '1990-06-01';
@@ -250,10 +304,12 @@ SELECT * FROM person WHERE email LIKE '%oo%';
 SELECT * FROM person WHERE email LIKE '_________@_________.com'; -- _ represents single character
 SELECT * FROM person WHERE country_of_birth ILIKE 'p%'; -- ILIKE same as LIKE just ignores case
 SELECT * FROM person WHERE email SIMILAR TO '%oo%'; -- SIMILAR TO - stronger then LIKE - interprets regex differently
-SELECT * FROM person WHERE email ~ '.+@ovh.net'; -- ~ more powerfull then SIMILAR TO - interprets regex differently
+SELECT * FROM person WHERE email ~ '.+@ovh.net'; -- POSIX REGULAR EXPRESSIONS more powerfull then SIMILAR TO
 SELECT * FROM person WHERE email = NULL;
 SELECT * FROM person WHERE email IS NULL;
 SELECT * FROM person WHERE email IS NOT NULL;
+SELECT * FROM person WHERE email IS TRUE;
+SELECT * FROM person WHERE email IS FALSE;
 
 -- aggragate / group by / having (having is filtering of groups)
 
@@ -271,6 +327,10 @@ SELECT country_of_birth, MIN(randomnumber) FROM person GROUP BY country_of_birth
 SELECT country_of_birth, SUM(randomnumber) FROM person GROUP BY country_of_birth HAVING SUM(randomnumber) <= 50;
 SELECT first_name, country_of_birth, MIN(randomnumber) FROM person GROUP BY first_name, country_of_birth; -- double grouping
 
+/*
+GROUPING SETS, CUBE, and ROLLUP (advanced grouping options)
+*/
+
 --order by / asc/desc
 SELECT * FROM person ORDER BY last_name; -- asscending is default
 SELECT * FROM person ORDER BY last_name ASC;
@@ -279,34 +339,33 @@ SELECT * FROM person ORDER BY first_name, last_name; -- combine order
 
 -- joins
 
+-- cross join (include each row from both tables) (Cartesian product - all possible combinations)
+SELECT *
+FROM person
+    CROSS JOIN car;
+
 -- inner
 SELECT * 
 FROM person
     JOIN car ON person.car_id = car.car_id;
-    -- JOIN table_y ON table_x.id = table_y.id; -- add like this in case of joining more tables
+    -- JOIN & INNER JOIN is the same
+    -- INNER JOIN car ON person.car_id = car.car_id;
+    -- add like this in case of joining more tables
+    -- JOIN table_y ON table_x.id = table_y.id;
     -- JOIN expression can have AND expression inside for more advanced joining
 
--- inner join same as join
-SELECT *, person.first_name
-FROM person
-    INNER JOIN car ON person.car_id = car.car_id;
-
 -- if both ids are the same keyword USING can be used
+-- USING will not print both values as the value is the same (the ON will print both values)
 SELECT *
 FROM person
     JOIN car USING(car_id);
 
--- natural join, joining is done intuitively by db engine, discarding duplicate columns
-SELECT * 
-FROM person
-    NATURAL JOIN car;
-
--- left (take all from left)
+-- left outer join (take all from left)
 SELECT *
 FROM person
     LEFT JOIN car ON person.car_id = car.car_id;
 
--- right (take all from right)
+-- right outer join (take all from right)
 SELECT *
 FROM person
     RIGHT JOIN car ON person.car_id = car.car_id;
@@ -316,10 +375,12 @@ SELECT *
 FROM person
     FULL JOIN car ON person.car_id = car.car_id;
 
--- cross join (include each row from both tables)
-SELECT *
+-- NATURAL JOIN is a shorthand form of USING, it forms a USING list consisting of 
+-- all column names that appear in both input tables. As with USING, these columns
+-- appear only once in the output table
+SELECT * 
 FROM person
-    CROSS JOIN car;
+    NATURAL JOIN car;
 
 -- self join - for organizational or hierarchical structure
 SELECT
@@ -384,12 +445,11 @@ SELECT * FROM custom_view;
 -- delete view with
 DROP VIEW custom_view;
 
--- materialized views
--- .................................................
--- views WITH CHECK OPTION
--- .................................................
--- recursive views
--- .................................................
+/*
+materialized views
+views WITH CHECK OPTION
+recursive views
+*/
 
 -- table copies
 
@@ -404,99 +464,188 @@ FROM person;
 CREATE TABLE new_table AS
 SELECT * FROM person;
 
+/*
+SEQUENCES
+*/
 
+/*
+ARRAY TYPES
+*/
 
+/*
+RANGE TYPES
+*/
 
+-- sql procedural - not explained very good
+-- (not very advanced, look below for plpgsql)
 
-
-
-
-
-
-
-
-
-
-
--- sql function
-
-CREATE OR REPLACE FUNCTION function_example_1(random_text text)
-CREATE OR REPLACE FUNCTION function_example_1(random_text text)
+CREATE OR REPLACE FUNCTION function_example_1(random_text VARCHAR DEFAULT 'pera')
+-- can input/return any type (int, varchar, void,... person,... setof some_type,...)
 RETURNS person
 AS
 $$
- SELECT * FROM person WHERE last_name = random_text;
+    SELECT * FROM person WHERE last_name = random_text;
 $$
 LANGUAGE SQL;
 SELECT function_example_1('Jozwik');
 SELECT function_example_1(random_text => 'Jozwik');
 SELECT (function_example_1('Jozwik')).*;
 SELECT (function_example_1('Jozwik')).first_name;
+DROP FUNCTION function_example_1;
 
+CREATE FUNCTION function_example_2(IN number1 INT, OUT number2 INT, INOUT number3 INT)
+AS
+$$
+    SELECT number1 + number3, number1;
+$$
+LANGUAGE SQL;
+SELECT function_example_2(1,2);
+DROP FUNCTION function_example_2;
 
+-- procedures (transaction control in comparison to just functions above)
+-- (not very advanced, look below for plpgsql)
 
-
-
-
-
-
-
-
-
-
-
-
+CREATE PROCEDURE procedure_example_1(random_text VARCHAR)
+AS
+$$
+    SELECT * FROM person WHERE last_name = random_text;
+$$
+LANGUAGE SQL;
+CALL procedure_example_1('Jozwik');
+DROP PROCEDURE procedure_example_1;
 
 -- plpgsql
 
--- CREATE OR REPLACE FUNCTION function_example()
-CREATE OR REPLACE FUNCTION plpgsql_function_example_1(variable_1_in INT)
--- RETURNS VOID
+DROP FUNCTION plpgsql_function_example_1;
+CREATE OR REPLACE FUNCTION plpgsql_function_example_1(variable_1_in INT DEFAULT 5)
+-- can put any type for returns & parameters
 -- RETURNS VARCHAR
-RETURNS INT
-LANGUAGE PLPGSQL
+-- RETURNS INT
+-- RETURNS VOID -- return nothing
+
+-- RETURNS RECORD -- similar as returns table above
+-- RETURNS person -- returns table
+-- RETURNS SETOF person -- returns table
+-- RETURNS TABLE(first_name VARCHAR, make VARCHAR) -- return table
+
+-- RETURNS SETOF RECORD -- To define a function that returns a set,
+-- add the SETOF keyword in the function definition.
 AS
-    $$
+$$
     DECLARE
             temp_value INT;
-            value_4_out INT;
+            const_value INTEGER := 30;
+
+            record_type_variable RECORD;
+            person_type_variable person;
     BEGIN
-        SELECT COUNT(*)
-        FROM person
-        INTO temp_value;
 
-        value_4_out := variable_1_in + temp_value;
-        -- or like this:
-        -- SELECT variable_1_in + temp_value INTO value_4_out;
+        -- maybe here you can create temporary tables instead of putting them in DECLARE above
 
-        RETURN value_4_out;
+        SELECT COUNT(*) FROM person INTO temp_value;
+        temp_value := temp_value + const_value - 50 + variable_1_in;
+
+        SELECT * FROM person WHERE id = temp_value INTO record_type_variable; 
+            -- doesn't have predefined structure, so it can accept anything (so any select)
+        SELECT * FROM person INTO person_type_variable;
+
+        -- chose one of below
+
+        -- RETURN record_type_variable; -- this works with returns record
+        -- RETURN person_type_variable; -- this works with returns person
+        -- RETURN QUERY SELECT * FROM person; -- this works with returns setof person
+        -- RETURN QUERY
+        --     SELECT person.first_name, car.make
+        --         FROM person
+        --         JOIN car ON person.car_id = car.car_id; -- this works with returns table(first_name VARCHAR, make VARCHAR)
+
+        /*
+        CONDITIONALS:
+        IF ... THEN ... END IF
+        IF ... THEN ... ELSE ... END IF
+        IF ... THEN ... ELSIF ... THEN ... ELSE ... END IF
+        CASE ... WHEN ... THEN ... ELSE ... END CASE
+        CASE WHEN ... THEN ... ELSE ... END CASE
+        */
+
+        /*
+        LOOPS:
+        WHILE & WHILE NOT -- these are optional
+        FOR IN -- these are optional (or FOREACH - for now this works only for arrays)
+            LOOP
+                EXIT & EXIT WHEN
+                CONTINUE & CONTINUE WHEN
+            END LOOP
+        */
     END;
-    $$;
+$$
+LANGUAGE PLPGSQL;
 SELECT plpgsql_function_example_1(3); -- one field format
 SELECT plpgsql_function_example_1(variable_1_in => 3);
+DROP FUNCTION plpgsql_function_example_1;
 
-CREATE OR REPLACE FUNCTION plpgsql_function_example_2(IN variable_1 INT, IN variable_2 INT, OUT variable_3 INT, OUT variable_4 INT, INOUT variable_5 INT)
-LANGUAGE PLPGSQL
+CREATE OR REPLACE FUNCTION plpgsql_function_example_2(IN variable_1 INT, OUT variable_2 INT, INOUT variable_3 INT)
 AS
     $$
     DECLARE
-        temp_value_1 INT;
-        temp_value_2 INT;
+        temp_value INT;
     BEGIN
-        SELECT COUNT(*)
-        FROM person
-        INTO temp_value_1;
-
-        SELECT MAX(randomnumber)
-        FROM person
-        INTO temp_value_2;
-
-        SELECT variable_1 + temp_value_1 INTO variable_3;
-        variable_4 := variable_2 + temp_value_2;
+        variable_2 := variable_1 + variable_3;
+        SELECT variable_1 + variable_3 INTO variable_3;
     END;
-    $$;
-SELECT plpgsql_function_example_2(3, 4, 5); -- field format
-SELECT (plpgsql_function_example_2(3, 4, 5)).*; -- table format
-SELECT (plpgsql_function_example_2(3, 4, 5)).variable_3 -- get specific field
+    $$
+LANGUAGE PLPGSQL;
+SELECT plpgsql_function_example_2(3, 4); -- field format
+SELECT (plpgsql_function_example_2(3, 4)).*; -- table format
+SELECT (plpgsql_function_example_2(3, 4)).variable_3; -- get specific field
+DROP FUNCTION plpgsql_function_example_2;
 
--- and more completex plpgsql...
+-- procedure is the same as the function mostly
+CREATE OR REPLACE PROCEDURE plpgsql_procedure_example_1(name VARCHAR, id_toset INT)
+AS
+$$
+    BEGIN
+        UPDATE person
+        SET first_name = name
+        WHERE id = id_toset;
+        COMMIT;
+    END;
+$$
+LANGUAGE plpgsql;
+CALL plpgsql_procedure_example_1('pera',10);
+
+/*
+DO execute an anonymous code block
+DO $$
+$$
+*/
+
+-- triggers
+-- before & after insert/update/delete
+
+DROP TRIGGER trigger_example ON person;
+DROP FUNCTION trigger_function_example;
+
+CREATE OR REPLACE FUNCTION trigger_function_example()
+RETURNS TRIGGER
+AS
+$$
+    BEGIN
+        INSERT INTO car (make, model, price) VALUES ('Chrysler', 'LeBaron', 8888888);
+        RETURN NULL;
+    END;
+$$
+LANGUAGE PLPGSQL;
+
+CREATE TRIGGER trigger_example
+    AFTER UPDATE
+    ON person
+    FOR EACH ROW -- once for any affected row
+    EXECUTE PROCEDURE trigger_function_example();
+
+UPDATE person SET first_name = 'Simovic' WHERE id = 5;
+SELECT * FROM car;
+
+/*
+cursors
+*/

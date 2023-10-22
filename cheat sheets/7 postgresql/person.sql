@@ -48,8 +48,3 @@ insert into person (first_name, last_name, gender, email, date_of_birth, country
 insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Clemente', 'Boomes', 'Genderqueer', 'cboomes11@moonfruit.com', '1951-07-19', 'Japan', 74.04625, null);
 insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Betty', 'Gregoretti', 'Female', 'bgregoretti12@newsvine.com', '2014-12-04', 'Peru', 76.29627, 7);
 insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Susette', 'Sharma', 'Genderqueer', 'ssharma13@prnewswire.com', '1955-02-27', 'Russia', 16.79953, 2);
-insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Ina', 'Henker', 'Female', null, '1952-02-07', 'Brazil', 23.97133, null);
-insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Riannon', 'Arrigucci', 'Non-binary', 'rarrigucci15@noaa.gov', '1977-12-16', 'Portugal', 0, null);
-insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Kenyon', 'Deeves', 'Male', null, '2014-04-07', 'Greece', 78.98323, null);
-insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Tamiko', 'Swadling', 'Genderqueer', null, '1988-01-29', 'Indonesia', 7.85243, 15);
-insert into person (first_name, last_name, gender, email, date_of_birth, country_of_birth, randomnumber, car_id) values ('Marjorie', 'Driussi', 'Female', null, '1971-06-13', 'France', 4.65146, 25);
