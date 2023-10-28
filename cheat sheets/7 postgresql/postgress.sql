@@ -46,15 +46,6 @@ PRIVILEGES & POLICIES
 SCHEMAS
 */
 
-/*
-to control execution of postgresql use commands:
-BEGIN or BEGIN TRANSACTION;
-COMMIT or COMMIT TRANSACTION;
-SAVEPOINT my_savepoint;
-ROLLBACK or ROLLBACK TRANSACTION;
-ROLLBACK TO my_savepoint;
-*/
-
 -- create database
 CREATE DATABASE testingDatabase;
 
@@ -216,6 +207,16 @@ DELETE FROM person WHERE gender = 'Male' AND country_of_birth = 'Paris' RETURNIN
 
 -- input big files here (person.sql & car.sql)
 
+/*
+SELECT
+FROM
+WHERE
+GROUP BY
+HAVING
+ORDER BY
+OFFSET/LIMIT
+*/
+
 -- select / from
 SELECT * FROM person;
 SELECT *, first_name FROM person;
@@ -228,17 +229,26 @@ SELECT * FROM person FETCH FIRST 10 ROWS ONLY; -- fetch is same as limit just is
 SELECT * FROM person OFFSET 10; -- offset(return records after that number of records), skip first 10, 
 SELECT country_of_birth AS country FROM person; -- as(alias)
 
--- some functions
+-- converting types
+
+-- dealing with null
 SELECT first_name, coalesce(email, 'default value if value missing') FROM person; -- returns first NOT NULL argument
 -- handle null value - nullif returns 1st argument if both values are not equel, returns null if they are equal
 SELECT first_name, 10/NULLIF(randomnumber, 0) AS new_price FROM person; -- this will replace 0 with null to prevent division with zero
+
+-- string functions
 SELECT first_name, UPPER(first_name) AS upper_first_name, LOWER(first_name) AS lower_first_name FROM person;
 SELECT first_name, LENGTH(first_name) AS length_of_first_name FROM person;
 SELECT first_name, TRIM(first_name) AS trimmed_first_name FROM person;
 SELECT CONCAT(first_name, ' ', last_name) AS full_name, country_of_birth FROM person;
 SELECT first_name || ' ' || last_name AS full_name FROM person; -- also concat
+
+-- match functions
 SELECT first_name, GREATEST(randomnumber, 50), LEAST(randomnumber, 20) FROM person;
 SELECT '100'::INTEGER;
+
+-- +(add) / -(subtract) / *(multiply) / /(division) / ^(power) / %(moduo)
+SELECT randomnumber, randomnumber * 2 AS MULT, randomnumber / 2 AS DIV, randomnumber + randomnumber AS ADS, randomnumber - randomnumber AS SUB, randomnumber ^ 2 AS POWER, randomnumber % 3 AS MODUL FROM person;
 
 -- case
 SELECT
@@ -251,8 +261,7 @@ SELECT
     END
 FROM person;
 
--- +(add) / -(subtract) / *(multiply) / /(division) / ^(power) / %(moduo)
-SELECT randomnumber, randomnumber * 2 AS MULT, randomnumber / 2 AS DIV, randomnumber + randomnumber AS ADS, randomnumber - randomnumber AS SUB, randomnumber ^ 2 AS POWER, randomnumber % 3 AS MODUL FROM person;
+-- if
 
 -- dates - refer to the official documentation
 SELECT NOW(); -- return this moment
@@ -272,7 +281,7 @@ SELECT first_name, EXTRACT(MONTH FROM date_of_birth) AS month_of_birth FROM PERS
 SELECT first_name, AGE(NOW(), date_of_birth) AS age FROM person; -- AGE returns time between two dates
 
 /*
-SELECT in WITH (advanced select sugar syntax?)
+SELECT in WITH (advanced select)
 WITH regional_sales AS (
     SELECT region, SUM(amount) AS total_sales
     FROM orders
@@ -299,6 +308,9 @@ SELECT * FROM person WHERE gender != 'Female' AND gender <> 'Male';
 SELECT * FROM person WHERE country_of_birth IN ('Russia', 'France');
 SELECT * FROM person WHERE country_of_birth NOT IN ('Russia', 'China', 'Argentina', 'Indonesia', 'Brazil', 'Portugal', 'France');
 SELECT * FROM person WHERE date_of_birth BETWEEN DATE '2000-01-01' AND '2023-01-01';
+
+-- like
+
 SELECT * FROM person WHERE email LIKE '%o.com'; -- % means any number of characters
 SELECT * FROM person WHERE email LIKE '%oo%';
 SELECT * FROM person WHERE email LIKE '_________@_________.com'; -- _ represents single character
@@ -648,4 +660,13 @@ SELECT * FROM car;
 
 /*
 cursors
+*/
+
+/*
+to control execution of postgresql use commands:
+BEGIN or BEGIN TRANSACTION;
+COMMIT or COMMIT TRANSACTION;
+SAVEPOINT my_savepoint;
+ROLLBACK or ROLLBACK TRANSACTION;
+ROLLBACK TO my_savepoint;
 */
