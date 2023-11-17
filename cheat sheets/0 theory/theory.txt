@@ -1,0 +1,511 @@
+﻿
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% <<<<< BASICS >>>>> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+basic principles
+
+	kiss: keep it simple, stupid
+	dry: don't repeat yourself
+	yagni: you are'nt gonna need it	
+
+
+programming paradigms
+
+	imperative/procedural: which groups instructions into procedures, they do not deal with state
+	oop: object-oriented which groups instructions together with the part of the state they operate on
+	functional: in which the desired result is declared as the value of a series of functions, they avoid state
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% <<<<< OOP >>>>> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+class
+
+    Class is an extensible program-code-template for creating objects, providing initial values for state (member variables) and implementations of behavior
+
+
+object
+
+    In the class-based object-oriented programming paradigm, object refers to a particular instance of a class, where the object can be a combination of variables, functions, and data structures.
+
+
+oop apstraction
+
+	process of abstraction, a programmer hides all but the relevant data about an object in order to reduce complexity of usage
+	implement more complex logic on top of the provided abstraction without understanding or even thinking about all the hidden complexity.
+
+
+oop encapsulation
+
+	bundling data and methods that work on that data within one class
+	
+	(in java)
+	setters & getters
+
+
+oop polimorfism
+
+	ability to process objects differently depending on their data type or class
+	example define different area methods for any number of derived classes, such as circles, rectangles and triangles. No matter what shape an object is, applying the area method will return the correct results.
+
+oop inheritance
+
+	It is the ability to acquire the properties of existing classes and create new ones. Inheritance allows you to reuse code without having to rewrite it in a program.
+
+
+solid principle
+
+		Single responsibility principle
+    		A class should only have a single responsibility
+
+		Open–closed principle
+			Software entities should be open for extension, but closed for modification
+
+		Liskov substitution principle
+			Objects in a program should be replaceable with instances of their subtypes without altering the correctness of that program
+
+		Interface segregation principle
+			Many client-specific interfaces are better than one general-purpose interface
+
+		Dependency inversion principle
+			One should depend upon abstractions, not concretions
+
+
+invariants
+
+    in OOP, an invariant is a set of assertions that must always hold true during the life of an object for the program to be valid
+    In general, it's a property of the program state that is always true
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% <<<<< SPECIFICS >>>>> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+exceptions
+
+	An exception is a problem that arises during the execution. The normal flow of the program is disrupted and the program/Application terminates abnormally, which is not recommended, therefore, these exceptions are to be handled
+
+	Checked exceptions − A checked exception is an exception that is checked by the compiler at compilation-time
+	Unchecked exceptions − occurs at the time of execution. These are also called as Runtime Exceptions.
+
+
+event handling (events)
+
+	event is any user input or background activity that sends signal to specific node
+
+
+gui (graphical user interface)
+
+	is a form of user interface that allows users to interact with electronic devices through graphical icons and visual indicators, instead of text-based user interfaces
+
+	(in java)
+	java swing, java fx
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% <<<<< BACKEND >>>>> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+java
+
+	general-purpose computer-programming language that is concurrent, class-based, object-oriented
+	java is pass by value for basic types, pass by reference for objects
+	Java applications are compiled to bytecode (intermediate level) that can run on any Java virtual machine (before executin in machine code level with interpreter)
+
+
+java static block
+
+  	it is a static initializer. It's executed when the class is loaded and a good place to put initialization of static variables
+  	a class can have any number of static initialization blocks, and they can appear anywhere in the class body. static initialization blocks are called in the order that they appear in the source code
+
+
+java binding
+
+	Connecting a method call to the method body is known as binding
+	Static Binding or Early Binding is when object is known at compile-time, a faster than dynamic
+	Dynamic Binding or Late Binding is when object is known at run-time and not at compile time
+
+
+JDBC (Java Database Connectivity)
+
+	application programming interface (API) for Java, which defines how a client may access a relational database
+	
+
+servlet
+
+	A Java servlet is a Java software component that extends the capabilities of a server. Although servlets can respond to any types of requests, they most commonly implement web containers for hosting web applications on web servers and thus qualify as a server-side servlet web API
+
+
+JSP (java server pages)
+
+	is a technology that helps software developers create dynamically generated web pages based on HTML, XML, or other document types
+	Architecturally, JSP may be viewed as a high-level abstraction of Java servlets. JSPs are translated into servlets at runtime, therefore JSP is a Servlet
+
+
+JSTL (java standard tag library)
+
+	extends the JSP specification by adding a tag library of JSP tags for common tasks, such as XML data processing, conditional execution, database access, loops and internationalization
+	The use of a standardized tag set, rather than breaking in and out of Java code, leads to more maintainable code and enables separation of concerns between the development of the application code and user interface.
+	There are a total of six JSTL tag library descriptors
+
+
+difference
+
+	The difference between servlets and JSP is that servlets typically embed HTML inside Java code, while JSPs embed Java code in HTML.
+
+
+scriptlet
+
+	scriptlet is a fragment of Java code that is run when the user requests the page
+
+
+EL (expression language)
+
+	is a special purpose programming language mostly used in Java web applications for embedding expressions into web pages
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% <<<<< FRONTEND >>>>> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+DOM (Document Object Model)
+
+  	is a cross-platform and language-independent application programming interface that treats an HTML, XHTML, or XML document as a tree structure wherein each node is an object representing a part of the document. DOM methods allow programmatic access to the tree
+
+
+HTML (Hypertext Markup Language)
+
+	"Hypertext" refers to the hyperlinks that an HTML page may contain. "Markup language" refers to the way tags are used to define the page layout and elements within the page
+
+	<!DOCTYPE html>
+	<html>
+	</html> 
+
+
+CSS (Cascading Style Sheets)
+
+	is a style sheet language used for describing the presentation of a document written in a markup language like HTML
+
+
+js (javascript)
+
+	high-level, interpreted programming language that conforms to the ECMAScript specification.
+	is also characterized as dynamic, weakly typed, prototype-based and multi-paradigm (event-driven, functional, and imperative)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% <<<<< XML >>>>> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+XML (Extensible Markup Language)
+
+	is a markup language that defines a set of rules for encoding documents in a format that is both human-readable and machine-readable
+	The design goals of XML emphasize simplicity, generality, and usability across the Internet
+
+	(declaration is optional for version 1.0, mandatory for 1.1)
+	(external dtd is optional)
+
+	<?xml version="1.0" encoding="UTF-8"?>
+	<!DOCTYPE note SYSTEM "Note.dtd">
+
+	<note>
+		<to>Tove</to>
+		<from>Jani</from>
+		<heading>Reminder</heading>
+		<body>Don't forget me this weekend!</body>
+	</note>
+
+
+XSL (Extensible Stylesheet Language)
+
+	refer to a family of languages used to transform and render XML documents, eventually split into three parts:
+    XSL Transformation (XSLT): an XML language for transforming XML documents
+    XSL Formatting Objects (XSL-FO): an XML language for specifying the visual formatting of an XML document
+    XML Path Language (XPath): a non-XML language used by XSLT, for navigation
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% <<<<< DATA STRUCTURES >>>>> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+array & matrices(matrix)
+
+	An array is a container object that holds a fixed number of values of a single type, length is immutable.
+	matrix is two-dimensional array
+
+
+collections
+
+	collection represents a single unit of objects / group
+	collections framework is a unified architecture for representing and manipulating collections & is designed around a set of standard interfaces
+	Several standard implementations such as LinkedList, HashSet, and TreeSet, of these interfaces are provided that you may use as-is and you may also implement your own collection, if you choose.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% <<<<< DATABASES >>>>> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+persistence
+
+  	persistence refers to the characteristic of state that outlives the process that created it (computer data storage)
+
+
+marshaling & serialization / demarshalling & deserialization
+
+  	process of transforming the memory representation of an object to a data format suitable for storage or transmission
+
+
+DBMS (database management system)
+RDBMS (relational database management system)
+
+
+SQL (Structured Query Language)
+
+	domain-specific language designed for managing data held in a relational database management system (RDBMS), or for stream processing in a relational data stream management system (RDSMS).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% <<<<< OPERATING SYSTEMS >>>>> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+process
+
+	process is a self-contained execution environment. A process has a complete, private set of basic run-time resources, like memory space
+  	PID - uniq process identifier
+  	process can be:
+    	new
+    	running
+    	ready (ready to be passed to processor)
+    	waiting
+    	terminated
+
+	(in java)
+	Most implementations of the Java virtual machine run as a single process
+
+
+threads
+
+	Threads are sometimes called lightweight processes. Both processes and threads provide an execution environment
+	Threads exist within a process — every process has at least one. Threads share the process's resources
+
+
+syncronisation & scheduling
+
+  	semaphore - low-level synchronization abstract data type construct. hardware integrated value that can be used for synchronisation of multiple processes
+  	monitor - high-level synchronization abstract data type construct. hardware integrated value that can be used for synchronisation of multiple processes
+
+  	starvation - threads waits indefinately
+  	deadlock - circular waiting for resources
+
+
+system calls api interface
+
+  	Windows               - Win32
+  	Linux, Unix & Mac     - POSIX
+  	Java Virtual Machine  - Java Api
+
+
+operative systems elements
+
+  	BIOS / ROM (connects kernel with hardware)
+  	kernel (core of the operating system)
+  	shell (bash or similar, user interface)
+
+  	interupt controller (receiving passing line from device requesting recources)
+
+
+STACK/HEAP memory components
+
+  	STACK - stores enviroment variables
+  	HEAP - everything else: objects, text, initialized & unitialized data
+
+
+operative systems security
+
+	active directory (windows) - a directory is a hierarchical structure that stores information about objects on the network. provides the methods for storing directory data and making this data available to network users and administrators. Security is integrated through logon authentication and access control to objects in the directory. With a single network logon, administrators can manage directory data and organization throughout their network, and authorized network users can access resources anywhere on the network
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% <<<<< NETWORKING >>>>> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+server
+
+	is both machine & software
+	most popular are windows & linux/unix
+
+
+type of connections
+
+  	server-client
+  	client-client (pear to pear)
+
+
+network socket
+
+  	is an internal endpoint for sending or receiving data within a node on a computer network
+  	new software socket for each connection
+
+
+communication channel - connection
+
+  	consist of source address, source port, destination adress, destination port & used protocol
+
+
+port numbers
+
+  	port is a communication endpoint. Physical as well as wireless connections are terminated at ports of hardware devices. A port is a logical construct that identifies a specific process or a type of network service. A port number is always associated with an IP address of a host and the protocol type of the communication. Specific port numbers are commonly reserved to identify specific services, so that an arriving packet can be easily forwarded to a running application. For this purpose, the lowest numbered 1024 port numbers identify the historically most commonly used services, and are called the well-known port numbers. Higher-numbered ports are available for general use by applications and are known as ephemeral ports. 
+
+	0 - 1023 - system ports
+    80 - http
+    443 - https
+  	1024 - 49151 - registered ports
+  	49152 - 65535 - dynamic or private ports
+
+
+name resolution
+
+	DNS (domain name system) servers - convert web addresses to ip addresses (located in us, england, sweden, japan,..)
+	hosts file – local alternative for DNS, can override DNS?
+
+
+VPN (virtual private network)
+
+  	VPN extends a private network across a public network, and enables users to send and receive data across shared or public networks as if their computing devices were directly connected to the private network
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% <<<<< PROTOCOLS >>>>> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+OSI model (Open Systems Interconnection model)
+
+	standardizes the communication functions of a telecommunication/computing system without regard to its underlying internal structure and technology
+	
+	has seven abstraction layers:
+	    Physical Layer
+	    Data Link Layer
+	    Network Layer
+	    Transport Layer
+	    Session Layer
+	    Presentation Layer
+	    Application Layer
+
+
+internet protocol suite (it was made prior to osi)
+
+	model and set of communications protocols used in the Internet and similar computer networks.
+	The Internet protocol suite provides end-to-end data communication specifying how data should be packetized, addressed, transmitted, routed, and received.
+	This functionality is organized into four abstraction layers
+		
+		link & physical layer, communication methods for data that remains within a single network segment (physical/ethernet) (osi 1 & 2)
+		the internet layer, providing internetworking between independent networks, networking (ip) (osi 3)
+		the transport layer, handling host-to-host communication (tcp & udp) (osi 4)
+		application layer, providing process-to-process data exchange for applications (ftp, http, imap4, pop3, smtp, rtp,...) (osi 7)
+
+
+IP (internet protocol) (networking layer)
+
+	principal communications protocol in the Internet protocol suite for relaying datagrams across network solely based on the IP addresses
+	The first major version of IP, Internet Protocol Version 4 (IPv4), is the dominant protocol of the Internet. Its successor, Internet Protocol Version 6 (IPv6), has been growing in adoption
+  	subnet is a subset of ip addresses
+
+
+TCP (Transmission Control Protocol) (transport layer)
+
+	TCP provides reliable, ordered, and error-checked delivery of a stream between applications running on hosts communicating via an IP network.
+
+
+UDP (User Datagram Protocol) (transport layer)
+	
+	uses a simple connectionless communication model with a minimum of protocol mechanism
+	It has no handshaking dialogues, and thus exposes the user's program to any unreliability of the underlying network. Time-sensitive applications often use UDP because dropping packets is preferable to waiting for packets delayed due to retransmission
+
+
+HTTP (hypertext transfer protocol) (application layer (one of many))
+
+  	runs on TCP port 80
+
+  	http://www.someschool.com/somedepartment
+  	http://         - protocol
+  	www.            - host name
+  	someschool.com  - server/domain name
+  	/somedepartment - path
+
+	HTTP is the foundation of data communication for the World Wide Web, can transmit any data
+	HTTP protocol functions as a request–response protocol in the client–server computing model.
+	HTTP connection can be both Connectionless (no continious connection, http 1.0, default) & persistant (continuos, added to http 1.1)
+	Stateless (client-server knows about each other just during connection)
+
+	client uses tcp/ip to establish connection, sends request (http message) and disconects waiting response,
+	server establishes connetion and send response and disconnects again
+
+
+HTTP structure (contain plain text information (body can be binary data))
+
+	REQUEST
+	START LINE - METHOD (GET, POST,...)
+				 URI (uniform recource identifier)(path to resources)
+				 HTTP version
+	HEADERS - key - value pairs:
+			  host (website)
+			  accept-language (english..)
+			  accept (MIME/data type)
+			  ...
+	BODY - any data..
+
+	RESPONSE
+	START LINE - HTTP version
+				 status code (200 ok, 404 file not found,...)
+	HEADERS - key - value pairs:
+			  host (website)
+			  accept-language (english..)
+			  accept (MIME/data type)
+			  ...
+	BODY - data requested
+
+
+HTTPS (Hypertext Transfer Protocol Secure)
+
+	Is an extension of the Hypertext Transfer Protocol (HTTP) for secure communication over a computer network
+	In HTTPS, the communication protocol is encrypted using Transport Layer Security (TLS), or, formerly, Secure Sockets Layer (SSL)
+	Inserts SSL/TLS security layer between TCP & HTTP layers
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% <<<<< WEB SERVICES >>>>> %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+web services
+
+	Web services provide interoperability between computer systems on the Internet
+
+
+SOAP (Simple Object Access Protocol)
+
+	It uses XML Information Set for its message format, and relies on application layer protocols, most often Hypertext Transfer Protocol (HTTP) or Simple Mail Transfer Protocol (SMTP), for message negotiation and transmission.
+
+
+REST (Representational State Transfer)
+
+	In a RESTful web service, requests made to a resource's URI will elicit a response with a payload formatted in HTML, XML, JSON, or some other format.
+
+
+WSDL (Web Services Description Language)
+
+	is an XML-based interface description language that is used for describing the functionality offered by a web service.
+	provides a machine-readable description of how the service can be called, what parameters it expects, and what data structures it returns

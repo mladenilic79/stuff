@@ -1,0 +1,61 @@
+basics -------------------------------|
+	excel ------------------------|
+	access user level no sql -----|
+	vba
+teorija ------------------------------|
+	arhitektura racunara ---------|
+	operativni sistemi -----------|
+		linux system
+		windows system
+		android system
+	networking mreze
+terminal -----------------------------|
+	cmd --------------------------|
+	powershell
+	bash -------------------------|
+	git --------------------------|
+		terminal
+		visual
+sql open source ----------------------|
+	sqlite -----------------------|
+	maria ------------------------|
+	postgress --------------------|
+sql propriatery ----------------------|
+	mysql ------------------------|
+	ms sql server ----------------|
+no sql -------------------------------|
+	mongodb
+	Neo4j
+python scripting ---------------------|
+data ---------------------------------|
+	data science
+	machine learning
+metal --------------------------------|
+	tkinter
+	wxpython
+	kivi
+	pyqt
+	pyside
+	flet
+	toga	
+orm ----------------------------------|
+	sqlalchemy
+	sqlmodel
+omd ----------------------------------|
+	beanie
+	mongo engine
+web ----------------------------------|
+	fastapi
+	flask
+	django
+support ------------------------------|
+	postman
+	docker
+apps ---------------------------------|
+	aws
+	azure
+	google cloud
+front --------------------------------|
+	html
+	css
+	javascript
