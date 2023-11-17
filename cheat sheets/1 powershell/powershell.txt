@@ -1,0 +1,14 @@
+
+get everithing ps see on the system
+	get-psdrive
+
+list current content
+	ls
+or
+	dir
+
+list all processes
+	get-process
+list all services
+	get-service
+	get-service | stop-service
