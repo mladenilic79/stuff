@@ -14,7 +14,12 @@ config list & edit settings
 create account
 
 3. start project
-create repo online
+
+option 1: clone directory
+make full copy of remote repository in current directory
+	git clone <remote url>
+
+option 2: create repo online
 initialize/reinitialize working directory
 	git init
 add remote set to name "origin"
@@ -78,10 +83,6 @@ remote
 		(git remote set-url origin git@github.com:USERNAME/REPOSITORY.git)
 	git remote rm <remote repo name> (delete connection to remote repo)
 	git remote rename <old remote repo name> <new remote repo name> (origin or other)
-clone
-	git clone <remote url> (make full copy of remote repository)
-	git clone <remote url> <directory>
-		(make full copy of remote repository on local directory)
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@
 @@@@@ info @@@@@@@@@@@@@@@
