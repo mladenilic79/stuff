@@ -145,8 +145,8 @@ pull
 	git pull --rebase <remote repo name> (fetch & rebase)
 	git pull <remote repo name> <branch name> (pull specific branch; fetch & merge)
 pull with disregard local changes & commits
-	git reset --hard origin/master
-	git pull origin master
+	git reset --hard origin/main
+	git pull origin main
 push
 	git push <remote repo name or url> <branch name> --allow-unrelated-histories
 		(for syncing project started from two end independantly)
