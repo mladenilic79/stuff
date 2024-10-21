@@ -32,7 +32,7 @@
 
 a = 4
 
-if (a >= 9) and (7 <= 18):
+if a >= 9 and 7 <= 18:
     print("Important Birthday")
 elif (5 == 5) or (a != 50):
     print("Important Birthday")
